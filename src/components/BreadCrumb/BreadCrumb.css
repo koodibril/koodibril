@@ -1,0 +1,27 @@
+.breadcrumb-wrapper {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    width: 10%;
+    height: 100%;
+    font-family: 'Tommy';
+    font-size: 20px;
+    padding: 30px 50px 50px 50px;
+    background-color: rgba(255, 255, 255, 0.7);
+    justify-content: space-evenly;
+  }
+
+.breadcrumb-cartridge {
+    height: 50px !important;
+    width: 50px !important;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.breadcrumb-cartridge img {
+    height: 100%;
+    width: 100%;
+}
