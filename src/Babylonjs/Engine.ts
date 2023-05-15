@@ -81,10 +81,10 @@ export class KoodibrilEngine {
     this.scene = new Scene(this.engine);
     this.scene.clearColor = new Color4(1, 1, 1, 1); // set the color of the void
     this.scene.ambientColor = new Color3(1, 1, 1); // set the ambiant color, don't seem to affect object
-    this.scene.fogMode = Scene.FOGMODE_LINEAR;
-    this.scene.fogStart = 4.0;
-    this.scene.fogEnd = 20.0;
-    this.scene.fogColor = new Color3(1, 1, 1); // set the color of the fog
+    // this.scene.fogMode = Scene.FOGMODE_LINEAR;
+    // this.scene.fogStart = 4.0;
+    // this.scene.fogEnd = 20.0;
+    // this.scene.fogColor = new Color3(1, 1, 1); // set the color of the fog
 
     this.camera = new FlyCamera("camera1", new Vector3(0, 3, -5), this.scene);
 
@@ -135,7 +135,7 @@ export class KoodibrilEngine {
 
     this.timeout = false;
     this.open = false;
-    this.position = 0;
+    this.position = 12;
     this.wheely = 0;
     this.engine.loadingUIText = "";
     this.engine.loadingUIBackgroundColor = "rgb(1, 1, 1, 0.7)";
@@ -190,6 +190,7 @@ export class KoodibrilEngine {
   // class that is called outside of the rendering for listeners
   public animate(): void {
     const rendererLoopCallback = (): void => {
+      this.forestActions.warp();
       this.scene.render();
     };
 
@@ -215,20 +216,8 @@ export class KoodibrilEngine {
               this.getPos(pointerInfo.event.clientX, pointerInfo.event.clientY);
             } else {
               this.opener(
-                this.forest.flowers.front.meshe.position.x,
-                this.forest.flowers.front.meshe.position.y
-              );
-            }
-          }
-          break;
-        case PointerEventTypes.POINTERDOUBLETAP:
-          if (!this.move && !this.loading && this.device === 2) {
-            if (this.open) {
-              this.opener(0, 0);
-            } else {
-              this.opener(
-                this.forest.flowers.front.meshe.position.x,
-                this.forest.flowers.front.meshe.position.y
+                this.forest.flowers.rows[this.position][0].meshe.position.x,
+                this.forest.flowers.rows[this.position][0].meshe.position.y
               );
             }
           }
@@ -236,18 +225,13 @@ export class KoodibrilEngine {
       }
     });
 
+    window.addEventListener("wheel", (pointerInfo) => {
+      console.log(pointerInfo.deltaY);
+      console.log(pointerInfo.movementY);
+    });
+
     // this will resize the scene if the canvas is resized
     window.addEventListener("resize", () => {
-      this.engine.resize();
-    });
-    // this will resize the scene if the phone change orientation
-    window.addEventListener("orientationchange", () => {
-      if (
-        window.screen.orientation.type === "portrait-primary" ||
-        window.screen.orientation.type === "portrait-secondary"
-      ) {
-        this.engine.displayLoadingUI();
-      }
       this.engine.resize();
     });
   }
@@ -258,9 +242,7 @@ export class KoodibrilEngine {
     this.koodibril.lastFly.stop();
     this.koodibril.lastFly.onAnimationEndObservable.clear();
     if (this.open) {
-      this.animationsActions.retract_fast_flower();
-      this.animationsActions.retract_tree();
-      this.animationsActions.retract_bush();
+      this.animationsActions.retract_fast_flower(this.position);
       this.animationsActions.retract_pannel();
       this.textActions.bottomText.dispose();
       this.textActions.middleText.dispose();
@@ -279,16 +261,24 @@ export class KoodibrilEngine {
     this.loading = false;
   }
 
+  public goTo(appName: string): void {
+    const nextPos = applications.findIndex((app) => app.name === appName);
+    if (nextPos === -1) return;
+    let travel = this.position;
+    while (travel !== nextPos && travel < 40) {
+      this.wheel(-120);
+      travel++;
+    }
+  }
+
   // function that will add an animation to all mesh of the forest
   // sliding them frontward, or backward
   public wheel(delta: number): void {
-    // this.appName.next({ app: "wheel", side: false });
     const direction = Math.sign(delta);
-    console.log(delta);
     if (this.open && !this.animationsActions.loading) {
       this.reset();
     }
-    if (!this.move && !this.animationsActions.loading) {
+    if (!this.animationsActions.loading) {
       if (direction === 1) {
         this.position = this.position === 0 ? 23 : this.position - 1;
       } else {
@@ -297,99 +287,40 @@ export class KoodibrilEngine {
       if (this.position === 24) {
         this.position = 0;
       }
-      const flowerPos = this.forest.flowers.front.meshe.position;
+      const flowerPos =
+        this.forest.flowers.rows[this.position][0].meshe.position;
       this.setAppName({
         app: applications[this.position].name,
         side: flowerPos.x + (flowerPos.x < 0 ? 0.5 : -0.5) < 0,
       });
-      this.forestActions.addRow(direction);
       this.move = true;
       let rollOver: Animatable | null = null;
       let toMove: Bush[] | Tree[] | Flower[] = [];
-      this.lightsAction.day(direction);
-      // this.device === 2 && this.guiAction.show ? this.refreshColorGui() : null;
-      for (let i = 0; i < 12; i++) {
-        switch (i) {
-          case 0:
-            toMove = this.forest.trees.front;
-            break;
-          case 1:
-            toMove = this.forest.trees.middle;
-            break;
-          case 2:
-            toMove = this.forest.trees.back;
-            break;
-          case 3:
-            toMove = this.forest.trees.delete;
-            break;
-          case 4:
-            toMove = this.forest.bushes.front;
-            break;
-          case 5:
-            toMove = this.forest.bushes.middle;
-            break;
-          case 6:
-            toMove = this.forest.bushes.back;
-            break;
-          case 7:
-            toMove = this.forest.bushes.delete;
-            break;
-          case 8:
-            toMove = [this.forest.flowers.front];
-            break;
-          case 9:
-            toMove = [this.forest.flowers.middle];
-            break;
-          case 10:
-            toMove = [this.forest.flowers.back];
-            break;
-          case 11:
-            toMove = [this.forest.flowers.delete];
-            break;
-        }
+      // change day on direction
+      // this.lightsAction.day(direction);
+      for (let i = 0; i < 24; i++) {
+        toMove = [
+          ...this.forest.trees.rows[i],
+          ...this.forest.bushes.rows[i],
+          ...this.forest.flowers.rows[i],
+        ];
         for (const element of toMove) {
           const position = element.meshe.position;
-          if (element.meshe.position.z === 8 && direction === 1) {
-            rollOver = this.animationsActions.slideObject(
-              element.meshe,
-              position,
-              new Vector3(
-                position.x,
-                -5,
-                (position.z as number) + 4 * direction
-              ),
-              (delta * direction) / 10
-            );
-          } else if (element.meshe.position.z === 12 && direction === -1) {
-            rollOver = this.animationsActions.slideObject(
-              element.meshe,
-              position,
-              new Vector3(
-                position.x,
-                element.meshe.name === "flower" ? 1.5 : 0,
-                (position.z as number) + 4 * direction
-              ),
-              (delta * direction) / 10
-            );
-          } else {
-            rollOver = this.animationsActions.slideObject(
-              element.meshe,
-              position,
-              new Vector3(
-                position.x,
-                position.y,
-                (position.z as number) + 4 * direction
-              ),
-              (delta * direction) / 10
-            );
-          }
+          rollOver = this.animationsActions.smoothSlideObject(
+            element.meshe,
+            position,
+            new Vector3(
+              position.x,
+              position.y,
+              (position.z as number) + delta / 10
+            )
+          );
         }
       }
       if (rollOver)
         rollOver.onAnimationEndObservable.add(() => {
           this.move = false;
           this.open = false;
-          this.forestActions.deleteRow();
         });
     }
   }
@@ -398,7 +329,7 @@ export class KoodibrilEngine {
   // will start all the animations relative to
   public opener(x: number, y: number): void {
     this.loading = true;
-    const flowerPos = this.forest.flowers.front.meshe.position;
+    const flowerPos = this.forest.flowers.rows[this.position][0].meshe.position;
     const xOffsetr = flowerPos.x < 0 ? 0.5 : 0.1;
     const xOffsetl = flowerPos.x < 0 ? 0.1 : 0.5;
     if (
@@ -410,10 +341,8 @@ export class KoodibrilEngine {
     ) {
       this.koodibril.lastFly.stop();
       this.koodibril.lastFly.onAnimationEndObservable.clear();
-      this.animationsActions.goToFlower();
-      this.animationsActions.deploy_flower();
-      this.animationsActions.deploy_bush();
-      this.animationsActions.deploy_tree();
+      this.animationsActions.goToFlower(this.position);
+      this.animationsActions.deploy_flower(this.position);
       this.animationsActions.deploy_pannel();
       setTimeout(() => {
         this.textActions.generateTopText(this.position);
@@ -438,28 +367,28 @@ export class KoodibrilEngine {
   }
 
   // tried to change color of the forest on the forest on the run
-  public refreshColorGui(): void {
-    this.guiAction.reset();
-    this.guiAction.instantiateColorGui();
-    this.guiAction.createColorPannel("Sun", this.lights.sunMesh);
-    this.guiAction.createPBRColorPannel(
-      "Bush",
-      this.forest.bushes.front[0].color[0].subMeshes[0].getMesh(),
-      false
-    );
-    this.guiAction.createPBRColorPannel(
-      "FlowerTop",
-      this.forest.flowers.front.color[1].subMeshes[0].getMesh(),
-      true
-    );
-    this.guiAction.createPBRColorPannel(
-      "FlowerBot",
-      this.forest.flowers.front.color[2].subMeshes[0].getMesh(),
-      true
-    );
-    this.guiAction.createTreeColorPannel("TreeBot", this.forest.trees, false);
-    this.guiAction.createTreeColorPannel("TreeTop", this.forest.trees, true);
-    this.guiAction.createFogColorPannel();
-    this.guiAction.createAmbiantColorPannel();
-  }
+  // public refreshColorGui(): void {
+  //   this.guiAction.reset();
+  //   this.guiAction.instantiateColorGui();
+  //   this.guiAction.createColorPannel("Sun", this.lights.sunMesh);
+  //   this.guiAction.createPBRColorPannel(
+  //     "Bush",
+  //     this.forest.bushes.front[0].color[0].subMeshes[0].getMesh(),
+  //     false
+  //   );
+  //   this.guiAction.createPBRColorPannel(
+  //     "FlowerTop",
+  //     this.forest.flowers.front.color[1].subMeshes[0].getMesh(),
+  //     true
+  //   );
+  //   this.guiAction.createPBRColorPannel(
+  //     "FlowerBot",
+  //     this.forest.flowers.front.color[2].subMeshes[0].getMesh(),
+  //     true
+  //   );
+  //   this.guiAction.createTreeColorPannel("TreeBot", this.forest.trees, false);
+  //   this.guiAction.createTreeColorPannel("TreeTop", this.forest.trees, true);
+  //   this.guiAction.createFogColorPannel();
+  //   this.guiAction.createAmbiantColorPannel();
+  // }
 }

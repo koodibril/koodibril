@@ -10,21 +10,21 @@ function App() {
     app: "KOODIBRIL",
     side: false,
   });
+  const [engine, setEngine] = useState<KoodibrilEngine>();
   const [show, setShow] = useState(false);
   useEffect(() => {
     const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
     const engine = new KoodibrilEngine(setShow, setAppName);
     engine.createScene(canvas);
     engine.animate();
+    setEngine(engine);
   }, []);
-
-  console.log(appName);
 
   return (
     <div className="engine-wrapper">
       <canvas id="renderCanvas"></canvas>
       <Slider appName={appName} show={show}></Slider>
-      <BreadCrumb appName={appName}></BreadCrumb>
+      <BreadCrumb appName={appName} engine={engine}></BreadCrumb>
     </div>
   );
 }

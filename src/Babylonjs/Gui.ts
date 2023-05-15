@@ -17,7 +17,7 @@ import {
   StackPanel,
   TextBlock,
 } from "@babylonjs/gui";
-import { Forest, Trees } from "./Forest";
+import { Forest } from "./Forest";
 import { Lights } from "./Lights";
 
 export class GuiActions {
@@ -57,23 +57,6 @@ export class GuiActions {
       if (value === true) {
         this.instantiateColorGui();
         this.createColorPannel("Sun", this.lights.sunMesh);
-        this.createPBRColorPannel(
-          "Bush",
-          this.forest.bushes.front[0].color[0].subMeshes[0].getMesh(),
-          false
-        );
-        this.createPBRColorPannel(
-          "FlowerTop",
-          this.forest.flowers.front.color[1].subMeshes[0].getMesh(),
-          true
-        );
-        this.createPBRColorPannel(
-          "FlowerBot",
-          this.forest.flowers.front.color[2].subMeshes[0].getMesh(),
-          true
-        );
-        this.createTreeColorPannel("TreeBot", this.forest.trees, false);
-        this.createTreeColorPannel("TreeTop", this.forest.trees, true);
         this.createFogColorPannel();
         this.createAmbiantColorPannel();
       } else {
@@ -163,41 +146,6 @@ export class GuiActions {
     left
       ? this.panelLeft.addControl(picker)
       : this.panelRight.addControl(picker);
-  }
-
-  public createTreeColorPannel(name: string, trees: Trees, top: boolean): void {
-    const textBlock = new TextBlock();
-    textBlock.text = name + "Color:";
-    textBlock.height = "30px";
-    this.panelLeft.addControl(textBlock);
-    const picker = new ColorPicker();
-    picker.height = "150px";
-    picker.width = "150px";
-    picker.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_CENTER;
-    const initColor = top
-      ? (trees.front[0].color[3].subMeshes[0].getMesh().material as PBRMaterial)
-      : (trees.front[0].color[1].subMeshes[0].getMesh()
-          .material as PBRMaterial);
-    picker.value = initColor.albedoColor;
-    const textBlock2 = new TextBlock();
-    textBlock2.text = "Value:" + picker.value.toHexString();
-    textBlock2.height = "30px";
-    this.panelLeft.addControl(textBlock2);
-    picker.onValueChangedObservable.add(function (value) {
-      // value is a color3
-      trees.front.forEach((element) => {
-        let material = top
-          ? (element.color[3].subMeshes[0].getMesh().material as PBRMaterial)
-          : (element.color[1].subMeshes[0].getMesh().material as PBRMaterial);
-        material.albedoColor.copyFrom(value);
-        material = top
-          ? (element.color[2].subMeshes[0].getMesh().material as PBRMaterial)
-          : (element.color[0].subMeshes[0].getMesh().material as PBRMaterial);
-        material.albedoColor.copyFrom(value);
-      });
-      textBlock2.text = "Value:" + value.toHexString();
-    });
-    this.panelLeft.addControl(picker);
   }
 
   public createFogColorPannel(): void {

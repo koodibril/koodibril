@@ -33,24 +33,15 @@ export interface Tree {
 }
 
 export interface Trees {
-  front: Tree[];
-  middle: Tree[];
-  back: Tree[];
-  delete: Tree[];
+  rows: Tree[][];
 }
 
 export interface Bushes {
-  front: Bush[];
-  middle: Bush[];
-  back: Bush[];
-  delete: Bush[];
+  rows: Bush[][];
 }
 
 export interface Flowers {
-  front: Flower;
-  middle: Flower;
-  back: Flower;
-  delete: Flower;
+  rows: Flower[][];
 }
 
 export interface Forest {
@@ -82,18 +73,19 @@ export class ForestActions {
     this.forest.flowers = <Flowers>{};
     this.forest.pannel = <Pannel>{};
 
-    this.forest.trees.front = [];
-    this.forest.trees.middle = [];
-    this.forest.trees.back = [];
-    this.forest.trees.delete = [];
-    this.forest.bushes.front = [];
-    this.forest.bushes.middle = [];
-    this.forest.bushes.back = [];
-    this.forest.bushes.delete = [];
-    this.forest.flowers.front = <Flower>{};
-    this.forest.flowers.middle = <Flower>{};
-    this.forest.flowers.back = <Flower>{};
-    this.forest.flowers.delete = <Flower>{};
+    this.forest.trees.rows = new Array(24).fill(0);
+    this.forest.trees.rows = this.forest.trees.rows.map(() => {
+      return [];
+    });
+    this.forest.bushes.rows = new Array(24).fill(0);
+    this.forest.bushes.rows = this.forest.bushes.rows.map(() => {
+      return [];
+    });
+    this.forest.flowers.rows = new Array(24).fill(0);
+    this.forest.flowers.rows = this.forest.flowers.rows.map(() => {
+      return [];
+    });
+
     await this.importforest();
     this.seed();
   }
@@ -132,25 +124,32 @@ export class ForestActions {
     }
   }
 
-  // create the forest on 3 rows
+  // create the forest on 23 rows
   public seed(): void {
-    const random_tree = this.shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     this.addpannel();
-    this.addtree(new Vector3(-3, 0, 0), 0, random_tree[0]);
-    this.addtree(new Vector3(4, 0, 0), 0, random_tree[1]);
-    this.addtree(new Vector3(-6, 0, 4), 1, random_tree[2]);
-    this.addtree(new Vector3(3, 0, 4), 1, random_tree[3]);
-    this.addtree(new Vector3(5, 0, 4), 1, random_tree[4]);
-    this.addtree(new Vector3(-4, 0, 8), 2, random_tree[5]);
-    this.addtree(new Vector3(-3, 0, 8), 2, random_tree[6]);
-    this.addtree(new Vector3(2, 0, 8), 2, random_tree[7]);
-    this.addtree(new Vector3(5, 0, 8), 2, random_tree[8]);
 
-    for (let z = 0; z <= 8; z = z + 4) {
-      const random = this.shuffleArray([1, 2, 3, 4]);
-      this.addbush(new Vector3(0, 0, z), z / 4, random[0]);
-      this.addflower(new Vector3(Math.random() * (2 - -2) + -2, 1.5, z), z / 4);
+    for (let row = 0; row < 24; row++) {
+      const z = row * 4 - 48;
+      const random_tree = this.shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      const position_tree = this.shuffleArray([-3, -6, 3, 5]);
+      const random_bush = this.shuffleArray([1, 2, 3, 4]);
+
+      for (let i = 0; i < 4; i++) {
+        this.addtree(new Vector3(position_tree[i], 0, z), row, random_tree[i]);
+      }
+      this.addbush(
+        new Vector3(0, 0, z),
+        row,
+        random_bush[this.getRandomInt(0, 3)]
+      );
+      this.addflower(new Vector3(Math.random() * (2 - -2) + -2, 1.5, z), row);
     }
+  }
+
+  private getRandomInt(min: number, max: number): number {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   // suffle method for selecting randomly trees, or bushes
@@ -181,17 +180,7 @@ export class ForestActions {
     flower.meshe.position = position;
     flower.meshe.name = "flower";
     flower.meshe.checkCollisions = true;
-    switch (row) {
-      case 0:
-        this.forest.flowers.front = flower;
-        break;
-      case 1:
-        this.forest.flowers.middle = flower;
-        break;
-      case 2:
-        this.forest.flowers.back = flower;
-        break;
-    }
+    this.forest.flowers.rows[row].push(flower);
   }
 
   // add the pannel wich will nether move, only open and close
@@ -229,17 +218,7 @@ export class ForestActions {
     bush.meshe.position = position;
     bush.meshe.name = "bush";
     bush.meshe.checkCollisions = true;
-    switch (row) {
-      case 0:
-        this.forest.bushes.front.push(bush);
-        break;
-      case 1:
-        this.forest.bushes.middle.push(bush);
-        break;
-      case 2:
-        this.forest.bushes.back.push(bush);
-        break;
-    }
+    this.forest.bushes.rows[row].push(bush);
   }
 
   // add another instance of a tree in the forest
@@ -259,113 +238,24 @@ export class ForestActions {
     tree.meshe.rotate(new Vector3(0, 1, 0), Math.PI * 1.5);
     tree.meshe.position = position;
     tree.meshe.name = "tree";
-    switch (row) {
-      case 0:
-        this.forest.trees.front.push(tree);
-        break;
-      case 1:
-        this.forest.trees.middle.push(tree);
-        break;
-      case 2:
-        this.forest.trees.back.push(tree);
-        break;
-    }
+    this.forest.trees.rows[row].push(tree);
   }
 
-  // add another row on front or back, set the arrays of the trees, bush and flower to be deleted
-  public addRow(delta: number): void {
-    if (delta === 1) {
-      this.forest.bushes.delete = this.forest.bushes.back;
-      this.forest.bushes.back = this.forest.bushes.middle;
-      this.forest.bushes.middle = this.forest.bushes.front;
-      this.forest.bushes.front = [];
-
-      this.forest.flowers.delete = this.forest.flowers.back;
-      this.forest.flowers.back = this.forest.flowers.middle;
-      this.forest.flowers.middle = this.forest.flowers.front;
-      this.forest.flowers.front = <Flower>{};
-
-      this.forest.trees.delete = this.forest.trees.back;
-      this.forest.trees.back = this.forest.trees.middle;
-      this.forest.trees.middle = this.forest.trees.front;
-      this.forest.trees.front = [];
-    } else {
-      this.forest.bushes.delete = this.forest.bushes.front;
-      this.forest.bushes.front = this.forest.bushes.middle;
-      this.forest.bushes.middle = this.forest.bushes.back;
-      this.forest.bushes.back = [];
-
-      this.forest.flowers.delete = this.forest.flowers.front;
-      this.forest.flowers.front = this.forest.flowers.middle;
-      this.forest.flowers.middle = this.forest.flowers.back;
-      this.forest.flowers.back = <Flower>{};
-
-      this.forest.trees.delete = this.forest.trees.front;
-      this.forest.trees.front = this.forest.trees.middle;
-      this.forest.trees.middle = this.forest.trees.back;
-      this.forest.trees.back = [];
-    }
-    const random_tree = this.shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-    const position = this.shuffleArray([-3, -6, 3, 5]);
-    for (let i = 0; i < 4; i++) {
-      if (i > 1) {
-        this.addtree(
-          new Vector3(
-            i === 2 ? -8 : 8,
-            delta === -1 ? -6 : 0,
-            delta === -1 ? 12 : -4
-          ),
-          delta === -1 ? 2 : 0,
-          random_tree[i]
-        );
-      } else {
-        this.addtree(
-          new Vector3(
-            position[i],
-            delta === -1 ? -6 : 0,
-            delta === -1 ? 12 : -4
-          ),
-          delta === -1 ? 2 : 0,
-          random_tree[i]
-        );
-      }
-    }
-    const random = this.shuffleArray([1, 2, 3, 4]);
-    this.addflower(
-      new Vector3(
-        Math.random() * (2 - -2) + -2,
-        delta === -1 ? -5 : 1.5,
-        delta === -1 ? 12 : -4
-      ),
-      delta === -1 ? 2 : 0
-    );
-    this.addbush(
-      new Vector3(0, delta === -1 ? -5 : 0, delta === -1 ? 12 : -4),
-      delta === -1 ? 2 : 0,
-      random[0]
-    );
-  }
-
-  // called at the end of scroll, will delete all mesh and destroy arrays of every mesh considered out of map (<4 || >12)
-  public deleteRow(): void {
-    for (let i = 0; i < 3; i++) {
-      if (i === 0) {
-        for (let j = 0; j < this.forest.trees.delete.length; j++) {
-          this.forest.trees.delete[j].meshe.dispose();
-          this.forest.trees.delete.shift();
-          j = -1;
+  public warp(): void {
+    let toCheck: Bush[] | Tree[] | Flower[] = [];
+    for (let i = 0; i < 24; i++) {
+      toCheck = [
+        ...this.forest.trees.rows[i],
+        ...this.forest.bushes.rows[i],
+        ...this.forest.flowers.rows[i],
+      ];
+      for (const element of toCheck) {
+        const position = element.meshe.position;
+        if (position._z < -48) {
+          position._z = position._z + 92;
+        } else if (position._z > 44) {
+          position._z = position._z - 92;
         }
-      }
-      if (i === 1) {
-        for (let j = 0; j < this.forest.bushes.delete.length; j++) {
-          this.forest.bushes.delete[j].meshe.dispose();
-          this.forest.bushes.delete.shift();
-          j = -1;
-        }
-      }
-      if (i === 2) {
-        this.forest.flowers.delete.meshe.dispose();
-        this.forest.flowers.delete = <Flower>{};
       }
     }
   }

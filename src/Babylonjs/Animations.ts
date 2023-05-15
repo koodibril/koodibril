@@ -9,6 +9,9 @@ import {
   AnimationGroup,
   ParticleSystem,
   Texture,
+  BezierCurveEase,
+  CubicEase,
+  EasingFunction,
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 import { Forest } from "./Forest";
@@ -128,6 +131,36 @@ export class AnimationsActions {
     );
   }
 
+  public smoothSlideObject(
+    object: AbstractMesh,
+    from: Vector3,
+    to: Vector3
+  ): Animatable {
+    const zkeysSmooth = [
+      {
+        frame: 0,
+        value: from.z,
+      },
+      {
+        frame: 120,
+        value: to.z,
+      },
+    ];
+
+    const zSlide = new Animation(
+      "zSlideEasingAnimation",
+      "position.z",
+      30,
+      Animation.ANIMATIONTYPE_FLOAT
+    );
+    zSlide.setKeys(zkeysSmooth);
+    const easingFunction = new CubicEase();
+    easingFunction.setEasingMode(EasingFunction.EASINGMODE_EASEINOUT);
+    zSlide.setEasingFunction(easingFunction);
+    object.animations.push(zSlide);
+    return this.scene.beginAnimation(object, 0, 120, false);
+  }
+
   // generate random movements for the colibri, will call itself at the end of the last animations
   // to stop the fly always clean all observables, if not you will have double fly wich makes it jumpy
   public fly(): void {
@@ -206,10 +239,10 @@ export class AnimationsActions {
   }
 
   // animate the colibri to go to the flower
-  public goToFlower(): void {
+  public goToFlower(position: number): void {
     this.koodibril.lastFly.stop();
     this.koodibril.lastFly.onAnimationEndObservable.clear();
-    const flowerPos = this.forest.flowers.front.meshe.position;
+    const flowerPos = this.forest.flowers.rows[position][0].meshe.position;
     if (flowerPos.x < 0 && !this.koodibril.leftoright) {
       this.koodibril.mesh.rotate(new Vector3(0, 1, 0), Math.PI);
       this.koodibril.leftoright = true;
@@ -234,8 +267,8 @@ export class AnimationsActions {
   }
 
   // initiante the particle system
-  public start_particle(): void {
-    const flowerPos = this.forest.flowers.front.meshe.position;
+  public start_particle(position: number): void {
+    const flowerPos = this.forest.flowers.rows[position][0].meshe.position;
     this.particle = new ParticleSystem("particles", 2000, this.scene);
     this.particle.particleTexture = new Texture(
       "/assets/textures/flare.png",
@@ -286,95 +319,37 @@ export class AnimationsActions {
   }
 
   // stop all flower animations
-  public stop_flower(): void {
-    this.forest.flowers.front.animations.forEach((element) => {
+  public stop_flower(position: number): void {
+    this.forest.flowers.rows[position][0].animations.forEach((element) => {
       element.stop();
     });
   }
 
   // launch the flower animations
-  public deploy_flower(): void {
-    this.stop_flower();
+  public deploy_flower(position: number): void {
+    this.stop_flower(position);
     // this.forest.flowers.front.animations[2].start(false, 1).onAnimationEndObservable.add(() => {
     //   this.forest.flowers.front.animations[4].start(false, 1);
     //   this.forest.flowers.front.animations[6].start(false, 1);
     // });
-    this.forest.flowers.front.animations[2].start(false, 1);
+    this.forest.flowers.rows[position][0].animations[2].start(false, 1);
   }
 
   // close the flower beautifully
-  public retract_flower(): void {
-    this.stop_flower();
+  public retract_flower(position: number): void {
+    this.stop_flower(position);
     // this.forest.flowers.front.animations[5].start(false, 1);
     // this.forest.flowers.front.animations[3].start(false, 1).onAnimationEndObservable.add(() => {
     //   this.forest.flowers.front.animations[0].start(false, 1);
     // });
-    this.forest.flowers.front.animations[0].start(false, 1);
+    this.forest.flowers.rows[position][0].animations[0].start(false, 1);
   }
 
   // close the flower fast, called whith scroll
-  public retract_fast_flower(): void {
+  public retract_fast_flower(position: number): void {
     // this.forest.flowers.front.animations[5].start(false, 0.5);
     // this.forest.flowers.front.animations[3].start(false, 2);
     // this.forest.flowers.front.animations[0].start(false, 0.5);
-    this.forest.flowers.front.animations[0].start(false, 1);
-  }
-
-  // stop all tree animation
-  public stop_tree(): void {
-    this.forest.trees.front.forEach((element) => {
-      element.animations.forEach((element2) => {
-        element2.stop();
-      });
-    });
-  }
-
-  // start the deploying tree animations
-  public deploy_tree(): void {
-    this.stop_tree();
-    // for (let i = 0; i < this.forest.trees.front.length; i++) {
-    //   this.forest.trees.front[i].animations[0].start(false, 0.3);
-    //   this.forest.trees.front[i].animations[2].start(false, 0.3);
-    // }
-  }
-
-  // start the retract tree animations
-  public retract_tree(): void {
-    this.stop_tree();
-    // for (let i = 0; i < this.forest.trees.front.length; i++) {
-    //   this.forest.trees.front[i].animations[0].stop();
-    //   this.forest.trees.front[i].animations[2].stop();
-    //   this.forest.trees.front[i].animations[1].start(false, 0.5);
-    //   this.forest.trees.front[i].animations[3].start(false, 0.5);
-    // }
-  }
-
-  // stop all bush animations
-  public stop_bush(): void {
-    this.forest.bushes.front.forEach((element) => {
-      element.animations.forEach((element2) => {
-        element2.stop();
-      });
-    });
-  }
-
-  // start the deploying bush animations
-  public deploy_bush(): void {
-    this.stop_bush();
-    this.loading = false;
-    // this.forest.bushes.front.forEach(element => {
-    //   element.animations[0].start(false, 0.3).onAnimationEndObservable.add(() => {
-    //     this.loading = false;
-    //   });
-    // });
-  }
-
-  // start the retracting bush animations
-  public retract_bush(): void {
-    this.stop_bush();
-    // this.forest.bushes.front.forEach(element => {
-    //   element.animations[0].stop();
-    //   element.animations[1].start(false, 0.5);
-    // });
+    this.forest.flowers.rows[position][0].animations[0].start(false, 1);
   }
 }
