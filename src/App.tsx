@@ -6,7 +6,10 @@ import Slider from "./components/Slider/Slider";
 import BreadCrumb from "./components/BreadCrumb/BreadCrumb";
 
 function App() {
-  const [appName, setAppName] = useState<pannelInfo>({ app: "", side: false });
+  const [appName, setAppName] = useState<pannelInfo>({
+    app: "KOODIBRIL",
+    side: false,
+  });
   const [show, setShow] = useState(false);
   useEffect(() => {
     const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
@@ -14,6 +17,8 @@ function App() {
     engine.createScene(canvas);
     engine.animate();
   }, []);
+
+  console.log(appName);
 
   return (
     <div className="engine-wrapper">
