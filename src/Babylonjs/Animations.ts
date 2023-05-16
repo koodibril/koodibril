@@ -9,7 +9,6 @@ import {
   AnimationGroup,
   ParticleSystem,
   Texture,
-  BezierCurveEase,
   CubicEase,
   EasingFunction,
 } from "@babylonjs/core";

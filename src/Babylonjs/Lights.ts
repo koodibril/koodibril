@@ -4,7 +4,6 @@ import {
   MeshBuilder,
   Color4,
   Vector3,
-  HemisphericLight,
   Animation,
   Color3,
   StandardMaterial,
@@ -14,13 +13,13 @@ import {
   Texture,
   Camera,
   Engine,
+  DirectionalLight,
 } from "@babylonjs/core";
 
 export interface Lights {
-  sun: SpotLight;
+  sun: DirectionalLight;
   sunMesh: Mesh;
   sunMat: StandardMaterial;
-  ambiant: HemisphericLight;
   groundLight: GridMaterial;
 }
 
@@ -42,24 +41,13 @@ export class LightsActions {
   // create all lights and the sun/moon
   public instantiateLights(): void {
     this.lights = <Lights>{};
-    this.lights.ambiant = new HemisphericLight(
-      "DirectionalLight",
-      new Vector3(0, 1, 0),
-      this.scene
-    );
-    this.lights.ambiant.intensity = 1;
-    this.lights.sun = new SpotLight(
+    this.lights.sun = new DirectionalLight(
       "sunLight",
-      Vector3.Zero(),
       new Vector3(0, -1, 0),
-      Math.PI,
-      10,
       this.scene
     );
     this.lights.sunMat = new StandardMaterial("yellowMat", this.scene);
-    const whiteMat = new StandardMaterial("whiteMat", this.scene);
     this.lights.sunMat.emissiveColor = new Color3(1, 1, 0.5);
-    whiteMat.emissiveColor = new Color3(1, 1, 1);
     this.lights.sun.intensity = 1;
     this.lights.sunMesh = MeshBuilder.CreateIcoSphere("sunMesh", { radius: 5 });
     this.lights.sunMesh.material = this.lights.sunMat;
@@ -162,22 +150,19 @@ export class LightsActions {
   }
 
   // at each hour will set the position and the intensity of each lights
-  // sunset at 6
+  // sunset at 18
   public day(hour: number): void {
-    console.log("hey");
     this.setFocus();
-    this.hour = hour;
+    this.hour = ((hour * -1 + 48) / 96) * 24;
+    console.log(this.hour);
     const sun_ang = this.hour * (Math.PI / 12);
-    const sun_y = 0 + 24 * Math.cos(sun_ang);
-    const sun_z = 4 + 24 * Math.sin(sun_ang);
+    const sun_y = (0 + 24 * Math.cos(sun_ang)) * -1;
+    const sun_z = (4 + 24 * Math.sin(sun_ang)) * -1;
     let luminosity = (sun_y + 24) / 24;
     this.setFirefly();
     this.setSunColor();
-    this.movestar(
-      this.lights.sunMesh,
-      this.lights.sunMesh.position,
-      new Vector3(0, sun_y, sun_z)
-    );
+    const sunPos = new Vector3(0, sun_y, sun_z);
+    this.lights.sunMesh.setAbsolutePosition(sunPos);
     if (luminosity > 1 || sun_y > 0) {
       luminosity = 1;
     } else if (luminosity < 0.5) {
@@ -186,7 +171,7 @@ export class LightsActions {
     if (this.hour === 18) {
       luminosity = 0.9;
     }
-    if (this.hour === 5) {
+    if (this.hour >= 17 && this.hour <= 18) {
       this.scene.fogColor = new Color3(
         0.9 * luminosity * 1.1,
         0.9 * luminosity,
@@ -198,7 +183,7 @@ export class LightsActions {
         0.85 * luminosity,
         1
       );
-    } else if (this.hour === 6) {
+    } else if (this.hour >= 18 && this.hour <= 19) {
       this.sunset();
     } else {
       this.scene.fogColor = new Color3(
@@ -213,7 +198,7 @@ export class LightsActions {
         1
       );
     }
-    this.lights.ambiant.intensity = 1 * luminosity;
+    // this.lights.ambiant.intensity = 1 * luminosity;
     this.lights.groundLight.mainColor = new Color3(
       1 * luminosity,
       1 * luminosity,
@@ -334,7 +319,10 @@ export class LightsActions {
   }
 
   public setFirefly(): void {
-    if (this.hour >= 1 && this.hour <= 5 && !this.firefly) {
+    if (
+      !this.firefly &&
+      ((this.hour >= 0 && this.hour <= 5) || this.hour > 24)
+    ) {
       this.firefly = true;
       for (let z = 0; z <= 8; z = z + 4) {
         for (let x = -3; x <= 6; x = x + 3) {

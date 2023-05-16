@@ -9,6 +9,7 @@ import {
   PointerEventTypes,
   Matrix,
   Animatable,
+  // FreeCamera, for debug
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 import { GridMaterial } from "@babylonjs/materials";
@@ -81,14 +82,22 @@ export class KoodibrilEngine {
     this.scene = new Scene(this.engine);
     this.scene.clearColor = new Color4(1, 1, 1, 1); // set the color of the void
     this.scene.ambientColor = new Color3(1, 1, 1); // set the ambiant color, don't seem to affect object
-    // this.scene.fogMode = Scene.FOGMODE_LINEAR;
-    // this.scene.fogStart = 4.0;
-    // this.scene.fogEnd = 20.0;
-    // this.scene.fogColor = new Color3(1, 1, 1); // set the color of the fog
+    this.scene.fogMode = Scene.FOGMODE_LINEAR;
+    this.scene.fogStart = 4.0;
+    this.scene.fogEnd = 20.0;
+    this.scene.fogColor = new Color3(1, 1, 1); // set the color of the fog
 
     this.camera = new FlyCamera("camera1", new Vector3(0, 3, -5), this.scene);
-
     this.camera.setTarget(new Vector3(0, 2, 0));
+
+    //for debug
+    // const camera = new FreeCamera(
+    //   "camera1",
+    //   new Vector3(0, 5, -10),
+    //   this.scene
+    // );
+    // camera.attachControl(true);
+
     this.lightsAction = new LightsActions(this.scene, this.camera, this.engine);
     this.lightsAction.instantiateLights();
     this.lights = this.lightsAction.lights;
@@ -348,6 +357,7 @@ export class KoodibrilEngine {
   private warp(): void {
     let toCheck: Bush[] | Tree[] | Flower[] = [];
     if (!this.forest) return;
+    this.lightsAction.day(this.forest.flowers.rows[12][0].meshe.position.z);
     for (let i = 0; i < 24; i++) {
       toCheck = [
         ...this.forest.trees.rows[i],
@@ -361,7 +371,6 @@ export class KoodibrilEngine {
           app: applications[this.position].name,
           side: flower_pos.x + (flower_pos.x < 0 ? 0.5 : -0.5) < 0,
         });
-        this.lightsAction.day(i);
       }
       for (const element of toCheck) {
         const position = element.meshe.position;
@@ -369,16 +378,16 @@ export class KoodibrilEngine {
           const newPos = new Vector3(
             position._x,
             position._y,
-            position._z + 92
+            position._z + 96
           );
-          position.set(newPos._x, newPos._y, newPos._z);
-        } else if (position._z > 44) {
+          element.meshe.setAbsolutePosition(newPos);
+        } else if (position._z > 48) {
           const newPos = new Vector3(
             position._x,
             position._y,
-            position._z - 92
+            position._z - 96
           );
-          position.set(newPos._x, newPos._y, newPos._z);
+          element.meshe.setAbsolutePosition(newPos);
         }
       }
     }
