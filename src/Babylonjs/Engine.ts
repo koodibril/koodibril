@@ -83,8 +83,8 @@ export class KoodibrilEngine {
     this.scene.clearColor = new Color4(1, 1, 1, 1); // set the color of the void
     this.scene.ambientColor = new Color3(1, 1, 1); // set the ambiant color, don't seem to affect object
     this.scene.fogMode = Scene.FOGMODE_LINEAR;
-    this.scene.fogStart = 4.0;
-    this.scene.fogEnd = 20.0;
+    this.scene.fogStart = 20.0;
+    this.scene.fogEnd = 40.0;
     this.scene.fogColor = new Color3(1, 1, 1); // set the color of the fog
 
     this.camera = new FlyCamera("camera1", new Vector3(0, 3, -5), this.scene);
@@ -355,15 +355,9 @@ export class KoodibrilEngine {
   }
 
   private warp(): void {
-    let toCheck: Bush[] | Tree[] | Flower[] = [];
     if (!this.forest) return;
     this.lightsAction.day(this.forest.flowers.rows[12][0].meshe.position.z);
     for (let i = 0; i < 24; i++) {
-      toCheck = [
-        ...this.forest.trees.rows[i],
-        ...this.forest.bushes.rows[i],
-        ...this.forest.flowers.rows[i],
-      ];
       const flower_pos = this.forest.flowers.rows[i][0].meshe.position;
       if (flower_pos.z > -2 && flower_pos.z < 2 && this.position !== i) {
         this.position = i;
@@ -371,24 +365,6 @@ export class KoodibrilEngine {
           app: applications[this.position].name,
           side: flower_pos.x + (flower_pos.x < 0 ? 0.5 : -0.5) < 0,
         });
-      }
-      for (const element of toCheck) {
-        const position = element.meshe.position;
-        if (position._z < -48) {
-          const newPos = new Vector3(
-            position._x,
-            position._y,
-            position._z + 96
-          );
-          element.meshe.setAbsolutePosition(newPos);
-        } else if (position._z > 48) {
-          const newPos = new Vector3(
-            position._x,
-            position._y,
-            position._z - 96
-          );
-          element.meshe.setAbsolutePosition(newPos);
-        }
       }
     }
   }

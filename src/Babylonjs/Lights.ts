@@ -14,6 +14,7 @@ import {
   Camera,
   Engine,
   DirectionalLight,
+  GlowLayer,
 } from "@babylonjs/core";
 
 export interface Lights {
@@ -31,6 +32,7 @@ export class LightsActions {
   private hour!: number;
   private firefly!: boolean;
   private particles!: ParticleSystem[];
+  private glow!: GlowLayer;
 
   public constructor(
     private scene: Scene,
@@ -54,6 +56,8 @@ export class LightsActions {
     this.lights.sun.parent = this.lights.sunMesh;
     this.lights.sunMesh.position = new Vector3(0, 20, 4);
     this.lights.sunMesh.applyFog = false;
+    this.glow = new GlowLayer("glow", this.scene);
+    this.glow.intensity = 1;
     this.hour = 0;
     this.firefly = false;
     this.particles = [];
@@ -154,10 +158,9 @@ export class LightsActions {
   public day(hour: number): void {
     this.setFocus();
     this.hour = ((hour * -1 + 48) / 96) * 24;
-    console.log(this.hour);
     const sun_ang = this.hour * (Math.PI / 12);
-    const sun_y = (0 + 24 * Math.cos(sun_ang)) * -1;
-    const sun_z = (4 + 24 * Math.sin(sun_ang)) * -1;
+    const sun_y = (0 + 24 * Math.cos(sun_ang)) * -2;
+    const sun_z = (4 + 24 * Math.sin(sun_ang)) * -2;
     let luminosity = (sun_y + 24) / 24;
     this.setFirefly();
     this.setSunColor();
@@ -319,10 +322,7 @@ export class LightsActions {
   }
 
   public setFirefly(): void {
-    if (
-      !this.firefly &&
-      ((this.hour >= 0 && this.hour <= 5) || this.hour > 24)
-    ) {
+    if (!this.firefly && (this.hour >= 20 || this.hour <= 5)) {
       this.firefly = true;
       for (let z = 0; z <= 8; z = z + 4) {
         for (let x = -3; x <= 6; x = x + 3) {
@@ -348,7 +348,7 @@ export class LightsActions {
           this.particles.push(particleSystem);
         }
       }
-    } else if (this.hour > 5 || this.hour < 1) {
+    } else if (this.hour > 5 && this.hour < 20) {
       this.particles.forEach((element) => {
         element.stop();
       });

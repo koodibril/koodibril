@@ -137,8 +137,16 @@ export class AnimationsActions {
     delta: number
   ): Animatable | null {
     if (object.animations.length > 0) {
+      object.animations[0].runtimeAnimations[0].reset(false);
       const currentKeys = object.animations[0].getKeys();
       currentKeys[1].value += delta / 100;
+      if (currentKeys[1].value < -44) {
+        currentKeys[0].value += 96;
+        currentKeys[1].value += 96;
+      } else if (currentKeys[1].value > 52) {
+        currentKeys[0].value -= 96;
+        currentKeys[1].value -= 96;
+      }
       return null;
     }
     const zkeysSmooth = [
