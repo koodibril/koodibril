@@ -325,6 +325,39 @@ export class KoodibrilEngine {
     return null;
   }
 
+  // function that will move all mesh of the forest
+  // sliding them frontward, or backward
+  public externWheel(delta: number): Animatable | null {
+    if (this.open && !this.animationsActions.loading) {
+      this.reset();
+    }
+    if (!this.animationsActions.loading) {
+      this.move = true;
+      let toMove: Bush[] | Tree[] | Flower[] = [];
+      for (let i = 0; i < 24; i++) {
+        toMove = [
+          ...this.forest.trees.rows[i],
+          ...this.forest.bushes.rows[i],
+          ...this.forest.flowers.rows[i],
+        ];
+        for (const element of toMove) {
+          const position = element.meshe.position;
+          position.set(
+            position.x,
+            position.y,
+            position.z + 4 * Math.sign(delta)
+          );
+          if (position.z < -44) {
+            position.set(position.x, position.y, position.z + 96);
+          } else if (position.z > 52) {
+            position.set(position.x, position.y, position.z - 96);
+          }
+        }
+      }
+    }
+    return null;
+  }
+
   // fonction that check if the flower can open (position of the colibri vs position of the flower)
   // will start all the animations relative to
   public opener(x: number, y: number): void {

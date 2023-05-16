@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./BreadCrumb.css";
 import { applications } from "src/Babylonjs/Texts";
 import { KoodibrilEngine, pannelInfo } from "src/Babylonjs/Engine";
@@ -9,49 +9,50 @@ const BreadCrumb: React.FC<{
 }> = (props) => {
   const currentApp = props.appName.app;
   const engine = props.engine;
-  const getApps = () => {
+  const appRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  useEffect(() => {
+    appRefs.current = appRefs.current.slice(0, applications.length);
+  }, [applications]);
+
+  useEffect(() => {
     const appId = applications.findIndex((app) => app.name === currentApp);
-    if (appId === -1) return [];
-    if (appId >= 4 && appId <= 20)
-      return applications.slice(appId - 4, appId + 4);
-    if (appId < 4)
-      return [
-        ...applications.slice(appId - 4),
-        ...applications.slice(0, appId + 4),
-      ];
-    if (appId > 20)
-      return [
-        ...applications.slice(appId - 4),
-        ...applications.slice(0, appId + 4 - 24),
-      ];
-  };
+    if (appId !== -1)
+      appRefs.current[appId]?.scrollIntoView({ block: "center" });
+  }, [currentApp]);
 
   const generateApps = () => {
-    const apps = getApps();
-    if (engine && apps && apps.length > 0) {
-      return apps.map((app, id) => {
+    if (engine) {
+      return applications.map((app, id) => {
         return (
           <div
             key={id}
+            ref={(el) => (appRefs.current[id] = el)}
             className={`breadcrumb-cartridge${
               currentApp === app.name ? " selected" : ""
             }`}
             onClick={() => engine.goTo(app.name)}
           >
-            {app.logo ? <img src={app.logo} /> : null}
+            <img src={app.logo} />
           </div>
         );
       });
     }
   };
 
+  const handleScroll = (event: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    console.log(event);
+  };
   const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
-    // engine?.externWheel(event.deltaY);
-    engine?.wheel(event.deltaY * 3.3);
+    console.log(event);
   };
 
   return (
-    <div onWheel={(e) => handleWheel(e)} className="breadcrumb-wrapper">
+    <div
+      onScroll={(e) => handleScroll(e)}
+      onWheel={(e) => handleWheel(e)}
+      className="breadcrumb-wrapper"
+    >
       {generateApps()}
     </div>
   );
