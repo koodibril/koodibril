@@ -137,6 +137,8 @@ export class AnimationsActions {
     delta: number
   ): Animatable | null {
     if (object.animations.length > 0) {
+      if (object.animations[0].runtimeAnimations[0].currentFrame > 80)
+        return null;
       object.animations[0].runtimeAnimations[0].reset(false);
       const currentKeys = object.animations[0].getKeys();
       currentKeys[1].value += delta / 100;

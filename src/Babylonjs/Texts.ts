@@ -87,7 +87,7 @@ export const applications: Application[] = [
     ],
   },
   {
-    name: "YOUR APP",
+    name: "YOUR APP1",
     subtitle: "Coming soon",
     logo: "",
     pdf: "",
@@ -163,7 +163,7 @@ export const applications: Application[] = [
     ],
   },
   {
-    name: "YOUR APP",
+    name: "YOUR APP2",
     subtitle: "Coming soon",
     logo: "",
     pdf: "",
@@ -223,7 +223,7 @@ export const applications: Application[] = [
     technos: [],
   },
   {
-    name: "YOUR APP",
+    name: "YOUR APP3",
     subtitle: "Coming soon",
     logo: "",
     pdf: "",
@@ -272,7 +272,7 @@ export const applications: Application[] = [
     technos: [],
   },
   {
-    name: "YOUR APP",
+    name: "YOUR APP4",
     subtitle: "Coming soon",
     logo: "",
     pdf: "",
@@ -322,7 +322,7 @@ export const applications: Application[] = [
     technos: ["devicon-c-plain-wordmark colored"],
   },
   {
-    name: "YOUR APP",
+    name: "YOUR APP5",
     subtitle: "Coming soon",
     logo: "",
     pdf: "",
@@ -360,7 +360,7 @@ export const applications: Application[] = [
     technos: ["devicon-c-plain-wordmark colored"],
   },
   {
-    name: "YOUR APP",
+    name: "YOUR APP6",
     subtitle: "Coming soon",
     logo: "",
     pdf: "",

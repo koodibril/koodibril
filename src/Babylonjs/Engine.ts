@@ -199,7 +199,7 @@ export class KoodibrilEngine {
   // class that is called outside of the rendering for listeners
   public animate(): void {
     const rendererLoopCallback = (): void => {
-      this.warp();
+      this.clock();
       this.scene.render();
     };
 
@@ -268,16 +268,25 @@ export class KoodibrilEngine {
   public goTo(appName: string): void {
     const nextPos = applications.findIndex((app) => app.name === appName);
     if (nextPos === -1) return;
-    let travel = this.position;
-    while (travel !== nextPos && travel < 40) {
-      this.wheel(-120);
-      travel++;
+    let diff = this.position - nextPos;
+    if (diff > 12) {
+      diff -= 24;
+    } else if (diff < -12) {
+      diff += 24;
     }
+    const travel = diff * 3.3 * 120;
+    this.wheel(travel)?.onAnimationEndObservable.add(() => {
+      this.opener(
+        this.forest.flowers.rows[nextPos][0].meshe.position.x,
+        this.forest.flowers.rows[nextPos][0].meshe.position.y
+      );
+    });
+    setTimeout(() => this.wheel(0), 1500);
   }
 
   // function that will add an animation to all mesh of the forest
   // sliding them frontward, or backward
-  public wheel(delta: number): void {
+  public wheel(delta: number): Animatable | null {
     if (this.open && !this.animationsActions.loading) {
       this.reset();
     }
@@ -305,12 +314,15 @@ export class KoodibrilEngine {
           );
         }
       }
-      if (rollOver)
+      if (rollOver) {
         rollOver.onAnimationEndObservable.add(() => {
           this.move = false;
           this.open = false;
         });
+        return rollOver;
+      }
     }
+    return null;
   }
 
   // fonction that check if the flower can open (position of the colibri vs position of the flower)
@@ -354,7 +366,7 @@ export class KoodibrilEngine {
     }
   }
 
-  private warp(): void {
+  private clock(): void {
     if (!this.forest) return;
     this.lightsAction.day(this.forest.flowers.rows[12][0].meshe.position.z);
     for (let i = 0; i < 24; i++) {
