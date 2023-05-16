@@ -163,13 +163,10 @@ export class LightsActions {
 
   // at each hour will set the position and the intensity of each lights
   // sunset at 6
-  public day(delta: number): void {
+  public day(hour: number): void {
+    console.log("hey");
     this.setFocus();
-    if (delta === 1) {
-      this.hour = this.hour === 0 ? 23 : this.hour - 1;
-    } else {
-      this.hour = this.hour === 24 ? 1 : this.hour + 1;
-    }
+    this.hour = hour;
     const sun_ang = this.hour * (Math.PI / 12);
     const sun_y = 0 + 24 * Math.cos(sun_ang);
     const sun_z = 4 + 24 * Math.sin(sun_ang);
@@ -337,7 +334,7 @@ export class LightsActions {
   }
 
   public setFirefly(): void {
-    if (this.hour >= 10 && this.hour <= 13 && !this.firefly) {
+    if (this.hour >= 1 && this.hour <= 5 && !this.firefly) {
       this.firefly = true;
       for (let z = 0; z <= 8; z = z + 4) {
         for (let x = -3; x <= 6; x = x + 3) {
@@ -363,7 +360,7 @@ export class LightsActions {
           this.particles.push(particleSystem);
         }
       }
-    } else if (this.hour > 13 || this.hour < 10) {
+    } else if (this.hour > 5 || this.hour < 1) {
       this.particles.forEach((element) => {
         element.stop();
       });

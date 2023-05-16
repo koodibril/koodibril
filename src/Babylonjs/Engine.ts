@@ -190,7 +190,7 @@ export class KoodibrilEngine {
   // class that is called outside of the rendering for listeners
   public animate(): void {
     const rendererLoopCallback = (): void => {
-      this.forestActions.warp();
+      this.warp();
       this.scene.render();
     };
 
@@ -223,11 +223,6 @@ export class KoodibrilEngine {
           }
           break;
       }
-    });
-
-    window.addEventListener("wheel", (pointerInfo) => {
-      console.log(pointerInfo.deltaY);
-      console.log(pointerInfo.movementY);
     });
 
     // this will resize the scene if the canvas is resized
@@ -274,30 +269,13 @@ export class KoodibrilEngine {
   // function that will add an animation to all mesh of the forest
   // sliding them frontward, or backward
   public wheel(delta: number): void {
-    const direction = Math.sign(delta);
     if (this.open && !this.animationsActions.loading) {
       this.reset();
     }
     if (!this.animationsActions.loading) {
-      if (direction === 1) {
-        this.position = this.position === 0 ? 23 : this.position - 1;
-      } else {
-        this.position = this.position === 24 ? 1 : this.position + 1;
-      }
-      if (this.position === 24) {
-        this.position = 0;
-      }
-      const flowerPos =
-        this.forest.flowers.rows[this.position][0].meshe.position;
-      this.setAppName({
-        app: applications[this.position].name,
-        side: flowerPos.x + (flowerPos.x < 0 ? 0.5 : -0.5) < 0,
-      });
       this.move = true;
       let rollOver: Animatable | null = null;
       let toMove: Bush[] | Tree[] | Flower[] = [];
-      // change day on direction
-      // this.lightsAction.day(direction);
       for (let i = 0; i < 24; i++) {
         toMove = [
           ...this.forest.trees.rows[i],
@@ -312,8 +290,9 @@ export class KoodibrilEngine {
             new Vector3(
               position.x,
               position.y,
-              (position.z as number) + delta / 10
-            )
+              (position.z as number) + delta / 100
+            ),
+            delta
           );
         }
       }
@@ -363,6 +342,45 @@ export class KoodibrilEngine {
       this.open
     ) {
       this.reset();
+    }
+  }
+
+  private warp(): void {
+    let toCheck: Bush[] | Tree[] | Flower[] = [];
+    if (!this.forest) return;
+    for (let i = 0; i < 24; i++) {
+      toCheck = [
+        ...this.forest.trees.rows[i],
+        ...this.forest.bushes.rows[i],
+        ...this.forest.flowers.rows[i],
+      ];
+      const flower_pos = this.forest.flowers.rows[i][0].meshe.position;
+      if (flower_pos.z > -2 && flower_pos.z < 2 && this.position !== i) {
+        this.position = i;
+        this.setAppName({
+          app: applications[this.position].name,
+          side: flower_pos.x + (flower_pos.x < 0 ? 0.5 : -0.5) < 0,
+        });
+        this.lightsAction.day(i);
+      }
+      for (const element of toCheck) {
+        const position = element.meshe.position;
+        if (position._z < -48) {
+          const newPos = new Vector3(
+            position._x,
+            position._y,
+            position._z + 92
+          );
+          position.set(newPos._x, newPos._y, newPos._z);
+        } else if (position._z > 44) {
+          const newPos = new Vector3(
+            position._x,
+            position._y,
+            position._z - 92
+          );
+          position.set(newPos._x, newPos._y, newPos._z);
+        }
+      }
     }
   }
 

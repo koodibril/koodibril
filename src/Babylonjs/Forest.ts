@@ -240,23 +240,4 @@ export class ForestActions {
     tree.meshe.name = "tree";
     this.forest.trees.rows[row].push(tree);
   }
-
-  public warp(): void {
-    let toCheck: Bush[] | Tree[] | Flower[] = [];
-    for (let i = 0; i < 24; i++) {
-      toCheck = [
-        ...this.forest.trees.rows[i],
-        ...this.forest.bushes.rows[i],
-        ...this.forest.flowers.rows[i],
-      ];
-      for (const element of toCheck) {
-        const position = element.meshe.position;
-        if (position._z < -48) {
-          position._z = position._z + 92;
-        } else if (position._z > 44) {
-          position._z = position._z - 92;
-        }
-      }
-    }
-  }
 }

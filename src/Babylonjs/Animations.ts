@@ -134,8 +134,14 @@ export class AnimationsActions {
   public smoothSlideObject(
     object: AbstractMesh,
     from: Vector3,
-    to: Vector3
-  ): Animatable {
+    to: Vector3,
+    delta: number
+  ): Animatable | null {
+    if (object.animations.length > 0) {
+      const currentKeys = object.animations[0].getKeys();
+      currentKeys[1].value += delta / 100;
+      return null;
+    }
     const zkeysSmooth = [
       {
         frame: 0,
@@ -158,7 +164,11 @@ export class AnimationsActions {
     easingFunction.setEasingMode(EasingFunction.EASINGMODE_EASEINOUT);
     zSlide.setEasingFunction(easingFunction);
     object.animations.push(zSlide);
-    return this.scene.beginAnimation(object, 0, 120, false);
+    const animatable = this.scene.beginAnimation(object, 0, 120, false);
+    animatable.onAnimationEndObservable.addOnce(() => {
+      object.animations.pop();
+    });
+    return animatable;
   }
 
   // generate random movements for the colibri, will call itself at the end of the last animations
@@ -257,7 +267,7 @@ export class AnimationsActions {
       new Vector3(
         flowerPos.x + (flowerPos.x < 0 ? 0.7 : -0.7),
         1.7,
-        this.koodibril.mesh.position.z
+        flowerPos.z
       ),
       2
     ).onAnimationEndObservable.add(() => {
