@@ -56,7 +56,7 @@ export class GuiActions {
       this.show = value;
       if (value === true) {
         this.instantiateColorGui();
-        this.createColorPannel("Sun", this.lights.sunMesh);
+        this.createColorPannel("Sun", this.lights.sun.mesh);
         this.createFogColorPannel();
         this.createAmbiantColorPannel();
       } else {

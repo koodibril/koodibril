@@ -4,23 +4,30 @@ import {
   MeshBuilder,
   Color4,
   Vector3,
-  Animation,
   Color3,
   StandardMaterial,
   SpotLight,
   Mesh,
   ParticleSystem,
   Texture,
-  Camera,
-  Engine,
   DirectionalLight,
   GlowLayer,
 } from "@babylonjs/core";
 
+export interface Sun {
+  light: DirectionalLight;
+  mesh: Mesh;
+  material: StandardMaterial;
+}
+export interface Moon {
+  light: DirectionalLight;
+  mesh: Mesh;
+  material: StandardMaterial;
+}
+
 export interface Lights {
-  sun: DirectionalLight;
-  sunMesh: Mesh;
-  sunMat: StandardMaterial;
+  sun: Sun;
+  moon: Moon;
   groundLight: GridMaterial;
 }
 
@@ -34,35 +41,40 @@ export class LightsActions {
   private particles!: ParticleSystem[];
   private glow!: GlowLayer;
 
-  public constructor(
-    private scene: Scene,
-    private camera: Camera,
-    private engine: Engine
-  ) {}
+  public constructor(private scene: Scene) {}
 
   // create all lights and the sun/moon
   public instantiateLights(): void {
     this.lights = <Lights>{};
-    this.lights.sun = new DirectionalLight(
-      "sunLight",
-      new Vector3(0, -1, 0),
-      this.scene
-    );
-    this.lights.sunMat = new StandardMaterial("yellowMat", this.scene);
-    this.lights.sunMat.emissiveColor = new Color3(1, 1, 0.5);
-    this.lights.sun.intensity = 1;
-    this.lights.sunMesh = MeshBuilder.CreateIcoSphere("sunMesh", { radius: 5 });
-    this.lights.sunMesh.material = this.lights.sunMat;
-    this.lights.sun.parent = this.lights.sunMesh;
-    this.lights.sunMesh.position = new Vector3(0, 20, 4);
-    this.lights.sunMesh.applyFog = false;
-    this.glow = new GlowLayer("glow", this.scene);
-    this.glow.intensity = 1;
     this.hour = 0;
     this.firefly = false;
     this.particles = [];
     this.stars = [];
+    this.glow = new GlowLayer("glow", this.scene);
+    this.glow.intensity = 1;
     this.instantiateStars();
+    this.instantiateSun();
+  }
+
+  public instantiateSun(): void {
+    this.lights.sun = <Sun>{};
+    this.lights.sun.light = new DirectionalLight(
+      "sunLight",
+      new Vector3(0, -1, 0),
+      this.scene
+    );
+    this.lights.sun.material = new StandardMaterial("yellowMat", this.scene);
+    this.lights.sun.material.emissiveColor = new Color3(1, 1, 0.5);
+    this.lights.sun.material = new StandardMaterial("redMat", this.scene);
+    this.lights.sun.material.emissiveColor = new Color3(1, 0.5, 0.5);
+    this.lights.sun.light.intensity = 0.01;
+    this.lights.sun.mesh = MeshBuilder.CreateIcoSphere("sunMesh", {
+      radius: 5,
+    });
+    this.lights.sun.mesh.material = this.lights.sun.material;
+    this.lights.sun.light.parent = this.lights.sun.mesh;
+    this.lights.sun.mesh.position = new Vector3(0, 20, 4);
+    this.lights.sun.mesh.applyFog = false;
   }
 
   public instantiateStars(): void {
@@ -93,66 +105,6 @@ export class LightsActions {
     }
   }
 
-  // function that will move the sun/moon
-  public movestar(object: Mesh, from: Vector3, to: Vector3): void {
-    const frameRate = 10;
-    const xkeyFrames = [
-      {
-        frame: 0,
-        value: from.x,
-      },
-      {
-        frame: frameRate,
-        value: to.x,
-      },
-    ];
-    const ykeyFrames = [
-      {
-        frame: 0,
-        value: from.y,
-      },
-      {
-        frame: frameRate,
-        value: to.y,
-      },
-    ];
-    const zkeyFrames = [
-      {
-        frame: 0,
-        value: from.z,
-      },
-      {
-        frame: frameRate,
-        value: to.z,
-      },
-    ];
-
-    const xSlide = new Animation(
-      "xSlide",
-      "position.x",
-      frameRate,
-      Animation.ANIMATIONTYPE_FLOAT
-    );
-    const ySlide = new Animation(
-      "ySlide",
-      "position.y",
-      frameRate,
-      Animation.ANIMATIONTYPE_FLOAT
-    );
-    const zSlide = new Animation(
-      "zSlide",
-      "position.z",
-      frameRate,
-      Animation.ANIMATIONTYPE_FLOAT
-    );
-
-    xSlide.setKeys(xkeyFrames);
-    ySlide.setKeys(ykeyFrames);
-    zSlide.setKeys(zkeyFrames);
-    const animations = [zSlide, ySlide, xSlide];
-    this.scene.beginDirectAnimation(object, animations, 0, frameRate, false, 2);
-  }
-
   // at each hour will set the position and the intensity of each lights
   // sunset at 18
   public day(hour: number): void {
@@ -161,33 +113,38 @@ export class LightsActions {
     const sun_ang = this.hour * (Math.PI / 12);
     const sun_y = (0 + 24 * Math.cos(sun_ang)) * -2;
     const sun_z = (4 + 24 * Math.sin(sun_ang)) * -2;
-    let luminosity = (sun_y + 24) / 24;
+    let luminosity = sun_y / 48;
+    if (this.hour <= 18 || this.hour >= 6) luminosity += 0.5;
+    if (luminosity >= 1) luminosity = 1;
     this.setFirefly();
-    this.setSunColor();
     const sunPos = new Vector3(0, sun_y, sun_z);
-    this.lights.sunMesh.setAbsolutePosition(sunPos);
-    if (luminosity > 1 || sun_y > 0) {
-      luminosity = 1;
-    } else if (luminosity < 0.5) {
+    this.lights.sun.mesh.setAbsolutePosition(sunPos);
+    if (luminosity < 0.375) {
       luminosity = 0.375;
     }
-    if (this.hour === 18) {
-      luminosity = 0.9;
-    }
-    if (this.hour >= 17 && this.hour <= 18) {
+    this.glow.intensity = luminosity;
+    this.sunset(luminosity);
+    this.lights.groundLight.mainColor = new Color3(
+      1 * luminosity,
+      1 * luminosity,
+      1 * luminosity
+    );
+  }
+
+  private sunset(luminosity: number): void {
+    if (this.hour >= 16.6 && this.hour <= 18.4) {
+      luminosity += 0.5;
       this.scene.fogColor = new Color3(
-        0.9 * luminosity * 1.1,
         0.9 * luminosity,
-        0.85 * luminosity
+        0.5 * luminosity,
+        0.5 * luminosity
       );
       this.scene.clearColor = new Color4(
-        0.9 * luminosity * 1.1,
         0.9 * luminosity,
-        0.85 * luminosity,
+        0.5 * luminosity,
+        0.5 * luminosity,
         1
       );
-    } else if (this.hour >= 18 && this.hour <= 19) {
-      this.sunset();
     } else {
       this.scene.fogColor = new Color3(
         1 * luminosity,
@@ -201,124 +158,6 @@ export class LightsActions {
         1
       );
     }
-    // this.lights.ambiant.intensity = 1 * luminosity;
-    this.lights.groundLight.mainColor = new Color3(
-      1 * luminosity,
-      1 * luminosity,
-      1 * luminosity
-    );
-  }
-
-  public setSunColor(): void {
-    switch (this.hour) {
-      case 4:
-        this.smoothColor(
-          this.lights.sunMat,
-          this.lights.sunMat.emissiveColor,
-          new Color3(0.9, 0.9, 0.5)
-        );
-        break;
-      case 5:
-        this.smoothColor(
-          this.lights.sunMat,
-          this.lights.sunMat.emissiveColor,
-          new Color3(0.9, 0.9, 0.5)
-        );
-        break;
-      case 6:
-        this.smoothColor(
-          this.lights.sunMat,
-          this.lights.sunMat.emissiveColor,
-          new Color3(255 / 255, 102 / 255, 112 / 255)
-        );
-        break;
-      default:
-        this.smoothColor(
-          this.lights.sunMat,
-          this.lights.sunMat.emissiveColor,
-          new Color3(0.9, 0.9, 0.5)
-        );
-    }
-  }
-
-  public sunset(): void {
-    const luminosity = 0.9;
-    this.smoothColor(
-      this.lights.sunMat,
-      this.lights.sunMat.emissiveColor,
-      new Color3(0.9 * luminosity * 1.15, 0.9 * luminosity, 0.85 * luminosity)
-    );
-    this.scene.fogColor = new Color3(
-      0.9 * luminosity * 1.15,
-      0.9 * luminosity,
-      0.85 * luminosity
-    );
-    this.scene.clearColor = new Color4(
-      0.9 * luminosity * 1.15,
-      0.9 * luminosity,
-      0.85 * luminosity,
-      1
-    );
-  }
-
-  // function that will change the sun/moon color
-  public smoothColor(object: StandardMaterial, from: Color3, to: Color3): void {
-    const frameRate = 100;
-    const rkeyFrames = [
-      {
-        frame: 0,
-        value: from.r,
-      },
-      {
-        frame: frameRate,
-        value: to.r,
-      },
-    ];
-    const gkeyFrames = [
-      {
-        frame: 0,
-        value: from.g,
-      },
-      {
-        frame: frameRate,
-        value: to.g,
-      },
-    ];
-    const bkeyFrames = [
-      {
-        frame: 0,
-        value: from.b,
-      },
-      {
-        frame: frameRate,
-        value: to.b,
-      },
-    ];
-
-    const rSlide = new Animation(
-      "rSlide",
-      "emissiveColor.r",
-      frameRate,
-      Animation.ANIMATIONTYPE_FLOAT
-    );
-    const gSlide = new Animation(
-      "gSlide",
-      "emissiveColor.g",
-      frameRate,
-      Animation.ANIMATIONTYPE_FLOAT
-    );
-    const bSlide = new Animation(
-      "bSlide",
-      "emissiveColor.b",
-      frameRate,
-      Animation.ANIMATIONTYPE_FLOAT
-    );
-
-    rSlide.setKeys(rkeyFrames);
-    gSlide.setKeys(gkeyFrames);
-    bSlide.setKeys(bkeyFrames);
-    const animations = [rSlide, gSlide, bSlide];
-    this.scene.beginDirectAnimation(object, animations, 0, frameRate, false, 2);
   }
 
   public setFirefly(): void {
@@ -358,6 +197,6 @@ export class LightsActions {
   }
 
   public setFocus(): void {
-    this.lights.sun.setDirectionToTarget(new Vector3(0, 0, 0));
+    this.lights.sun.light.setDirectionToTarget(new Vector3(0, 0, 0));
   }
 }

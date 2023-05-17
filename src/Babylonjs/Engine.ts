@@ -98,7 +98,7 @@ export class KoodibrilEngine {
     // );
     // camera.attachControl(true);
 
-    this.lightsAction = new LightsActions(this.scene, this.camera, this.engine);
+    this.lightsAction = new LightsActions(this.scene);
     this.lightsAction.instantiateLights();
     this.lights = this.lightsAction.lights;
 
@@ -258,8 +258,7 @@ export class KoodibrilEngine {
     this.animationsActions.slideObject(
       this.koodibril.mesh,
       this.koodibril.mesh.position,
-      new Vector3(0, 2, this.koodibril.mesh.position.z),
-      2
+      new Vector3(0, 2, this.koodibril.mesh.position.z)
     );
     this.animationsActions.fly();
     this.loading = false;
@@ -400,7 +399,7 @@ export class KoodibrilEngine {
   }
 
   private clock(): void {
-    if (!this.forest) return;
+    if (!this.forest || !this.lightsAction) return;
     this.lightsAction.day(this.forest.flowers.rows[12][0].meshe.position.z);
     for (let i = 0; i < 24; i++) {
       const flower_pos = this.forest.flowers.rows[i][0].meshe.position;

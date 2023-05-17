@@ -46,8 +46,7 @@ const BreadCrumb: React.FC<{
   };
 
   const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
-    // engine?.externWheel(event.deltaY);
-    engine?.wheel(event.deltaY * 3.3);
+    if (engine) engine.wheel(event.deltaY * 3.3);
   };
 
   return (

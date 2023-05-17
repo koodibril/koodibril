@@ -1,16 +1,15 @@
 import {
   Scene,
   SceneLoader,
-  Color4,
   Vector3,
   Animation,
   Animatable,
   AbstractMesh,
   AnimationGroup,
   ParticleSystem,
-  Texture,
   CubicEase,
   EasingFunction,
+  Mesh,
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 import { Forest } from "./Forest";
@@ -56,10 +55,9 @@ export class AnimationsActions {
 
   // general fonction used to slide an object in 3 axis
   public slideObject(
-    object: AbstractMesh,
+    object: AbstractMesh | Mesh,
     from: Vector3,
-    to: Vector3,
-    speed: number
+    to: Vector3
   ): Animatable {
     const frameRate = 10;
     const xkeyFrames = [
@@ -115,19 +113,15 @@ export class AnimationsActions {
     xSlide.setKeys(xkeyFrames);
     ySlide.setKeys(ykeyFrames);
     zSlide.setKeys(zkeyFrames);
-    // const bezierEase = new BezierCurveEase(0.32, -0.73, 0.69, 1.59);
-    // xSlide.setEasingFunction(bezierEase);
-    // ySlide.setEasingFunction(bezierEase);
-    // zSlide.setEasingFunction(bezierEase);
-    const animations = [xSlide, zSlide, ySlide];
-    return this.scene.beginDirectAnimation(
-      object,
-      animations,
-      0,
-      frameRate,
-      false,
-      speed
-    );
+
+    const easingFunction = new CubicEase();
+    easingFunction.setEasingMode(EasingFunction.EASINGMODE_EASEINOUT);
+    xSlide.setEasingFunction(easingFunction);
+    ySlide.setEasingFunction(easingFunction);
+    zSlide.setEasingFunction(easingFunction);
+
+    object.animations.push(xSlide, ySlide, zSlide);
+    return this.scene.beginAnimation(object, 0, frameRate, false, 2);
   }
 
   public smoothSlideObject(
@@ -173,7 +167,7 @@ export class AnimationsActions {
     easingFunction.setEasingMode(EasingFunction.EASINGMODE_EASEINOUT);
     zSlide.setEasingFunction(easingFunction);
     object.animations.push(zSlide);
-    const animatable = this.scene.beginAnimation(object, 0, 120, false);
+    const animatable = this.scene.beginAnimation(object, 0, 120, false, 3);
     animatable.onAnimationEndObservable.addOnce(() => {
       object.animations.pop();
     });
@@ -277,42 +271,11 @@ export class AnimationsActions {
         flowerPos.x + (flowerPos.x < 0 ? 0.7 : -0.7),
         1.7,
         flowerPos.z
-      ),
-      2
+      )
     ).onAnimationEndObservable.add(() => {
       this.koodibril.animation[0].stop();
       this.koodibril.animation[1].start(true, 0.5);
     });
-  }
-
-  // initiante the particle system
-  public start_particle(position: number): void {
-    const flowerPos = this.forest.flowers.rows[position][0].meshe.position;
-    this.particle = new ParticleSystem("particles", 2000, this.scene);
-    this.particle.particleTexture = new Texture(
-      "/assets/textures/flare.png",
-      this.scene
-    );
-    this.particle.emitter = new Vector3(
-      flowerPos.x > 0 ? flowerPos.x - 0.16 : flowerPos.x + 0.16,
-      flowerPos.y - 0.1,
-      flowerPos.z
-    );
-    this.particle.createSphereEmitter(0.001, 0);
-    this.particle.color1 = new Color4(1.0, 0, 0, 1.0);
-    this.particle.color2 = new Color4(1.0, 0, 0, 1.0);
-    this.particle.minSize = 0.05;
-    this.particle.maxSize = 0.05;
-    this.particle.emitRate = 500;
-    this.particle.minLifeTime = 0.1;
-    this.particle.maxLifeTime = 0.1;
-    this.particle.start();
-  }
-
-  // stop the particle system
-  public stop_particle(): void {
-    this.particle.stop();
-    this.particle.reset();
   }
 
   // stop all flower animations
@@ -347,28 +310,17 @@ export class AnimationsActions {
   // launch the flower animations
   public deploy_flower(position: number): void {
     this.stop_flower(position);
-    // this.forest.flowers.front.animations[2].start(false, 1).onAnimationEndObservable.add(() => {
-    //   this.forest.flowers.front.animations[4].start(false, 1);
-    //   this.forest.flowers.front.animations[6].start(false, 1);
-    // });
     this.forest.flowers.rows[position][0].animations[2].start(false, 1);
   }
 
   // close the flower beautifully
   public retract_flower(position: number): void {
     this.stop_flower(position);
-    // this.forest.flowers.front.animations[5].start(false, 1);
-    // this.forest.flowers.front.animations[3].start(false, 1).onAnimationEndObservable.add(() => {
-    //   this.forest.flowers.front.animations[0].start(false, 1);
-    // });
     this.forest.flowers.rows[position][0].animations[0].start(false, 1);
   }
 
   // close the flower fast, called whith scroll
   public retract_fast_flower(position: number): void {
-    // this.forest.flowers.front.animations[5].start(false, 0.5);
-    // this.forest.flowers.front.animations[3].start(false, 2);
-    // this.forest.flowers.front.animations[0].start(false, 0.5);
     this.forest.flowers.rows[position][0].animations[0].start(false, 1);
   }
 }
