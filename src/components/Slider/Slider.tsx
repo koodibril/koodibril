@@ -1,10 +1,16 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import "./Slider.css";
 import { applications } from "src/Babylonjs/Texts";
 import { pannelInfo } from "src/Babylonjs/Engine";
+import { ReactComponent as XMark } from "src/icons/xmark-solid.svg";
 
-const Slider: React.FC<{ appName: pannelInfo; show: boolean }> = (props) => {
+const Slider: React.FC<{
+  appName: pannelInfo;
+  show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+}> = (props) => {
   const app = props.appName.app;
+  const [anim, setAnim] = useState(" test");
   const appInfo = useMemo(() => {
     const index = applications.findIndex((el) => el.name === app);
     if (index !== -1 && app !== "") {
@@ -20,11 +26,20 @@ const Slider: React.FC<{ appName: pannelInfo; show: boolean }> = (props) => {
       };
     }
   }, [app]);
+
+  const handleClose = () => {
+    if (props.show && anim === " test out") {
+      setAnim(" test");
+      props.setShow(false);
+    }
+  };
   return (
     <div
       style={{ display: props.show ? "block" : "none" }}
-      className={props.appName.side ? "wrapper" : "wrapper left"}
+      className={"wrapper" + anim}
+      onAnimationEnd={() => handleClose()}
     >
+      <XMark className="close-modal" onClick={() => setAnim(" test out")} />
       <div className="title-wrapper">
         <div className="title row justify-content-center">
           <img className="logo" src={appInfo?.logo} />

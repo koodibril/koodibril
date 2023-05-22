@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="engine-wrapper">
       <canvas id="renderCanvas"></canvas>
-      <Slider appName={appName} show={show}></Slider>
+      <Slider appName={appName} show={show} setShow={setShow}></Slider>
       <BreadCrumb appName={appName} engine={engine}></BreadCrumb>
     </div>
   );

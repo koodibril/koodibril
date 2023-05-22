@@ -16,80 +16,9 @@ export interface Application {
 
 export const applications: Application[] = [
   {
-    name: "KOODIBRIL",
-    subtitle: "A simple colibri app",
-    logo: "/images/portfolio/koodibril/colibri.png",
-    pdf: "",
-    pictures: [
-      "/images/portfolio/koodibril/1.png",
-      "/images/portfolio/koodibril/3.png",
-      "/images/portfolio/koodibril/4.png",
-    ],
-    // description: "This app has for purpoose to display my work in a fun way",
-    description:
-      "Portfolio sous babylonjs, une librairie travaillant avec webGl, qui permet l'utilisation \
-      de l'acceleration graphique pour le rendu d'une page web. Dans ce projet, j'ai egalement realiser \
-      l'integralite des modeles 3D sous blender, ainsi que leurs animations. La generation de la foret \
-      est effectuer de maniere aleatoire a chaque generation de rangs. Il existe exactement ",
-    link: "https://koodibril.com",
-    git: "https://github.com/koodibril/koodibril",
-    technos: [
-      "devicon-angularjs-plain-wordmark colored",
-      "devicon-devicon-plain-wordmark colored",
-      "devicon-spring-plain-wordmark colored",
-      "devicon-mongodb-plain-wordmark colored",
-      "devicon-opengl-plain-wordmark colored",
-    ],
-  },
-  {
-    name: "MIES HOUSE",
-    subtitle: "A simple logistic app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
-    pdf: "",
-    pictures: [],
-    description:
-      "Développer de nouvelles fonctionnalités, veiller a la robustesse, a l'extensibilité \
-    et a la reutilisabilité du code. Mettre en place le CI/CD a l'aide de github action, ansible, gcp \
-    et kubernetes. Mise a jour de la messagerie instantanée, \
-    Réaliser un serveur mail en lien avec la messagerie instantanée, \
-    Aider au développement de fonctionnalités diverses front (angular) et back (spring)",
-    link: "https://mieshouse.com/",
-    git: "",
-    technos: [
-      "devicon-angularjs-plain-wordmark colored",
-      "devicon-spring-plain-wordmark colored",
-      "devicon-postgresql-plain-wordmark colored",
-      "devicon-googlecloud-plain-wordmark colored",
-    ],
-  },
-  {
-    name: "UBEBEST",
-    subtitle: "A simple eco app",
-    logo: "https://ubebest.com/wp-content/uploads/2021/08/logo.png",
-    pdf: "",
-    pictures: [
-      "/images/portfolio/ubebest/1.png",
-      "/images/portfolio/ubebest/2.png",
-      "/images/portfolio/ubebest/3.png",
-    ],
-    description:
-      "Amelioration du backend, migration de scripts sous gcp afin de repartir la charge \
-    du serveur, creation d'un module strapi pour controler le serveur de scripts, et les lancer si \
-    necessaires. Mise a jour des scrappers. Mise a jour des scripts de calcul d'ecoscore, realisation \
-    de scripts de congregation de donnees. Creation d'un module strapi d'import et d'export de donnees",
-    link: "https://ubebest.com/",
-    git: "",
-    technos: [
-      "devicon-react-original-wordmark colored",
-      "devicon-nodejs-plain-wordmark colored",
-      "devicon-postgresql-plain-wordmark colored",
-      "devicon-googlecloud-plain-wordmark colored",
-    ],
-  },
-  {
     name: "YOUR APP1",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/your_app/logo.svg",
     pdf: "",
     pictures: [],
     description: "",
@@ -100,7 +29,7 @@ export const applications: Application[] = [
   {
     name: "GRAPHIT",
     subtitle: "A simple db app",
-    logo: "http://demo.graph-it.fr/static/media/Logo.8afff936.png",
+    logo: "/images/portfolio/graphit/logo.svg",
     pdf: "",
     pictures: [
       "/images/portfolio/graphit/1.png",
@@ -125,7 +54,7 @@ export const applications: Application[] = [
   {
     name: "BABYLON",
     subtitle: "A simple fps app",
-    logo: "https://upload.wikimedia.org/wikipedia/fr/0/0d/Logo_OpenClassrooms.png",
+    logo: "/images/portfolio/babylon/logo.png",
     pdf: "",
     pictures: [
       "/images/portfolio/babylon/1.png",
@@ -146,7 +75,7 @@ export const applications: Application[] = [
   {
     name: "CAMAGRU",
     subtitle: "A simple instagram app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/camagru/logo.png",
     pdf: "/images/portfolio/camagru/camagru.en.pdf",
     pictures: [
       "/images/portfolio/camagru/1.png",
@@ -165,7 +94,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP2",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/your_app/logo.svg",
     pdf: "",
     pictures: [],
     description: "",
@@ -176,7 +105,7 @@ export const applications: Application[] = [
   {
     name: "WOODART",
     subtitle: "A simple wordpress",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/woodart/logo.jpeg",
     pdf: "",
     pictures: [
       "/images/portfolio/woodart/1.png",
@@ -196,7 +125,7 @@ export const applications: Application[] = [
   {
     name: "MATCHA",
     subtitle: "A simple match app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/matcha/logo.png",
     pdf: "/images/portfolio/matcha/matcha.pdf",
     pictures: [],
     description:
@@ -212,7 +141,7 @@ export const applications: Application[] = [
   {
     name: "CLEAN-APP",
     subtitle: "A simple clean app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/clean_app/logo.png",
     pdf: "",
     pictures: [],
     description:
@@ -225,7 +154,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP3",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/your_app/logo.svg",
     pdf: "",
     pictures: [],
     description: "",
@@ -236,7 +165,7 @@ export const applications: Application[] = [
   {
     name: "HYPERTUBE",
     subtitle: "A simple youtube app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/hypertube/logo.jpg",
     pdf: "/images/portfolio/hypertube/hypertube/pdf",
     pictures: [],
     description:
@@ -248,7 +177,7 @@ export const applications: Application[] = [
   {
     name: "MUSICROOM",
     subtitle: "A simple deezer app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/musicroom/logo.png",
     pdf: "/images/portfolio/musicroom/music-room.pdf",
     pictures: [],
     description:
@@ -260,7 +189,7 @@ export const applications: Application[] = [
   {
     name: "BALANCINGBANK",
     subtitle: "A simple bank app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/balancing_bank/logo.svg",
     pdf: "",
     pictures: [],
     description:
@@ -272,9 +201,79 @@ export const applications: Application[] = [
     technos: [],
   },
   {
+    name: "KOODIBRIL",
+    subtitle: "A simple colibri app",
+    logo: "/images/portfolio/koodibril/colibri.png",
+    pdf: "",
+    pictures: [
+      "/images/portfolio/koodibril/1.png",
+      "/images/portfolio/koodibril/3.png",
+      "/images/portfolio/koodibril/4.png",
+    ],
+    description:
+      "Portfolio sous babylonjs, une librairie travaillant avec webGl, qui permet l'utilisation \
+      de l'acceleration graphique pour le rendu d'une page web. Dans ce projet, j'ai egalement realiser \
+      l'integralite des modeles 3D sous blender, ainsi que leurs animations. La generation de la foret \
+      est effectuer de maniere aleatoire a chaque generation de rangs. Il existe exactement ",
+    link: "https://koodibril.com",
+    git: "https://github.com/koodibril/koodibril",
+    technos: [
+      "devicon-angularjs-plain-wordmark colored",
+      "devicon-devicon-plain-wordmark colored",
+      "devicon-spring-plain-wordmark colored",
+      "devicon-mongodb-plain-wordmark colored",
+      "devicon-opengl-plain-wordmark colored",
+    ],
+  },
+  {
+    name: "MIES HOUSE",
+    subtitle: "A simple logistic app",
+    logo: "/images/portfolio/mies_house/logo.jpeg",
+    pdf: "",
+    pictures: [],
+    description:
+      "Développer de nouvelles fonctionnalités, veiller a la robustesse, a l'extensibilité \
+    et a la reutilisabilité du code. Mettre en place le CI/CD a l'aide de github action, ansible, gcp \
+    et kubernetes. Mise a jour de la messagerie instantanée, \
+    Réaliser un serveur mail en lien avec la messagerie instantanée, \
+    Aider au développement de fonctionnalités diverses front (angular) et back (spring)",
+    link: "https://mieshouse.com/",
+    git: "",
+    technos: [
+      "devicon-angularjs-plain-wordmark colored",
+      "devicon-spring-plain-wordmark colored",
+      "devicon-postgresql-plain-wordmark colored",
+      "devicon-googlecloud-plain-wordmark colored",
+    ],
+  },
+  {
+    name: "UBEBEST",
+    subtitle: "A simple eco app",
+    logo: "/images/portfolio/ubebest/logo.webp",
+    pdf: "",
+    pictures: [
+      "/images/portfolio/ubebest/1.png",
+      "/images/portfolio/ubebest/2.png",
+      "/images/portfolio/ubebest/3.png",
+    ],
+    description:
+      "Amelioration du backend, migration de scripts sous gcp afin de repartir la charge \
+    du serveur, creation d'un module strapi pour controler le serveur de scripts, et les lancer si \
+    necessaires. Mise a jour des scrappers. Mise a jour des scripts de calcul d'ecoscore, realisation \
+    de scripts de congregation de donnees. Creation d'un module strapi d'import et d'export de donnees",
+    link: "https://ubebest.com/",
+    git: "",
+    technos: [
+      "devicon-react-original-wordmark colored",
+      "devicon-nodejs-plain-wordmark colored",
+      "devicon-postgresql-plain-wordmark colored",
+      "devicon-googlecloud-plain-wordmark colored",
+    ],
+  },
+  {
     name: "YOUR APP4",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/your_app/logo.svg",
     pdf: "",
     pictures: [],
     description: "",
@@ -285,7 +284,7 @@ export const applications: Application[] = [
   {
     name: "UNIQU'AIR",
     subtitle: "A simple radio app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/uniqu_air/logo.png",
     pdf: "",
     pictures: [],
     description:
@@ -298,7 +297,7 @@ export const applications: Application[] = [
   {
     name: "RED-TETRIS",
     subtitle: "A simple tetris app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/red_tetris/logo.png",
     pdf: "/images/portfolio/red_tetris/tetris.pdf",
     pictures: [],
     description:
@@ -311,7 +310,7 @@ export const applications: Application[] = [
   {
     name: "LEMIN",
     subtitle: "A simple ant app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/lemin/logo.jpg",
     pdf: "/images/portfolio/lemin/lemin.pdf",
     pictures: [],
     description:
@@ -324,7 +323,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP5",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/your_app/logo.svg",
     pdf: "",
     pictures: [],
     description: "",
@@ -335,7 +334,7 @@ export const applications: Application[] = [
   {
     name: "COREWAR",
     subtitle: "A simple war app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/corewar/logo.jpg",
     pdf: "/images/portfolio/corewar/corewar.fr.pdf",
     pictures: [],
     description:
@@ -348,7 +347,7 @@ export const applications: Application[] = [
   {
     name: "PUSH_SWAP",
     subtitle: "A simple stack app",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/pushswap/logo.svg",
     pdf: "/images/portfolio/pushswap/push_swap.fr.pdf",
     pictures: [],
     description:
@@ -362,7 +361,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP6",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/your_app/logo.svg",
     pdf: "",
     pictures: [],
     description: "",
@@ -373,7 +372,7 @@ export const applications: Application[] = [
   {
     name: "AlphaBril",
     subtitle: "Florian-Marie Doucet",
-    logo: "/images/portfolio/mies_house/1.jpeg",
+    logo: "/images/portfolio/alphabril/logo.jpeg",
     pdf: "/images/portfolio/alphabril/cv.pdf",
     pictures: [
       "https://dam.malt.com/txnsh1cmtklme34ypjva?gravity=face&func=face&face_margin=60&w=440&h=440&force_format=webp",

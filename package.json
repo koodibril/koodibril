@@ -8,7 +8,7 @@
     "@babylonjs/loaders": "^6.3.0",
     "@babylonjs/materials": "^6.3.0",
     "babylonjs": "^6.3.0",
-    "devicon": "^2.15.1",
+    "devicon-react-svg": "^0.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
