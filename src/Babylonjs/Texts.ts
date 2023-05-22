@@ -16,12 +16,15 @@ export interface Application {
 
 export const applications: Application[] = [
   {
-    name: "YOUR APP1",
-    subtitle: "Coming soon",
+    name: "SWIFTY-COMPANION",
+    subtitle: "A simple profile app",
     logo: "/images/portfolio/your_app/logo.png",
-    pdf: "",
+    pdf: "/images/portfolio/swifty_companion/en.subject.pdf",
     pictures: [],
-    description: "",
+    description:
+      "Ce projet a pour but de vous initier au développement d'application mobile. \
+      Il s'agit de réaliser, une application qui permet de récupérer les informations \
+      des élèves de 42, en utilisant l'API de l'intranet de 42.",
     link: "",
     git: "",
     technos: [],
@@ -92,12 +95,16 @@ export const applications: Application[] = [
     ],
   },
   {
-    name: "YOUR APP2",
-    subtitle: "Coming soon",
+    name: "SWIFTY-PROTEIN",
+    subtitle: "A simple protein app",
     logo: "/images/portfolio/your_app/logo.png",
-    pdf: "",
+    pdf: "/images/portfolio/swifty_protein/en.subject.pdf",
     pictures: [],
-    description: "",
+    description:
+      "Ce projet a pour but de vous initier a la 3D and une application \
+    mobile classique. Vous devrez principalement réaliser une application qui modélisera \
+    des ligands en 3D, cette application sera aussi l'occasion d'approfondir vos \
+    connaissances dans le framework mobile de votre choix.",
     link: "",
     git: "",
     technos: [],
@@ -152,12 +159,17 @@ export const applications: Application[] = [
     technos: [],
   },
   {
-    name: "YOUR APP3",
-    subtitle: "Coming soon",
+    name: "INCEPTION OF THINGS",
+    subtitle: "A simple kubernetes implementation",
     logo: "/images/portfolio/your_app/logo.png",
-    pdf: "",
+    pdf: "/images/portfolio/iot/en.subject.pdf",
     pictures: [],
-    description: "",
+    description:
+      "Ce projet a pour but de vous faire découvrir kubernetes d'un point de vue \
+    développeur. Vous allez devoir mettre en place des petits clusters et découvrir la \
+    mécanique de l'intégration continue. À la fin de ce projet vous serrez capable d'avoir \
+    un cluster fonctionnel rapidement dans docker et ainsi avoir une intégration continue \
+    utilisable pour vos applications.",
     link: "",
     git: "",
     technos: [],
@@ -271,12 +283,14 @@ export const applications: Application[] = [
     ],
   },
   {
-    name: "YOUR APP4",
-    subtitle: "Coming soon",
+    name: "FRACTOL",
+    subtitle: "A simple fractal app",
     logo: "/images/portfolio/your_app/logo.png",
-    pdf: "",
+    pdf: "/images/portfolio/fractol/fr.subject.pdf",
     pictures: [],
-    description: "",
+    description:
+      "Découvrez la programmation 2D et l'univers psychédelique des fractales grâce \
+    à ce projet à réaliser avec la minilibX.",
     link: "",
     git: "",
     technos: [],
@@ -321,9 +335,9 @@ export const applications: Application[] = [
     technos: ["devicon-c-plain-wordmark colored"],
   },
   {
-    name: "YOUR APP5",
-    subtitle: "Coming soon",
-    logo: "/images/portfolio/your_app/logo.png",
+    name: "SALESRAMP",
+    subtitle: "A simple SaaS app",
+    logo: "/images/portfolio/salesramp/logo.svg",
     pdf: "",
     pictures: [],
     description: "",
@@ -359,9 +373,9 @@ export const applications: Application[] = [
     technos: ["devicon-c-plain-wordmark colored"],
   },
   {
-    name: "YOUR APP6",
-    subtitle: "Coming soon",
-    logo: "/images/portfolio/your_app/logo.png",
+    name: "Méta-Coaching",
+    subtitle: "A simple medical app",
+    logo: "/images/portfolio/meta_coaching/logo.svg",
     pdf: "",
     pictures: [],
     description: "",
