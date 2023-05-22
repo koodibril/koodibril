@@ -31,7 +31,7 @@ const BreadCrumb: React.FC<{
     if (apps) {
       const appId = apps.findIndex((app) => app.name === currentApp);
       if (appId === -1) return false;
-      if (appId - 1 === id || appId + 1 === id) return true;
+      if (appId - 1 === id || appId === id) return true;
     }
     return false;
   };
