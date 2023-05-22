@@ -265,6 +265,7 @@ export class KoodibrilEngine {
   }
 
   public goTo(appName: string): void {
+    if (this.loading) return;
     const nextPos = applications.findIndex((app) => app.name === appName);
     if (nextPos === -1) return;
     let diff = this.position - nextPos;
@@ -280,13 +281,12 @@ export class KoodibrilEngine {
         this.forest.flowers.rows[nextPos][0].meshe.position.y
       );
     });
-    setTimeout(() => this.wheel(0), 1500);
   }
 
   // function that will add an animation to all mesh of the forest
   // sliding them frontward, or backward
   public wheel(delta: number): Animatable | null {
-    if (this.open && !this.animationsActions.loading) {
+    if (this.open) {
       this.reset();
     }
     if (!this.animationsActions.loading) {
@@ -317,41 +317,9 @@ export class KoodibrilEngine {
         rollOver.onAnimationEndObservable.add(() => {
           this.move = false;
           this.open = false;
+          this.warp();
         });
         return rollOver;
-      }
-    }
-    return null;
-  }
-
-  // function that will move all mesh of the forest
-  // sliding them frontward, or backward
-  public externWheel(delta: number): Animatable | null {
-    if (this.open && !this.animationsActions.loading) {
-      this.reset();
-    }
-    if (!this.animationsActions.loading) {
-      this.move = true;
-      let toMove: Bush[] | Tree[] | Flower[] = [];
-      for (let i = 0; i < 24; i++) {
-        toMove = [
-          ...this.forest.trees.rows[i],
-          ...this.forest.bushes.rows[i],
-          ...this.forest.flowers.rows[i],
-        ];
-        for (const element of toMove) {
-          const position = element.meshe.position;
-          position.set(
-            position.x,
-            position.y,
-            position.z + 4 * Math.sign(delta)
-          );
-          if (position.z < -44) {
-            position.set(position.x, position.y, position.z + 96);
-          } else if (position.z > 52) {
-            position.set(position.x, position.y, position.z - 96);
-          }
-        }
       }
     }
     return null;
@@ -409,6 +377,25 @@ export class KoodibrilEngine {
           app: applications[this.position].name,
           side: flower_pos.x + (flower_pos.x < 0 ? 0.5 : -0.5) < 0,
         });
+      }
+    }
+  }
+
+  private warp(): void {
+    let toMove: Bush[] | Tree[] | Flower[] = [];
+    for (let i = 0; i < 24; i++) {
+      toMove = [
+        ...this.forest.trees.rows[i],
+        ...this.forest.bushes.rows[i],
+        ...this.forest.flowers.rows[i],
+      ];
+      for (const element of toMove) {
+        const position = element.meshe.position;
+        if (position.z < -44) {
+          position.set(position.x, position.y, position.z + 96);
+        } else if (position.z > 52) {
+          position.set(position.x, position.y, position.z - 96);
+        }
       }
     }
   }

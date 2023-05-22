@@ -89,7 +89,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP1",
     subtitle: "Coming soon",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "",
     pictures: [],
     description: "",
@@ -146,7 +146,7 @@ export const applications: Application[] = [
   {
     name: "CAMAGRU",
     subtitle: "A simple instagram app",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "/images/portfolio/camagru/camagru.en.pdf",
     pictures: [
       "/images/portfolio/camagru/1.png",
@@ -165,7 +165,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP2",
     subtitle: "Coming soon",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "",
     pictures: [],
     description: "",
@@ -176,7 +176,7 @@ export const applications: Application[] = [
   {
     name: "WOODART",
     subtitle: "A simple wordpress",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "",
     pictures: [
       "/images/portfolio/woodart/1.png",
@@ -196,7 +196,7 @@ export const applications: Application[] = [
   {
     name: "MATCHA",
     subtitle: "A simple match app",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "/images/portfolio/matcha/matcha.pdf",
     pictures: [],
     description:
@@ -212,7 +212,7 @@ export const applications: Application[] = [
   {
     name: "CLEAN-APP",
     subtitle: "A simple clean app",
-    logo: "/images/portfolio/clean_app/1.png",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "",
     pictures: [],
     description:
@@ -225,7 +225,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP3",
     subtitle: "Coming soon",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "",
     pictures: [],
     description: "",
@@ -236,7 +236,7 @@ export const applications: Application[] = [
   {
     name: "HYPERTUBE",
     subtitle: "A simple youtube app",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "/images/portfolio/hypertube/hypertube/pdf",
     pictures: [],
     description:
@@ -248,7 +248,7 @@ export const applications: Application[] = [
   {
     name: "MUSICROOM",
     subtitle: "A simple deezer app",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "/images/portfolio/musicroom/music-room.pdf",
     pictures: [],
     description:
@@ -260,7 +260,7 @@ export const applications: Application[] = [
   {
     name: "BALANCINGBANK",
     subtitle: "A simple bank app",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "",
     pictures: [],
     description:
@@ -274,7 +274,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP4",
     subtitle: "Coming soon",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "",
     pictures: [],
     description: "",
@@ -285,7 +285,7 @@ export const applications: Application[] = [
   {
     name: "UNIQU'AIR",
     subtitle: "A simple radio app",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "",
     pictures: [],
     description:
@@ -298,7 +298,7 @@ export const applications: Application[] = [
   {
     name: "RED-TETRIS",
     subtitle: "A simple tetris app",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "/images/portfolio/red_tetris/tetris.pdf",
     pictures: [],
     description:
@@ -311,7 +311,7 @@ export const applications: Application[] = [
   {
     name: "LEMIN",
     subtitle: "A simple ant app",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "/images/portfolio/lemin/lemin.pdf",
     pictures: [],
     description:
@@ -324,7 +324,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP5",
     subtitle: "Coming soon",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "",
     pictures: [],
     description: "",
@@ -335,7 +335,7 @@ export const applications: Application[] = [
   {
     name: "COREWAR",
     subtitle: "A simple war app",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "/images/portfolio/corewar/corewar.fr.pdf",
     pictures: [],
     description:
@@ -348,7 +348,7 @@ export const applications: Application[] = [
   {
     name: "PUSH_SWAP",
     subtitle: "A simple stack app",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "/images/portfolio/pushswap/push_swap.fr.pdf",
     pictures: [],
     description:
@@ -362,7 +362,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP6",
     subtitle: "Coming soon",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "",
     pictures: [],
     description: "",
@@ -373,7 +373,7 @@ export const applications: Application[] = [
   {
     name: "AlphaBril",
     subtitle: "Florian-Marie Doucet",
-    logo: "",
+    logo: "/images/portfolio/mies_house/1.jpeg",
     pdf: "/images/portfolio/alphabril/cv.pdf",
     pictures: [
       "https://dam.malt.com/txnsh1cmtklme34ypjva?gravity=face&func=face&face_margin=60&w=440&h=440&force_format=webp",
