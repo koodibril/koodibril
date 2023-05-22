@@ -18,7 +18,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP1",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/your_app/logo.svg",
+    logo: "/images/portfolio/your_app/logo.png",
     pdf: "",
     pictures: [],
     description: "",
@@ -29,7 +29,7 @@ export const applications: Application[] = [
   {
     name: "GRAPHIT",
     subtitle: "A simple db app",
-    logo: "/images/portfolio/graphit/logo.svg",
+    logo: "/images/portfolio/graphit/logo.png",
     pdf: "",
     pictures: [
       "/images/portfolio/graphit/1.png",
@@ -94,7 +94,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP2",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/your_app/logo.svg",
+    logo: "/images/portfolio/your_app/logo.png",
     pdf: "",
     pictures: [],
     description: "",
@@ -154,7 +154,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP3",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/your_app/logo.svg",
+    logo: "/images/portfolio/your_app/logo.png",
     pdf: "",
     pictures: [],
     description: "",
@@ -189,7 +189,7 @@ export const applications: Application[] = [
   {
     name: "BALANCINGBANK",
     subtitle: "A simple bank app",
-    logo: "/images/portfolio/balancing_bank/logo.svg",
+    logo: "/images/portfolio/balancing_bank/logo.png",
     pdf: "",
     pictures: [],
     description:
@@ -249,7 +249,7 @@ export const applications: Application[] = [
   {
     name: "UBEBEST",
     subtitle: "A simple eco app",
-    logo: "/images/portfolio/ubebest/logo.webp",
+    logo: "/images/portfolio/ubebest/logo.png",
     pdf: "",
     pictures: [
       "/images/portfolio/ubebest/1.png",
@@ -273,7 +273,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP4",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/your_app/logo.svg",
+    logo: "/images/portfolio/your_app/logo.png",
     pdf: "",
     pictures: [],
     description: "",
@@ -310,7 +310,7 @@ export const applications: Application[] = [
   {
     name: "LEMIN",
     subtitle: "A simple ant app",
-    logo: "/images/portfolio/lemin/logo.jpg",
+    logo: "/images/portfolio/lemin/logo.png",
     pdf: "/images/portfolio/lemin/lemin.pdf",
     pictures: [],
     description:
@@ -323,7 +323,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP5",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/your_app/logo.svg",
+    logo: "/images/portfolio/your_app/logo.png",
     pdf: "",
     pictures: [],
     description: "",
@@ -347,7 +347,7 @@ export const applications: Application[] = [
   {
     name: "PUSH_SWAP",
     subtitle: "A simple stack app",
-    logo: "/images/portfolio/pushswap/logo.svg",
+    logo: "/images/portfolio/pushswap/logo.png",
     pdf: "/images/portfolio/pushswap/push_swap.fr.pdf",
     pictures: [],
     description:
@@ -361,7 +361,7 @@ export const applications: Application[] = [
   {
     name: "YOUR APP6",
     subtitle: "Coming soon",
-    logo: "/images/portfolio/your_app/logo.svg",
+    logo: "/images/portfolio/your_app/logo.png",
     pdf: "",
     pictures: [],
     description: "",
