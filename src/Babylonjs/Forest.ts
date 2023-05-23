@@ -207,7 +207,7 @@ export class ForestActions {
     tree.animations.sort();
     tree.animations[1].start(false, 10.0);
     tree.animations[3].start(false, 10.0);
-    tree.meshe.scaling.scaleInPlace(2.5);
+    tree.meshe.scaling.scaleInPlace(Math.random() * (4 - 1.5) + 1.5);
     tree.meshe.checkCollisions = true;
     tree.meshe.rotate(new Vector3(0, 1, 0), Math.PI * 1.5);
     tree.meshe.position = position;

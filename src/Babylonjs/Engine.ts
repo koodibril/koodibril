@@ -80,11 +80,11 @@ export class KoodibrilEngine {
     this.scene.clearColor = new Color4(1, 1, 1, 1); // set the color of the void
     this.scene.ambientColor = new Color3(1, 1, 1); // set the ambiant color, don't seem to affect object
     this.scene.fogMode = Scene.FOGMODE_LINEAR;
-    this.scene.fogStart = 20.0;
-    this.scene.fogEnd = 40.0;
+    this.scene.fogStart = 15.0;
+    this.scene.fogEnd = 30.0;
     this.scene.fogColor = new Color3(1, 1, 1); // set the color of the fog
 
-    this.camera = new FlyCamera("camera1", new Vector3(0, 3, -5), this.scene);
+    this.camera = new FlyCamera("camera1", new Vector3(0, 2, -5), this.scene);
     this.camera.setTarget(new Vector3(0, 2, 0));
 
     //for debug

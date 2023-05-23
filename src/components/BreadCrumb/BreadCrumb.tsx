@@ -9,6 +9,7 @@ const BreadCrumb: React.FC<{
 }> = (props) => {
   const currentApp = props.appName.app;
   const engine = props.engine;
+
   const getApps = () => {
     const appId = applications.findIndex((app) => app.name === currentApp);
     if (appId === -1) return [];
@@ -42,14 +43,17 @@ const BreadCrumb: React.FC<{
       return apps.map((app, id) => {
         return (
           <div key={id}>
-            <div
-              key={app.name}
-              className={`breadcrumb-cartridge${
-                currentApp === app.name ? " selected" : ""
-              }`}
-              onClick={() => engine.goTo(app.name)}
-            >
-              <img src={app.logo} />
+            <div className="breadcrumb">
+              <div
+                key={app.name}
+                className={`breadcrumb-cartridge${
+                  currentApp === app.name ? " selected" : ""
+                }`}
+                onClick={() => engine.goTo(app.name)}
+              >
+                <img src={app.logo} />
+              </div>
+              <span className="tooltiptext">{app.name}</span>
             </div>
             {id < apps.length - 1 ? (
               <div
