@@ -7,9 +7,7 @@ import {
   Color3,
   FlyCamera,
   PointerEventTypes,
-  Matrix,
   Animatable,
-  // FreeCamera, for debug
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 import { GridMaterial } from "@babylonjs/materials";
@@ -17,7 +15,7 @@ import { ForestActions, Forest, Bush, Tree, Flower } from "./Forest";
 import { LightsActions, Lights } from "./Lights";
 import { AnimationsActions, Koodibril } from "./Animations";
 import { GuiActions } from "./Gui";
-import { applications, textActions } from "./Texts";
+import { applications } from "./Texts";
 import { CustomLoadingScreen } from "./Screen";
 
 export interface pannelInfo {
@@ -56,7 +54,6 @@ export class KoodibrilEngine {
   private koodibril!: Koodibril;
   private animationsActions!: AnimationsActions;
   private guiAction!: GuiActions;
-  public textActions!: textActions;
   private position!: number;
   private wheely!: number;
 
@@ -117,7 +114,7 @@ export class KoodibrilEngine {
     ground.checkCollisions = true;
 
     this.engine.loadingUIText = "Creating forest";
-    this.forestActions = new ForestActions(this.scene);
+    this.forestActions = new ForestActions(this.scene, this.engine);
     await this.forestActions.instantiateForest();
     this.forest = this.forestActions.forest;
 
@@ -125,8 +122,6 @@ export class KoodibrilEngine {
     this.animationsActions = new AnimationsActions(this.scene, this.forest);
     await this.animationsActions.initiateAnimation();
     this.koodibril = this.animationsActions.koodibril;
-
-    this.textActions = new textActions(this.scene, this.canvas);
 
     if (
       /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(
@@ -148,52 +143,6 @@ export class KoodibrilEngine {
     this.wheely = 0;
     this.engine.loadingUIText = "";
     this.engine.loadingUIBackgroundColor = "rgb(1, 1, 1, 0.7)";
-  }
-
-  // this class use vertex to get the position on canvas in px of an object rendered
-  public getPos(x: number, y: number): void {
-    const temp = new Vector3();
-    const vertices =
-      this.textActions.bottomText.getBoundingInfo().boundingBox.vectorsWorld;
-    const viewport = this.camera.viewport.toGlobal(
-      this.engine.getRenderWidth(),
-      this.engine.getRenderHeight()
-    );
-    let minX = 1e10,
-      minY = 1e10,
-      maxX = -1e10,
-      maxY = -1e10;
-    for (const vertex of vertices) {
-      Vector3.ProjectToRef(
-        vertex,
-        Matrix.IdentityReadOnly,
-        this.scene.getTransformMatrix(),
-        viewport,
-        temp
-      );
-
-      if (minX > temp.x) {
-        minX = temp.x;
-      }
-      if (maxX < temp.x) {
-        maxX = temp.x;
-      }
-      if (minY > temp.y) {
-        minY = temp.y;
-      }
-      if (maxY < temp.y) {
-        maxY = temp.y;
-      }
-    }
-    const ofstX = this.canvas.offsetLeft,
-      ofstY = this.canvas.offsetTop;
-    const left = minX + ofstX;
-    const top = minY + ofstY;
-    const width = maxX - minX + left;
-    const height = maxY - minY + top;
-    if (x < left || x > width || y < top || y > height) {
-      this.opener(0, 0);
-    }
   }
 
   // class that is called outside of the rendering for listeners
@@ -221,9 +170,7 @@ export class KoodibrilEngine {
           break;
         case PointerEventTypes.POINTERTAP:
           if (!this.move && !this.loading && this.device === 1) {
-            if (this.open) {
-              this.getPos(pointerInfo.event.clientX, pointerInfo.event.clientY);
-            } else {
+            if (!this.open) {
               this.opener(
                 this.forest.flowers.rows[this.position][0].meshe.position.x,
                 this.forest.flowers.rows[this.position][0].meshe.position.y
@@ -247,10 +194,6 @@ export class KoodibrilEngine {
     this.koodibril.lastFly.onAnimationEndObservable.clear();
     if (this.open) {
       this.animationsActions.retract_fast_flower(this.position);
-      this.animationsActions.retract_pannel();
-      this.textActions.bottomText.dispose();
-      this.textActions.middleText.dispose();
-      this.textActions.topText.dispose();
       this.open = false;
     }
     this.koodibril.animation[1].stop();
@@ -342,19 +285,13 @@ export class KoodibrilEngine {
       this.koodibril.lastFly.stop();
       this.koodibril.lastFly.onAnimationEndObservable.clear();
       this.animationsActions.goToFlower(this.position);
-      this.animationsActions.deploy_flower(this.position);
-      this.animationsActions.deploy_pannel();
-      setTimeout(() => {
-        this.textActions.generateTopText(this.position);
-      }, 150);
-      setTimeout(() => {
-        this.textActions.generateMiddleText(this.position);
-      }, 250);
-      setTimeout(() => {
-        this.textActions.generateBottomText(this.setShow);
-        this.open = true;
-        this.loading = false;
-      }, 350);
+      this.animationsActions
+        .deploy_flower(this.position)
+        .onAnimationEndObservable.add(() => {
+          this.open = true;
+          this.loading = false;
+          this.setShow(true);
+        });
     } else if (
       (flowerPos.x <= x - xOffsetr ||
         flowerPos.x >= x + xOffsetl ||

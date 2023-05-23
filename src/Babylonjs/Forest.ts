@@ -5,16 +5,11 @@ import {
   AbstractMesh,
   AnimationGroup,
   AssetContainer,
+  Engine,
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 
 export interface Flower {
-  animations: AnimationGroup[];
-  meshe: AbstractMesh;
-  color: AbstractMesh[];
-}
-
-export interface Pannel {
   animations: AnimationGroup[];
   meshe: AbstractMesh;
   color: AbstractMesh[];
@@ -48,7 +43,6 @@ export interface Forest {
   trees: Trees;
   flowers: Flowers;
   bushes: Bushes;
-  pannel: Pannel;
 }
 
 export class ForestActions {
@@ -63,7 +57,7 @@ export class ForestActions {
   // store the pannel.glb for fast loading
   private pannel!: AssetContainer;
 
-  public constructor(private scene: Scene) {}
+  public constructor(private scene: Scene, private engine: Engine) {}
 
   // instantiate the forest object before filling it
   public async instantiateForest(): Promise<void> {
@@ -71,7 +65,6 @@ export class ForestActions {
     this.forest.trees = <Trees>{};
     this.forest.bushes = <Bushes>{};
     this.forest.flowers = <Flowers>{};
-    this.forest.pannel = <Pannel>{};
 
     this.forest.trees.rows = new Array(24).fill(0);
     this.forest.trees.rows = this.forest.trees.rows.map(() => {
@@ -92,13 +85,13 @@ export class ForestActions {
 
   // import all forest.glb and store them for fast loading
   public async importforest(): Promise<void> {
-    // this.loadingState.next("Loading flowers");
+    this.engine.loadingUIText = "Loading flowers";
     this.flower = await SceneLoader.LoadAssetContainerAsync(
       "/assets/models/",
       "flower.glb",
       this.scene
     );
-    // this.loadingState.next("Loading pannel");
+    this.engine.loadingUIText = "Loading pannel";
     this.pannel = await SceneLoader.LoadAssetContainerAsync(
       "/assets/models/",
       "pannel.glb",
@@ -107,14 +100,14 @@ export class ForestActions {
     this.trees = [];
     this.bushes = [];
     for (let i = 1; i < 10; i++) {
-      // this.loadingState.next("Loading tree " + i.toString() + "/9");
+      this.engine.loadingUIText = "Loading tree " + i.toString() + "/9";
       this.trees[i] = await SceneLoader.LoadAssetContainerAsync(
         "/assets/models/forest/tree/",
         "tree" + i.toString() + ".glb",
         this.scene
       );
       if (i < 5) {
-        // this.loadingState.next("Loading bush " + i.toString() + "/4");
+        this.engine.loadingUIText = "Loading bush " + i.toString() + "/4";
         this.bushes[i] = await SceneLoader.LoadAssetContainerAsync(
           "/assets/models/forest/bush/",
           "bush" + i.toString() + ".glb",
@@ -126,8 +119,6 @@ export class ForestActions {
 
   // create the forest on 23 rows
   public seed(): void {
-    this.addpannel();
-
     for (let row = 0; row < 24; row++) {
       const z = row * 4 - 48;
       const random_tree = this.shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -181,23 +172,6 @@ export class ForestActions {
     flower.meshe.name = "flower";
     flower.meshe.checkCollisions = true;
     this.forest.flowers.rows[row].push(flower);
-  }
-
-  // add the pannel wich will nether move, only open and close
-  public addpannel(): void {
-    const pannelImport = this.pannel.instantiateModelsToScene();
-    const pannel = <Pannel>{};
-    (pannel.animations = pannelImport.animationGroups),
-      (pannel.meshe = pannelImport.rootNodes[0] as AbstractMesh);
-    pannel.meshe.scaling.scaleInPlace(1);
-    pannel.meshe.rotate(new Vector3(0, 1, 0), Math.PI * 0.5);
-    pannel.meshe.position = new Vector3(0, 4, 3);
-    pannel.animations[0].goToFrame(0);
-    pannel.animations[0].stop();
-    pannel.animations[1].start(false, 10.0);
-    pannel.color = pannelImport.rootNodes[0].getChildMeshes();
-    pannel.meshe.name = "pannel";
-    this.forest.pannel = pannel;
   }
 
   // add another instance of bush on the forest

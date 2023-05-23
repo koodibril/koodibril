@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { useEffect } from "react";
 import { KoodibrilEngine, pannelInfo } from "./Babylonjs/Engine";
-import Slider from "./components/Slider/Slider";
+import Modal from "./components/Modal/Modal";
 import BreadCrumb from "./components/BreadCrumb/BreadCrumb";
 
 function App() {
@@ -23,7 +23,12 @@ function App() {
   return (
     <div className="engine-wrapper">
       <canvas id="renderCanvas"></canvas>
-      <Slider appName={appName} show={show} setShow={setShow}></Slider>
+      <Modal
+        appName={appName}
+        show={show}
+        setShow={setShow}
+        engine={engine}
+      ></Modal>
       <BreadCrumb appName={appName} engine={engine}></BreadCrumb>
     </div>
   );

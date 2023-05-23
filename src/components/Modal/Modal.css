@@ -10,9 +10,9 @@
     font-family: 'Tommy';
     font-size: 20px;
     padding: 30px 50px 50px 50px;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 15px;
-    &.test {
+    &.blowIn {
       animation: blowUpModal .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
       &.out {
         animation: blowUpModalTwo .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
@@ -73,24 +73,10 @@
     justify-content: space-around;
   }
   .pictures {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto auto;
-    gap: 10px;
-    max-height: 200px;
-  }
-  .picture {
-    grid-column: span 2;
-    max-width: 200px;
-  }
-  .picture:hover {
-    cursor: pointer;
+    height: 300px;
   }
   .pdf {
     max-width: 3em;
-  }
-  .picture:last-child:nth-child(3n) {
-    grid-column-end: 4;
   }
   .description {
     max-height: 30%;
@@ -105,6 +91,8 @@
     max-height: 10%;
   }
   .technos {
+    display: flex;
+    flex-direction: row;
     height: 10%;
     align-items: center;
     justify-content: space-around;

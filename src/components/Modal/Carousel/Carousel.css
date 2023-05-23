@@ -1,0 +1,47 @@
+.control {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.controller {
+    margin-left: 5px;
+    margin-right: 5px;
+    position: relative;
+    bottom: 10px;
+    height: 3px;
+    width: 16px;
+    background-color: black;
+    opacity: 0.4;
+    border: solid 1px black;
+    &.selected {
+        width: 24px;
+        opacity: 1;
+    }
+}
+.controller:hover {
+    cursor: pointer;
+    background-color: brown;
+}
+.carousel-wraper {
+    height: 100%;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+.carousel {
+    height: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+}
+.carousel-item {
+    width: 100%;
+	flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.picture {
+    max-height: 300px;
+}

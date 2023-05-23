@@ -6,7 +6,6 @@ import {
   Animatable,
   AbstractMesh,
   AnimationGroup,
-  ParticleSystem,
   CubicEase,
   EasingFunction,
   Mesh,
@@ -27,8 +26,6 @@ export class AnimationsActions {
   public loading!: boolean;
   // the colibri mesh, used for deplacement
   public koodibril!: Koodibril;
-  // the particle system when flower is open
-  private particle!: ParticleSystem;
   public constructor(private scene: Scene, private forest: Forest) {}
 
   public async initiateAnimation(): Promise<void> {
@@ -279,28 +276,6 @@ export class AnimationsActions {
   }
 
   // stop all flower animations
-  public stop_pannel(): void {
-    this.forest.pannel.animations.forEach((element) => {
-      element.stop();
-    });
-  }
-
-  public deploy_pannel(): void {
-    this.stop_pannel();
-    this.forest.pannel.meshe.position = new Vector3(0, 2.7, 3);
-    this.forest.pannel.animations[0].start(false, 1);
-  }
-
-  public retract_pannel(): void {
-    this.stop_pannel();
-    this.forest.pannel.animations[1]
-      .start(false, 1)
-      .onAnimationEndObservable.add(() => {
-        this.forest.pannel.meshe.position = new Vector3(0, 4, 3);
-      });
-  }
-
-  // stop all flower animations
   public stop_flower(position: number): void {
     this.forest.flowers.rows[position][0].animations.forEach((element) => {
       element.stop();
@@ -308,9 +283,9 @@ export class AnimationsActions {
   }
 
   // launch the flower animations
-  public deploy_flower(position: number): void {
+  public deploy_flower(position: number): AnimationGroup {
     this.stop_flower(position);
-    this.forest.flowers.rows[position][0].animations[2].start(false, 1);
+    return this.forest.flowers.rows[position][0].animations[2].start(false, 1);
   }
 
   // close the flower beautifully

@@ -1,7 +1,3 @@
-import { Scene, Mesh, Vector3, MeshBuilder } from "@babylonjs/core";
-import { AdvancedDynamicTexture, TextBlock } from "@babylonjs/gui";
-import "@babylonjs/loaders/glTF";
-
 export interface Application {
   name: string;
   subtitle: string;
@@ -18,13 +14,12 @@ export const applications: Application[] = [
   {
     name: "SWIFTY-COMPANION",
     subtitle: "A simple profile app",
-    logo: "/images/portfolio/your_app/logo.png",
+    logo: "/images/portfolio/swifty_companion/logo.png",
     pdf: "/images/portfolio/swifty_companion/en.subject.pdf",
     pictures: [],
     description:
-      "Ce projet a pour but de vous initier au développement d'application mobile. \
-      Il s'agit de réaliser, une application qui permet de récupérer les informations \
-      des élèves de 42, en utilisant l'API de l'intranet de 42.",
+      "This project is an introduction to mobile programming. The goal is to create, an \
+      application which will allow you to get infos about 42students, using the API.",
     link: "",
     git: "",
     technos: [],
@@ -86,7 +81,9 @@ export const applications: Application[] = [
       "/images/portfolio/camagru/4.png",
     ],
     description:
-      "Projet web, ou l'objectif est de realiser une simple copie d'instagram.",
+      "This project is a warmup for web. You will need to realize, a small, instagram-like \
+      website allowing its users to create and share photomontage. You will, from scratch, \
+      implement basic functionnalities used by any website with a userbase",
     link: "https://camagru.koodibril.com/",
     git: "https://github.com/koodibril/camagru",
     technos: [
@@ -97,14 +94,13 @@ export const applications: Application[] = [
   {
     name: "SWIFTY-PROTEIN",
     subtitle: "A simple protein app",
-    logo: "/images/portfolio/your_app/logo.png",
+    logo: "/images/portfolio/swifty_protein/logo.png",
     pdf: "/images/portfolio/swifty_protein/en.subject.pdf",
     pictures: [],
     description:
-      "Ce projet a pour but de vous initier a la 3D and une application \
-    mobile classique. Vous devrez principalement réaliser une application qui modélisera \
-    des ligands en 3D, cette application sera aussi l'occasion d'approfondir vos \
-    connaissances dans le framework mobile de votre choix.",
+      "This project will give you the opportunity to create 3D scenes. For the most part, \
+      you will make an application that models ligands in 3D. This will also help you to deepen \
+      your knowledge of a mobile framework.",
     link: "",
     git: "",
     technos: [],
@@ -112,7 +108,7 @@ export const applications: Application[] = [
   {
     name: "WOODART",
     subtitle: "A simple wordpress",
-    logo: "/images/portfolio/woodart/logo.jpeg",
+    logo: "/images/portfolio/woodart/logo.png",
     pdf: "",
     pictures: [
       "/images/portfolio/woodart/1.png",
@@ -136,7 +132,9 @@ export const applications: Application[] = [
     pdf: "/images/portfolio/matcha/matcha.pdf",
     pictures: [],
     description:
-      "Projet web, ou l'objectif est de realiser une simple copie de tinder.",
+      "This second project will introduce a more evolved tool to create your web \
+      applications: the micro-framework. We invite you to create, in the language \
+      of your choice, a dating site. Interaction between users is the heart of the project!",
     link: "",
     git: "",
     technos: [
@@ -161,15 +159,14 @@ export const applications: Application[] = [
   {
     name: "INCEPTION OF THINGS",
     subtitle: "A simple kubernetes implementation",
-    logo: "/images/portfolio/your_app/logo.png",
+    logo: "/images/portfolio/iot/logo.png",
     pdf: "/images/portfolio/iot/en.subject.pdf",
     pictures: [],
     description:
-      "Ce projet a pour but de vous faire découvrir kubernetes d'un point de vue \
-    développeur. Vous allez devoir mettre en place des petits clusters et découvrir la \
-    mécanique de l'intégration continue. À la fin de ce projet vous serrez capable d'avoir \
-    un cluster fonctionnel rapidement dans docker et ainsi avoir une intégration continue \
-    utilisable pour vos applications.",
+      "This project aims to introduce you to kubernetes from a developer perspective. \
+      You will have to set up small clusters and discover the mechanics of continuous \
+      integration. At the end of this project you will be able to have a working cluster \
+      in docker and have a usable continuous integration for your applications.",
     link: "",
     git: "",
     technos: [],
@@ -177,11 +174,13 @@ export const applications: Application[] = [
   {
     name: "HYPERTUBE",
     subtitle: "A simple youtube app",
-    logo: "/images/portfolio/hypertube/logo.jpg",
+    logo: "/images/portfolio/hypertube/logo.png",
     pdf: "/images/portfolio/hypertube/hypertube/pdf",
     pictures: [],
     description:
-      "Projet web, ou l'objectif est de realiser une simple copie de youtube.",
+      "Last project in this series, the Hypertube project invites you to discover an \
+      extremely powerful tool category: MVC frameworks. You will learn how to manipulate \
+      a MVC, in the language of your choice, to create a streaming site of videos downloaded via the BitTorrent protocol.",
     link: "",
     git: "",
     technos: [],
@@ -193,7 +192,9 @@ export const applications: Application[] = [
     pdf: "/images/portfolio/musicroom/music-room.pdf",
     pictures: [],
     description:
-      "Projet web, ou l'objectif est de realiser une simple copie de deezer.",
+      "Project in partnership with Deezer. In a group, create a complete mobile app of collaborative \
+      playlist using the SDK and API of Deezer. On the menu, mobile native development, \
+      back-end development and creation of API REST.",
     link: "",
     git: "",
     technos: [],
@@ -215,7 +216,7 @@ export const applications: Application[] = [
   {
     name: "KOODIBRIL",
     subtitle: "A simple colibri app",
-    logo: "/images/portfolio/koodibril/colibri.png",
+    logo: "/images/portfolio/koodibril/logo.png",
     pdf: "",
     pictures: [
       "/images/portfolio/koodibril/1.png",
@@ -240,7 +241,7 @@ export const applications: Application[] = [
   {
     name: "MIES HOUSE",
     subtitle: "A simple logistic app",
-    logo: "/images/portfolio/mies_house/logo.jpeg",
+    logo: "/images/portfolio/mies_house/logo.png",
     pdf: "",
     pictures: [],
     description:
@@ -285,12 +286,11 @@ export const applications: Application[] = [
   {
     name: "FRACTOL",
     subtitle: "A simple fractal app",
-    logo: "/images/portfolio/your_app/logo.png",
+    logo: "/images/portfolio/fractol/logo.png",
     pdf: "/images/portfolio/fractol/fr.subject.pdf",
     pictures: [],
     description:
-      "Découvrez la programmation 2D et l'univers psychédelique des fractales grâce \
-    à ce projet à réaliser avec la minilibX.",
+      "Discover 2D programming and the psychedelic universe of fractals in this project, using minilibX.",
     link: "",
     git: "",
     technos: [],
@@ -315,8 +315,8 @@ export const applications: Application[] = [
     pdf: "/images/portfolio/red_tetris/tetris.pdf",
     pictures: [],
     description:
-      "Projet web, ou l'objectif est de realiser une copie ameliorer de tetris afin de \
-    permettre aux joueurs de s'affronter en ligne",
+      "The goal of this project is to develop a multiplayer tetris game on the network with \
+      a set of software exclusively from Full Stack Javascript.",
     link: "",
     git: "",
     technos: [],
@@ -328,8 +328,9 @@ export const applications: Application[] = [
     pdf: "/images/portfolio/lemin/lemin.pdf",
     pictures: [],
     description:
-      "Projet dont l'objectif est de realiser un algorithme permettant aux 'fourmis' \
-    de traverser leurs 'fourmilieres' selon le chemin le plus rapide",
+      "Your ant colony must move from on point to another. How do you do it in the shortest \
+      time possible? This project will get you acquainted with graph traversal \
+      algorithms: your program will have to intelligently select paths and precise movements used by the ants",
     link: "",
     git: "",
     technos: ["devicon-c-plain-wordmark colored"],
@@ -337,7 +338,7 @@ export const applications: Application[] = [
   {
     name: "SALESRAMP",
     subtitle: "A simple SaaS app",
-    logo: "/images/portfolio/salesramp/logo.svg",
+    logo: "/images/portfolio/salesramp/logo.png",
     pdf: "",
     pictures: [],
     description: "",
@@ -348,12 +349,14 @@ export const applications: Application[] = [
   {
     name: "COREWAR",
     subtitle: "A simple war app",
-    logo: "/images/portfolio/corewar/logo.jpg",
+    logo: "/images/portfolio/corewar/logo.png",
     pdf: "/images/portfolio/corewar/corewar.fr.pdf",
     pictures: [],
     description:
-      "Projet dont l'object est de participer a la guerre de MARS (corewar), une guerre \
-    ou deux programmes s'affrontent afin de corrompre la memoire de l'autre.",
+      "This project involves creating a virtual arena, and having simplistic-language programs \
+      fight each other. You will thus get acquainted with VM conception (with instructions it \
+        recognizes, registers, etc) and compilation problems of an assembly language in bytecode. \
+        In bonus, the pleasure to have your champions fight in the arena.",
     link: "",
     git: "",
     technos: ["devicon-c-plain-wordmark colored"],
@@ -365,9 +368,9 @@ export const applications: Application[] = [
     pdf: "/images/portfolio/pushswap/push_swap.fr.pdf",
     pictures: [],
     description:
-      "Projet dont l'objectif est de realiser un algorithme de tri. Il n'aura pour seule \
-    raison remettre en ordre une 'stack' de non et pourra utiliser seulement quelques actions. Il doit \
-    realiser sa tache en effectuant le moins d'action possible (complexite algorithmique)",
+      "This project involves sorting data on a stack, with a limited set of instructions, \
+      and the smallest number of moves. To make this happen, you will have to manipulate \
+      various sorting algorithms and choose the most appropriate solution(s) for optimized data sorting.",
     link: "",
     git: "",
     technos: ["devicon-c-plain-wordmark colored"],
@@ -375,7 +378,7 @@ export const applications: Application[] = [
   {
     name: "Méta-Coaching",
     subtitle: "A simple medical app",
-    logo: "/images/portfolio/meta_coaching/logo.svg",
+    logo: "/images/portfolio/meta_coaching/logo.png",
     pdf: "",
     pictures: [],
     description: "",
@@ -386,7 +389,7 @@ export const applications: Application[] = [
   {
     name: "AlphaBril",
     subtitle: "Florian-Marie Doucet",
-    logo: "/images/portfolio/alphabril/logo.jpeg",
+    logo: "/images/portfolio/alphabril/logo.png",
     pdf: "/images/portfolio/alphabril/cv.pdf",
     pictures: [
       "https://dam.malt.com/txnsh1cmtklme34ypjva?gravity=face&func=face&face_margin=60&w=440&h=440&force_format=webp",
@@ -402,110 +405,3 @@ export const applications: Application[] = [
     technos: [],
   },
 ];
-
-export class textActions {
-  public show!: boolean;
-  public topText!: Mesh;
-  public middleText!: Mesh;
-  public bottomText!: Mesh;
-  public applications: Application[];
-
-  public constructor(private scene: Scene, private canvas: HTMLCanvasElement) {
-    this.applications = applications;
-  }
-
-  public generateTopText(position: number): void {
-    const TopPlane = MeshBuilder.CreatePlane(
-      "plane2",
-      { width: 2.9, height: 1.6 },
-      this.scene
-    );
-    TopPlane.isPickable = true;
-    TopPlane.position = new Vector3(0.1, 3.6, 2.8);
-    TopPlane.billboardMode = Mesh.BILLBOARDMODE_ALL;
-
-    const advancedTexture = AdvancedDynamicTexture.CreateForMesh(
-      TopPlane,
-      2000,
-      1000
-    );
-
-    const textOnly = new TextBlock("textTop", this.applications[position].name);
-    textOnly.isPointerBlocker = true;
-    textOnly.width = 2.9;
-    textOnly.height = 1.6;
-    textOnly.color = "white";
-    textOnly.fontSize = 300;
-    textOnly.fontFamily = "jungleRoar";
-    textOnly.isHitTestVisible = false;
-    advancedTexture.addControl(textOnly);
-    this.topText = TopPlane;
-  }
-
-  public generateMiddleText(position: number): void {
-    const MiddlePlane = MeshBuilder.CreatePlane(
-      "plane2",
-      { width: 2.8, height: 1.4 },
-      this.scene
-    );
-    MiddlePlane.isPickable = true;
-    MiddlePlane.position = new Vector3(0, 2.7, 2.8);
-    MiddlePlane.billboardMode = Mesh.BILLBOARDMODE_ALL;
-
-    const advancedTexture = AdvancedDynamicTexture.CreateForMesh(
-      MiddlePlane,
-      2000,
-      1000
-    );
-
-    const textOnly = new TextBlock(
-      "textMid",
-      this.applications[position].subtitle
-    );
-    textOnly.isPointerBlocker = true;
-    textOnly.width = 2.8;
-    textOnly.height = 1.4;
-    textOnly.color = "white";
-    textOnly.fontSize = 140;
-    textOnly.fontFamily = "Tommy";
-    textOnly.isHitTestVisible = false;
-    advancedTexture.addControl(textOnly);
-    this.middleText = MiddlePlane;
-  }
-
-  public generateBottomText(
-    setShow: React.Dispatch<React.SetStateAction<boolean>>
-  ): void {
-    const BottomPlane = MeshBuilder.CreatePlane(
-      "plane2",
-      { width: 2.8, height: 1 },
-      this.scene
-    );
-    BottomPlane.isPickable = true;
-    BottomPlane.position = new Vector3(0, 1.98, 2.5);
-    BottomPlane.billboardMode = Mesh.BILLBOARDMODE_ALL;
-
-    const advancedTexture = AdvancedDynamicTexture.CreateForMesh(
-      BottomPlane,
-      2800,
-      1000
-    );
-
-    const textOnly = new TextBlock("textBot", "More information");
-    textOnly.isPointerBlocker = true;
-    textOnly.width = 2.8;
-    textOnly.height = 1;
-    textOnly.color = "white";
-    textOnly.fontSize = 200;
-    textOnly.fontFamily = "Tommy";
-    textOnly.hoverCursor = "pointer";
-
-    textOnly.isHitTestVisible = true;
-
-    textOnly.onPointerUpObservable.add(() => {
-      setShow(true);
-    });
-    advancedTexture.addControl(textOnly);
-    this.bottomText = BottomPlane;
-  }
-}

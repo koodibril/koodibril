@@ -1,16 +1,18 @@
 import React, { useMemo, useState } from "react";
-import "./Slider.css";
+import "./Modal.css";
 import { applications } from "src/Babylonjs/Texts";
-import { pannelInfo } from "src/Babylonjs/Engine";
+import { KoodibrilEngine, pannelInfo } from "src/Babylonjs/Engine";
 import { ReactComponent as XMark } from "src/icons/xmark-solid.svg";
+import Carousel from "./Carousel/Carousel";
 
-const Slider: React.FC<{
+const Modal: React.FC<{
   appName: pannelInfo;
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  engine: KoodibrilEngine | undefined;
 }> = (props) => {
   const app = props.appName.app;
-  const [anim, setAnim] = useState(" test");
+  const [anim, setAnim] = useState(" blowIn");
   const appInfo = useMemo(() => {
     const index = applications.findIndex((el) => el.name === app);
     if (index !== -1 && app !== "") {
@@ -28,8 +30,9 @@ const Slider: React.FC<{
   }, [app]);
 
   const handleClose = () => {
-    if (props.show && anim === " test out") {
-      setAnim(" test");
+    if (props.engine && props.show && anim === " blowIn out") {
+      setAnim(" blowIn");
+      props.engine.reset();
       props.setShow(false);
     }
   };
@@ -39,7 +42,7 @@ const Slider: React.FC<{
       className={"wrapper" + anim}
       onAnimationEnd={() => handleClose()}
     >
-      <XMark className="close-modal" onClick={() => setAnim(" test out")} />
+      <XMark className="close-modal" onClick={() => setAnim(" blowIn out")} />
       <div className="title-wrapper">
         <div className="title row justify-content-center">
           <img className="logo" src={appInfo?.logo} />
@@ -51,18 +54,16 @@ const Slider: React.FC<{
       </div>
       <div className="content">
         <div className="pictures">
-          {appInfo?.pictures.length === 0 && appInfo?.pdf === "" ? (
-            <div className="nopic">No pictures are available.</div>
-          ) : (
-            <>
-              {appInfo?.pictures.map((pic, id) => {
-                return <img key={id} className="picture" src={pic} />;
-              })}
-              {appInfo?.pdf ? (
-                <img src="/images/pdf.svg" className="picture pdf" />
-              ) : null}
-            </>
-          )}
+          {appInfo && appInfo.pictures ? (
+            appInfo.pictures.length === 0 && appInfo.pdf === "" ? (
+              <div className="nopic">No pictures are available.</div>
+            ) : (
+              <Carousel
+                pictures={appInfo.pictures}
+                pdf={appInfo.pdf}
+              ></Carousel>
+            )
+          ) : null}
         </div>
         <div className="description">{appInfo?.description}</div>
         <div className="links">
@@ -91,7 +92,7 @@ const Slider: React.FC<{
         </div>
       </div>
       <div className="footer">
-        <div className="technos row">
+        <div className="technos">
           {appInfo?.technos.map((tech, id) => {
             return <i key={id} className={`${tech} tech`}></i>;
           })}
@@ -101,4 +102,4 @@ const Slider: React.FC<{
   );
 };
 
-export default Slider;
+export default Modal;
