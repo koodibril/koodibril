@@ -71,7 +71,7 @@
     margin-top: -20px;
     width: 1px;
     left: calc(50% - 2px);
-    height: 50px;
+    height: calc((80vh / 6) - 70px);
     border-right: 2px solid black;
     &.beforeOrAfter {
       animation: zoomOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;

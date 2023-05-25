@@ -9,6 +9,8 @@ import {
   CubicEase,
   EasingFunction,
   Mesh,
+  StandardMaterial,
+  Color3,
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 import { Forest } from "./Forest";
@@ -17,7 +19,7 @@ export interface Koodibril {
   mesh: AbstractMesh;
   leftoright: boolean;
   animation: AnimationGroup[];
-  material: AbstractMesh;
+  material: StandardMaterial;
   lastFly: Animatable;
 }
 
@@ -38,8 +40,14 @@ export class AnimationsActions {
     );
     colibri.animationGroups[0].stop();
     colibri.animationGroups[0].start(true, 10.0);
+    const mat = new StandardMaterial("redMat", this.scene);
+    mat.diffuseColor = new Color3(1, 1, 1);
+    colibri.meshes.forEach((mesh) => {
+      mesh.material = mat;
+    });
     this.koodibril.mesh = colibri.meshes[0];
-    this.koodibril.material = colibri.meshes[1];
+    this.koodibril.mesh.material = mat;
+    this.koodibril.material = mat;
     this.koodibril.animation = colibri.animationGroups;
     this.koodibril.mesh.scaling.scaleInPlace(0.13);
     this.koodibril.mesh.position.y = 2;

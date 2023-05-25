@@ -27,12 +27,12 @@ function App() {
         <img
           className={language === "fr" ? "selected-language" : ""}
           onClick={() => setLanguage("fr")}
-          src="/images/france.png"
+          src="/images/fr.png"
         />
         <img
           className={language === "en" ? "selected-language" : ""}
           onClick={() => setLanguage("en")}
-          src="/images/united-states.png"
+          src="/images/en.png"
         />
       </div>
       <canvas id="renderCanvas"></canvas>

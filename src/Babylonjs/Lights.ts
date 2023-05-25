@@ -12,6 +12,7 @@ import {
   Texture,
   DirectionalLight,
   GlowLayer,
+  HemisphericLight,
 } from "@babylonjs/core";
 
 export interface Sun {
@@ -29,6 +30,7 @@ export interface Lights {
   sun: Sun;
   moon: Moon;
   groundLight: GridMaterial;
+  koodibrilLight: HemisphericLight;
 }
 
 export class LightsActions {
@@ -52,6 +54,15 @@ export class LightsActions {
     this.stars = [];
     this.glow = new GlowLayer("glow", this.scene);
     this.glow.intensity = 1;
+    this.lights.koodibrilLight = new HemisphericLight(
+      "hemiLight",
+      new Vector3(-1, 1, 0),
+      this.scene
+    );
+    this.lights.koodibrilLight.diffuse = new Color3(1, 1, 1);
+    this.lights.koodibrilLight.specular = new Color3(1, 1, 1);
+    this.lights.koodibrilLight.groundColor = new Color3(1, 1, 1);
+    this.lights.koodibrilLight.intensity = 0.1;
     this.instantiateStars();
     this.instantiateSun();
     this.instantiateMoon();
