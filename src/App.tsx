@@ -12,6 +12,7 @@ function App() {
   });
   const [engine, setEngine] = useState<KoodibrilEngine>();
   const [show, setShow] = useState(false);
+  const [language, setLanguage] = useState<"fr" | "en">("fr");
   useEffect(() => {
     const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
     const engine = new KoodibrilEngine(setShow, setAppName);
@@ -22,12 +23,25 @@ function App() {
 
   return (
     <div className="engine-wrapper">
+      <div className="international">
+        <img
+          className={language === "fr" ? "selected-language" : ""}
+          onClick={() => setLanguage("fr")}
+          src="/images/france.png"
+        />
+        <img
+          className={language === "en" ? "selected-language" : ""}
+          onClick={() => setLanguage("en")}
+          src="/images/united-states.png"
+        />
+      </div>
       <canvas id="renderCanvas"></canvas>
       <Modal
         appName={appName}
         show={show}
         setShow={setShow}
         engine={engine}
+        language={language}
       ></Modal>
       <BreadCrumb appName={appName} engine={engine}></BreadCrumb>
     </div>

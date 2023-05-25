@@ -10,6 +10,7 @@ const Modal: React.FC<{
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   engine: KoodibrilEngine | undefined;
+  language: "fr" | "en";
 }> = (props) => {
   const app = props.appName.app;
   const [anim, setAnim] = useState(" blowIn");
@@ -49,7 +50,7 @@ const Modal: React.FC<{
           {app}
         </div>
         <div className="subtitle row justify-content-center">
-          {appInfo?.subtitle}
+          {appInfo?.subtitle[props.language]}
         </div>
       </div>
       <div className="content">
@@ -65,7 +66,9 @@ const Modal: React.FC<{
             )
           ) : null}
         </div>
-        <div className="description">{appInfo?.description}</div>
+        <div className="description">
+          {appInfo?.description[props.language]}
+        </div>
         <div className="links">
           {appInfo?.link ? (
             <div className="link">
