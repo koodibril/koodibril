@@ -41,7 +41,7 @@ export class AnimationsActions {
     colibri.animationGroups[0].stop();
     colibri.animationGroups[0].start(true, 10.0);
     const mat = new StandardMaterial("redMat", this.scene);
-    mat.diffuseColor = new Color3(1, 1, 1);
+    mat.diffuseColor = new Color3(0.4, 0.4, 0.4);
     colibri.meshes.forEach((mesh) => {
       mesh.material = mat;
     });

@@ -6,22 +6,21 @@ import {
   Vector3,
   Color3,
   StandardMaterial,
-  SpotLight,
   Mesh,
   ParticleSystem,
   Texture,
-  DirectionalLight,
   GlowLayer,
   HemisphericLight,
+  PointLight,
 } from "@babylonjs/core";
 
 export interface Sun {
-  light: DirectionalLight;
+  light: PointLight;
   mesh: Mesh;
   material: StandardMaterial;
 }
 export interface Moon {
-  light: DirectionalLight;
+  light: PointLight;
   mesh: Mesh;
   material: StandardMaterial;
 }
@@ -54,15 +53,6 @@ export class LightsActions {
     this.stars = [];
     this.glow = new GlowLayer("glow", this.scene);
     this.glow.intensity = 1;
-    this.lights.koodibrilLight = new HemisphericLight(
-      "hemiLight",
-      new Vector3(-1, 1, 0),
-      this.scene
-    );
-    this.lights.koodibrilLight.diffuse = new Color3(1, 1, 1);
-    this.lights.koodibrilLight.specular = new Color3(1, 1, 1);
-    this.lights.koodibrilLight.groundColor = new Color3(1, 1, 1);
-    this.lights.koodibrilLight.intensity = 0.1;
     this.instantiateStars();
     this.instantiateSun();
     this.instantiateMoon();
@@ -70,60 +60,52 @@ export class LightsActions {
 
   public instantiateSun(): void {
     this.lights.sun = <Sun>{};
-    this.lights.sun.light = new DirectionalLight(
+    this.lights.sun.light = new PointLight(
       "sunLight",
-      new Vector3(0, -1, 0),
+      new Vector3(0, 20, 4),
       this.scene
     );
-    this.lights.sun.material = new StandardMaterial("redMat", this.scene);
-    this.lights.sun.material.emissiveColor = new Color3(1, 0.5, 0.5);
-    this.lights.sun.light.intensity = 0.01;
+    this.lights.sun.light.intensity = 1;
+
     this.lights.sun.mesh = MeshBuilder.CreateIcoSphere("sunMesh", {
       radius: 5,
     });
+    this.lights.sun.mesh.position = this.lights.sun.light.position;
+    this.lights.sun.material = new StandardMaterial("redMat", this.scene);
+    this.lights.sun.material.emissiveColor = new Color3(1, 0.5, 0.5);
     this.lights.sun.mesh.material = this.lights.sun.material;
-    this.lights.sun.light.parent = this.lights.sun.mesh;
-    this.lights.sun.mesh.position = new Vector3(0, 20, 4);
+
     this.lights.sun.mesh.applyFog = false;
   }
 
   public instantiateMoon(): void {
     this.lights.moon = <Moon>{};
-    this.lights.moon.light = new DirectionalLight(
+    this.lights.moon.light = new PointLight(
       "moonLight",
-      new Vector3(0, -1, 0),
+      new Vector3(0, -24, 40),
       this.scene
     );
-    this.lights.moon.material = new StandardMaterial("moonMat", this.scene);
-    this.lights.moon.material.emissiveColor = new Color3(1, 1, 1);
-    this.lights.moon.light.intensity = 1;
+    this.lights.moon.light.intensity = 0.5;
+
     this.lights.moon.mesh = MeshBuilder.CreateIcoSphere("moonMesh", {
       radius: 3,
     });
+    this.lights.moon.mesh.position = this.lights.moon.light.position;
+    this.lights.moon.material = new StandardMaterial("moonMat", this.scene);
+    this.lights.moon.material.emissiveColor = new Color3(1, 1, 1);
     this.lights.moon.mesh.material = this.lights.moon.material;
-    this.lights.moon.light.parent = this.lights.moon.mesh;
-    this.lights.moon.mesh.position = new Vector3(0, -24, 40);
+
     this.lights.moon.mesh.applyFog = false;
   }
 
   public instantiateStars(): void {
     for (let i = 0; i < 200; i++) {
-      const light = new SpotLight(
-        "starLight",
-        Vector3.Zero(),
-        new Vector3(0, -1, 0),
-        Math.PI,
-        10,
-        this.scene
-      );
       const whiteMat = new StandardMaterial("whiteMat", this.scene);
       whiteMat.emissiveColor = new Color3(1, 1, 1);
-      light.intensity = 1;
       const starMesh = MeshBuilder.CreateIcoSphere("starMesh", {
         radius: (Math.floor(Math.random() * (10 - 1 + 1)) + 1) / 100,
       });
       starMesh.material = whiteMat;
-      light.parent = starMesh;
       starMesh.position = new Vector3(
         Math.floor(Math.random() * (40 - -40 + 1)) + -40,
         Math.floor(Math.random() * (20 - 1 + 1)) + 1,
@@ -137,7 +119,7 @@ export class LightsActions {
   // at each hour will set the position and the intensity of each lights
   // sunset at 18
   public day(hour: number): void {
-    this.setFocus();
+    // this.setFocus();
     this.hour = ((hour * -1 + 48) / 96) * 24;
     const sun_ang = this.hour * (Math.PI / 12);
     const sun_y = (0 + 24 * Math.cos(sun_ang)) * -2;
@@ -149,17 +131,14 @@ export class LightsActions {
     const sunPos = new Vector3(0, sun_y, sun_z);
     const moonPos = new Vector3(sun_z / 2, (sun_y * -1) / 5, 40);
     this.lights.sun.mesh.setAbsolutePosition(sunPos);
+    this.lights.sun.light.position = sunPos;
     this.lights.moon.mesh.setAbsolutePosition(moonPos);
+    this.lights.moon.light.position = moonPos;
     if (luminosity < 0.375) {
       luminosity = 0.375;
     }
     this.glow.intensity = luminosity;
     this.sunset(luminosity);
-    this.lights.groundLight.mainColor = new Color3(
-      1 * luminosity,
-      1 * luminosity,
-      1 * luminosity
-    );
   }
 
   private sunset(luminosity: number): void {
@@ -228,6 +207,6 @@ export class LightsActions {
   }
 
   public setFocus(): void {
-    this.lights.sun.light.setDirectionToTarget(new Vector3(0, 0, 0));
+    this.lights.sun.light.setDirectionToTarget(new Vector3(-1, -2, -1));
   }
 }

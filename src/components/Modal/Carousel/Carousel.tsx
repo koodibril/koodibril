@@ -8,9 +8,7 @@ const Carousel: React.FC<{
 }> = (props) => {
   const { pictures, pdf } = props;
   const picRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const [picture, setPicture] = useState(
-    pictures.length === 0 && pdf !== "" ? 1 : 0
-  );
+  const [picture, setPicture] = useState(0);
   const carouselLength = useMemo(() => {
     if (pictures.length > 0 && pdf !== "") return pictures.length + 1;
     if (pdf !== "" && pictures.length === 0) return 1;

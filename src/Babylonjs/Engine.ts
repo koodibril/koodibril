@@ -10,7 +10,6 @@ import {
   Animatable,
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
-import { GridMaterial } from "@babylonjs/materials";
 import { ForestActions, Forest, Bush, Tree, Flower } from "./Forest";
 import { LightsActions, Lights } from "./Lights";
 import { AnimationsActions, Koodibril } from "./Animations";
@@ -78,7 +77,6 @@ export class KoodibrilEngine {
 
     this.scene = new Scene(this.engine);
     this.scene.clearColor = new Color4(1, 1, 1, 1); // set the color of the void
-    this.scene.ambientColor = new Color3(1, 1, 1); // set the ambiant color, don't seem to affect object
     this.scene.fogMode = Scene.FOGMODE_LINEAR;
     this.scene.fogStart = 15.0;
     this.scene.fogEnd = 30.0;
@@ -88,30 +86,29 @@ export class KoodibrilEngine {
     this.camera.setTarget(new Vector3(0, 2, 0));
 
     //for debug
-    // const camera = new FreeCamera(
-    //   "camera1",
-    //   new Vector3(0, 5, -10),
+    // const camera = new ArcRotateCamera(
+    //   "Camera",
+    //   0,
+    //   0.8,
+    //   90,
+    //   Vector3.Zero(),
     //   this.scene
     // );
-    // camera.attachControl(true);
+    // camera.lowerBetaLimit = 0.1;
+    // camera.upperBetaLimit = (Math.PI / 2) * 0.9;
+    // camera.lowerRadiusLimit = 30;
+    // camera.upperRadiusLimit = 150;
+    // camera.attachControl(this.canvas, true);
 
     this.lightsAction = new LightsActions(this.scene);
     this.lightsAction.instantiateLights();
     this.lights = this.lightsAction.lights;
 
     this.engine.loadingUIText = "Creating ground";
-    const ground = MeshBuilder.CreateGround("ground", {
+    MeshBuilder.CreateGround("ground", {
       width: 300,
       height: 300,
     });
-    this.lights.groundLight = new GridMaterial("groundMat", this.scene);
-    this.lights.groundLight.majorUnitFrequency = 20;
-    this.lights.groundLight.gridOffset = new Vector3(0, 0, 4);
-    this.lights.groundLight.mainColor = new Color3(1, 1, 1);
-    this.lights.groundLight.lineColor = new Color3(0, 0, 0);
-    ground.material = this.lights.groundLight;
-    ground.material.backFaceCulling = false;
-    ground.checkCollisions = true;
 
     this.engine.loadingUIText = "Creating forest";
     this.forestActions = new ForestActions(this.scene, this.engine);
@@ -122,7 +119,6 @@ export class KoodibrilEngine {
     this.animationsActions = new AnimationsActions(this.scene, this.forest);
     await this.animationsActions.initiateAnimation();
     this.koodibril = this.animationsActions.koodibril;
-    this.lights.koodibrilLight.parent = this.koodibril.mesh;
 
     if (
       /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(
@@ -172,10 +168,7 @@ export class KoodibrilEngine {
         case PointerEventTypes.POINTERTAP:
           if (!this.move && !this.loading && this.device === 1) {
             if (!this.open) {
-              this.opener(
-                this.forest.flowers.rows[this.position][0].meshe.position.x,
-                this.forest.flowers.rows[this.position][0].meshe.position.y
-              );
+              this.opener();
             }
           }
           break;
@@ -220,16 +213,10 @@ export class KoodibrilEngine {
     }
     const travel = diff * 3.3 * 120;
     if (diff === 0) {
-      this.opener(
-        this.forest.flowers.rows[nextPos][0].meshe.position.x,
-        this.forest.flowers.rows[nextPos][0].meshe.position.y
-      );
+      this.opener();
     } else {
       this.wheel(travel)?.onAnimationEndObservable.add(() => {
-        this.opener(
-          this.forest.flowers.rows[nextPos][0].meshe.position.x,
-          this.forest.flowers.rows[nextPos][0].meshe.position.y
-        );
+        this.opener();
       });
     }
   }
@@ -278,18 +265,9 @@ export class KoodibrilEngine {
 
   // fonction that check if the flower can open (position of the colibri vs position of the flower)
   // will start all the animations relative to
-  public opener(x: number, y: number): void {
+  public opener(): void {
     this.loading = true;
-    const flowerPos = this.forest.flowers.rows[this.position][0].meshe.position;
-    const xOffsetr = flowerPos.x < 0 ? 0.5 : 0.1;
-    const xOffsetl = flowerPos.x < 0 ? 0.1 : 0.5;
-    if (
-      flowerPos.x >= x - xOffsetr &&
-      flowerPos.x <= x + xOffsetl &&
-      flowerPos.y >= y - 0.5 &&
-      flowerPos.y <= y + 1 &&
-      !this.open
-    ) {
+    if (!this.open) {
       this.koodibril.lastFly.stop();
       this.koodibril.lastFly.onAnimationEndObservable.clear();
       this.animationsActions.goToFlower(this.position);
@@ -300,13 +278,7 @@ export class KoodibrilEngine {
           this.loading = false;
           this.setShow(true);
         });
-    } else if (
-      (flowerPos.x <= x - xOffsetr ||
-        flowerPos.x >= x + xOffsetl ||
-        flowerPos.y <= y - 0.5 ||
-        flowerPos.y >= y + 1) &&
-      this.open
-    ) {
+    } else if (this.open) {
       this.reset();
     }
   }
