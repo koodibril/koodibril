@@ -28,8 +28,9 @@ export const applications: Application[] = [
     description: {
       en: "This project is an introduction to mobile programming. The goal is to create, an \
       application which will allow you to get infos about 42students, using the API.",
-      fr: "This project is an introduction to mobile programming. The goal is to create, an \
-      application which will allow you to get infos about 42students, using the API.",
+      fr: "Ce projet a pour but de vous initier au développement d'application mobile. Il s'agit \
+      de réaliser, une application qui permet de récupérer les informations des élèves de 42, \
+      en utilisant l'API de l'intranet de 42.",
     },
     link: "",
     git: "",
@@ -112,9 +113,11 @@ export const applications: Application[] = [
       en: "This project is a warmup for web. You will need to realize, a small, instagram-like \
       website allowing its users to create and share photomontage. You will, from scratch, \
       implement basic functionnalities used by any website with a userbase",
-      fr: "This project is a warmup for web. You will need to realize, a small, instagram-like \
-      website allowing its users to create and share photomontage. You will, from scratch, \
-      implement basic functionnalities used by any website with a userbase",
+      fr: "Ce premier projet vous remet dans le bain du web : vous allez devoir réaliser, \
+      un petit site Instagram-like permettant à des utilisateurs de réaliser et partager \
+      des photo-montages. Vous allez ainsi implémenter, à mains nues (les frameworks sont \
+      interdits), les fonctionnalités de base rencontrées sur la majorité des sites possédant \
+      une base utilisateur.",
     },
     link: "https://camagru.koodibril.com/",
     git: "https://github.com/koodibril/camagru",
@@ -136,9 +139,10 @@ export const applications: Application[] = [
       en: "This project will give you the opportunity to create 3D scenes. For the most part, \
       you will make an application that models ligands in 3D. This will also help you to deepen \
       your knowledge of a mobile framework.",
-      fr: "This project will give you the opportunity to create 3D scenes. For the most part, \
-      you will make an application that models ligands in 3D. This will also help you to deepen \
-      your knowledge of a mobile framework.",
+      fr: "Ce projet a pour but de vous initier a la 3D and une application mobile classique. \
+      Vous devrez principalement réaliser une application qui modélisera des ligands en 3D, \
+      cette application sera aussi l'occasion d'approfondir vos connaissances dans le framework \
+      mobile de votre choix.",
     },
     link: "",
     git: "",
@@ -183,9 +187,9 @@ export const applications: Application[] = [
       en: "This second project will introduce a more evolved tool to create your web \
       applications: the micro-framework. We invite you to create, in the language \
       of your choice, a dating site. Interaction between users is the heart of the project!",
-      fr: "This second project will introduce a more evolved tool to create your web \
-      applications: the micro-framework. We invite you to create, in the language \
-      of your choice, a dating site. Interaction between users is the heart of the project!",
+      fr: "Ce second projet vous introduit à un outil plus évolué pour réaliser vos applications \
+      web : le micro-framework. Nous vous invitons à réaliser, dans le langage de votre choix, \
+      un site de rencontres. Les interactions entre utilisateurs seront au coeur du projet !",
     },
     link: "",
     git: "",
@@ -228,10 +232,11 @@ export const applications: Application[] = [
       You will have to set up small clusters and discover the mechanics of continuous \
       integration. At the end of this project you will be able to have a working cluster \
       in docker and have a usable continuous integration for your applications.",
-      fr: "This project aims to introduce you to kubernetes from a developer perspective. \
-      You will have to set up small clusters and discover the mechanics of continuous \
-      integration. At the end of this project you will be able to have a working cluster \
-      in docker and have a usable continuous integration for your applications.",
+      fr: "Ce projet a pour but de vous faire découvrir kubernetes d'un point de vue \
+      développeur. Vous allez devoir mettre en place des petits clusters et découvrir \
+      la mécanique de l'intégration continue. À la fin de ce projet vous serrez capable \
+      d'avoir un cluster fonctionnel rapidement dans docker et ainsi avoir une intégration \
+      continue utilisable pour vos applications.",
     },
     link: "",
     git: "",
@@ -250,9 +255,10 @@ export const applications: Application[] = [
       en: "Last project in this series, the Hypertube project invites you to discover an \
       extremely powerful tool category: MVC frameworks. You will learn how to manipulate \
       a MVC, in the language of your choice, to create a streaming site of videos downloaded via the BitTorrent protocol.",
-      fr: "Last project in this series, the Hypertube project invites you to discover an \
-      extremely powerful tool category: MVC frameworks. You will learn how to manipulate \
-      a MVC, in the language of your choice, to create a streaming site of videos downloaded via the BitTorrent protocol.",
+      fr: "Dernier projet de sa série, le projet Hypertube vous invite à découvrir une catégorie \
+      d'outil extrêmement puissante : les frameworks MVC. Vous apprendrez à manipuler un MVC, \
+      dans le langage de votre choix, pour réaliser un site de streaming de video téléchargées \
+      via le protocole BitTorrent.",
     },
     link: "",
     git: "",
@@ -271,9 +277,9 @@ export const applications: Application[] = [
       en: "Project in partnership with Deezer. In a group, create a complete mobile app of collaborative \
       playlist using the SDK and API of Deezer. On the menu, mobile native development, \
       back-end development and creation of API REST.",
-      fr: "Project in partnership with Deezer. In a group, create a complete mobile app of collaborative \
-      playlist using the SDK and API of Deezer. On the menu, mobile native development, \
-      back-end development and creation of API REST.",
+      fr: "Projet en partenariat avec Deezer. Créez en groupe une application mobile complète \
+      de playlist collaborative en utilisant les SDK et API de Deezer. Au programme : du \
+      développement natif mobile, du développement de back-end et de la création d'API REST.",
     },
     link: "",
     git: "",
@@ -404,8 +410,10 @@ export const applications: Application[] = [
     pdf: "/images/portfolio/fractol/fr.subject.pdf",
     pictures: [],
     description: {
-      en: "Discover 2D programming and the psychedelic universe of fractals in this project, using minilibX.",
-      fr: "Discover 2D programming and the psychedelic universe of fractals in this project, using minilibX.",
+      en: "Discover 2D programming and the psychedelic universe of fractals in this project, \
+      using minilibX.",
+      fr: "Découvrez la programmation 2D et l'univers psychédelique des fractales grâce à ce \
+      projet à réaliser avec la minilibX.",
     },
     link: "",
     git: "",
@@ -442,8 +450,8 @@ export const applications: Application[] = [
     description: {
       en: "The goal of this project is to develop a multiplayer tetris game on the network with \
       a set of software exclusively from Full Stack Javascript.",
-      fr: "The goal of this project is to develop a multiplayer tetris game on the network with \
-      a set of software exclusively from Full Stack Javascript.",
+      fr: "L'objectif de ce projet est de développer un jeu de tetris multijoueurs en réseau à \
+      partir d'une pile logicielle exclusivement Full Stack Javascript",
     },
     link: "",
     git: "",
@@ -461,10 +469,12 @@ export const applications: Application[] = [
     description: {
       en: "Your ant colony must move from on point to another. How do you do it in the shortest \
       time possible? This project will get you acquainted with graph traversal \
-      algorithms: your program will have to intelligently select paths and precise movements used by the ants",
-      fr: "Your ant colony must move from on point to another. How do you do it in the shortest \
-      time possible? This project will get you acquainted with graph traversal \
-      algorithms: your program will have to intelligently select paths and precise movements used by the ants",
+      algorithms: your program will have to intelligently select paths and precise \
+      movements used by the ants",
+      fr: "Votre colonie de fourmis doit se déplacer d'un point à un autre. Mais comment \
+      faire pour que cela prenne le moins de temps possible ? Ce projet vous fait \
+      découvrir les algorithmes de parcours de graphe : votre programme devra sélectionner \
+      intelligemment les chemins et les mouvements précis qui doivent être empruntés par ces fourmis.",
     },
     link: "",
     git: "",
@@ -501,10 +511,11 @@ export const applications: Application[] = [
       fight each other. You will thus get acquainted with VM conception (with instructions it \
       recognizes, registers, etc) and compilation problems of an assembly language in bytecode. \
       In bonus, the pleasure to have your champions fight in the arena.",
-      fr: "This project involves creating a virtual arena, and having simplistic-language programs \
-      fight each other. You will thus get acquainted with VM conception (with instructions it \
-      recognizes, registers, etc) and compilation problems of an assembly language in bytecode. \
-      In bonus, the pleasure to have your champions fight in the arena.",
+      fr: "Ce projet vous invite à créer une arène virtuelle et à y faire s'affronter des \
+      programmes codés dans un langage simpliste. Vous allez ainsi aborder la conception \
+      d'une VM (avec les instructions qu'elle reconnait, les registres, etc), et les \
+      problématiques de compilation d'un langage assembleur en bytecode. Avec, en bonus, \
+      le plaisir de faire s'affronter vos champions sur votre arène !",
     },
     link: "",
     git: "",
@@ -523,9 +534,10 @@ export const applications: Application[] = [
       en: "This project involves sorting data on a stack, with a limited set of instructions, \
       and the smallest number of moves. To make this happen, you will have to manipulate \
       various sorting algorithms and choose the most appropriate solution(s) for optimized data sorting.",
-      fr: "This project involves sorting data on a stack, with a limited set of instructions, \
-      and the smallest number of moves. To make this happen, you will have to manipulate \
-      various sorting algorithms and choose the most appropriate solution(s) for optimized data sorting.",
+      fr: "Ce projet vous demande de trier des données sur une pile, avec un set d'instructions \
+      limité, en moins de coups possibles. Pour le réussir, vous devrez manipuler différents \
+      algorithmes de tri et choisir la (ou les ?) solution la plus appropriée pour un \
+      classement optimisé des données.",
     },
     link: "",
     git: "",
