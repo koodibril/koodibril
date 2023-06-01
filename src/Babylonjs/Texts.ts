@@ -26,10 +26,9 @@ export const applications: Application[] = [
     pdf: "/images/portfolio/swifty_companion/en.subject.pdf",
     pictures: [],
     description: {
-      en: "This project is an introduction to mobile programming. The goal is to create, an \
-      application which will allow you to get infos about 42students, using the API.",
-      fr: "Ce projet a pour but de vous initier au développement d'application mobile. Il s'agit \
-      de réaliser, une application qui permet de récupérer les informations des élèves de 42, \
+      en: "Swifty-companion is a mobile app that allow you to gather personnal data on 42 students \
+      using the official API of 42 intranet.",
+      fr: "Swifty-companion est une application qui permet de récupérer les informations des élèves de 42, \
       en utilisant l'API de l'intranet de 42.",
     },
     link: "",
@@ -83,10 +82,12 @@ export const applications: Application[] = [
       "/images/portfolio/babylon/3.png",
     ],
     description: {
-      en: "Tuto d'initiation a l'openGl avec la librairie babylonjs, plus d'information \
-      sur openclassroom",
-      fr: "Tuto d'initiation a l'openGl avec la librairie babylonjs, plus d'information \
-      sur openclassroom",
+      en: "Tutorial of initiation to openGl with the babylonjs library. The objective is to\
+      create a mini game of First Person Shooter. We learn the use of game engine, frames, \
+      animations and meshes.",
+      fr: "Tutoriel d'initiation a l'openGl avec la librairie babylonjs, l'objectif est de \
+      realiser un mini jeu de tir a la premiere personne. On y apprend la gestion de l'engine \
+      des frames, animations et mesh.",
     },
     link: "https://babylon.koodibril.com/",
     git: "https://github.com/koodibril/babylon",
@@ -110,14 +111,12 @@ export const applications: Application[] = [
       "/images/portfolio/camagru/4.png",
     ],
     description: {
-      en: "This project is a warmup for web. You will need to realize, a small, instagram-like \
-      website allowing its users to create and share photomontage. You will, from scratch, \
-      implement basic functionnalities used by any website with a userbase",
-      fr: "Ce premier projet vous remet dans le bain du web : vous allez devoir réaliser, \
-      un petit site Instagram-like permettant à des utilisateurs de réaliser et partager \
-      des photo-montages. Vous allez ainsi implémenter, à mains nues (les frameworks sont \
-      interdits), les fonctionnalités de base rencontrées sur la majorité des sites possédant \
-      une base utilisateur.",
+      en: "Camagru is a little Instagram-like website, that allow users to create and share \
+      photoshopped pictures. It implement most fonctionality met on the majority of \
+      user based websites.",
+      fr: "Camagru est un petit site Instagram-like permettant à des utilisateurs de réaliser \
+      et partager des photo-montages. Il implemente les fonctionnalités de base rencontrées sur \
+      la majorité des sites possédant une base utilisateur.",
     },
     link: "https://camagru.koodibril.com/",
     git: "https://github.com/koodibril/camagru",
@@ -136,13 +135,12 @@ export const applications: Application[] = [
     pdf: "/images/portfolio/swifty_protein/en.subject.pdf",
     pictures: [],
     description: {
-      en: "This project will give you the opportunity to create 3D scenes. For the most part, \
-      you will make an application that models ligands in 3D. This will also help you to deepen \
-      your knowledge of a mobile framework.",
-      fr: "Ce projet a pour but de vous initier a la 3D and une application mobile classique. \
-      Vous devrez principalement réaliser une application qui modélisera des ligands en 3D, \
-      cette application sera aussi l'occasion d'approfondir vos connaissances dans le framework \
-      mobile de votre choix.",
+      en: "Swifty-protein is a mobile app that allows to get 'ligands' on the nanana API. You can \
+      search into a thousand of those molecular links and when you select one, it will display it \
+      in 3D to explore it.",
+      fr: "Swifty-protein est un application qui permet de recuperer des 'ligands' sur l'API \
+      du site nanana. Elle permet de rechercher parmis un milier de ces lisaisons moleculaires \
+      et lors de leurs selection, se charge de leurs representation en modele 3D.",
     },
     link: "",
     git: "",
@@ -162,10 +160,10 @@ export const applications: Application[] = [
       "/images/portfolio/woodart/3.png",
     ],
     description: {
-      en: "Realisation d'un wordpress simple pour mettre en avant les tableaux d'un artiste \
-      (@passat_woodart) et lui permettre d'ajouter lui meme ces nouveaux tableau.",
-      fr: "Realisation d'un wordpress simple pour mettre en avant les tableaux d'un artiste \
-      (@passat_woodart) et lui permettre d'ajouter lui meme ces nouveaux tableau.",
+      en: "Thomas (@passat_woodart) is an artist working with wood waste. He gathers them \
+      in an enjoyable mountain style, giving them a second life.",
+      fr: "Thomas (@passat_woodart) est un artiste travaillant les chutes de bois. Il les \
+      agencent dans un style montagnard agreable, leurs donnant une seconde vie.",
     },
     link: "https://passat-woodart.koodibril.com/",
     git: "",
@@ -184,12 +182,11 @@ export const applications: Application[] = [
     pdf: "/images/portfolio/matcha/matcha.pdf",
     pictures: [],
     description: {
-      en: "This second project will introduce a more evolved tool to create your web \
-      applications: the micro-framework. We invite you to create, in the language \
-      of your choice, a dating site. Interaction between users is the heart of the project!",
-      fr: "Ce second projet vous introduit à un outil plus évolué pour réaliser vos applications \
-      web : le micro-framework. Nous vous invitons à réaliser, dans le langage de votre choix, \
-      un site de rencontres. Les interactions entre utilisateurs seront au coeur du projet !",
+      en: "Matcha is Tinder-like website, that allow sharing, search and matching users \
+      profiles. It implement most functionality met on the majority of dating websites.",
+      fr: "Matcha est un site Tinder-like permettant aux utilisateurs de partager \
+      leurs profils et de se 'matcher' entre eux. Il implemente les fonctionnalités de base \
+      rencontrées sur la majorité des sites de rencontre.",
     },
     link: "",
     git: "",
@@ -209,10 +206,12 @@ export const applications: Application[] = [
     pdf: "",
     pictures: [],
     description: {
-      en: "Un script bash, utiliser pour generer le squelette d'un application type MERN avec de \
-      bonnes pratiques (typescript, eslint, redux, etc). Implemente de nombreuses technologies Cf lien Github",
-      fr: "Un script bash, utiliser pour generer le squelette d'un application type MERN avec de \
-      bonnes pratiques (typescript, eslint, redux, etc). Implemente de nombreuses technologies Cf lien Github",
+      en: "A npm module 'generate-clean-app', that generate the squelet of a MERN stack with good \
+      practices (typescript, eslint, redux, etc) and connectors for most of the common databases. \
+      Implement numerous technologies Cf github link.",
+      fr: "Module npm 'generate-clean-app', qui genere le squelette d'une application type MERN avec de \
+      bonnes pratiques (typescript, eslint, redux, etc) ainsi que les connecteurs des principales Databases. \
+      Implemente de nombreuses technologies Cf lien Github",
     },
     link: "",
     git: "https://github.com/AlphaBril/clean-app",
@@ -252,13 +251,12 @@ export const applications: Application[] = [
     pdf: "/images/portfolio/hypertube/hypertube/pdf",
     pictures: [],
     description: {
-      en: "Last project in this series, the Hypertube project invites you to discover an \
-      extremely powerful tool category: MVC frameworks. You will learn how to manipulate \
-      a MVC, in the language of your choice, to create a streaming site of videos downloaded via the BitTorrent protocol.",
-      fr: "Dernier projet de sa série, le projet Hypertube vous invite à découvrir une catégorie \
-      d'outil extrêmement puissante : les frameworks MVC. Vous apprendrez à manipuler un MVC, \
-      dans le langage de votre choix, pour réaliser un site de streaming de video téléchargées \
-      via le protocole BitTorrent.",
+      en: "Hypertube is a Youtube-like website, that allow sharing of videos with BitTorrent \
+      protocol to its users. It implement most functionnality met on the majority of \
+      streaming websites.",
+      fr: "Hypertube est un site Youtube-like permettant aux utilisateurs de partager \
+      des videos via le protocole BitTorrent. Il implemente les fonctionnalités de base \
+      rencontrées sur la majorité des sites de streaming de video.",
     },
     link: "",
     git: "",
@@ -277,8 +275,8 @@ export const applications: Application[] = [
       en: "Project in partnership with Deezer. In a group, create a complete mobile app of collaborative \
       playlist using the SDK and API of Deezer. On the menu, mobile native development, \
       back-end development and creation of API REST.",
-      fr: "Projet en partenariat avec Deezer. Créez en groupe une application mobile complète \
-      de playlist collaborative en utilisant les SDK et API de Deezer. Au programme : du \
+      fr: "Musicroom est une application mobile en partenariat avec Deezer. Elle permet de realiser \
+      des playlist collaborative en utilisant les SDK et API de Deezer. Du \
       développement natif mobile, du développement de back-end et de la création d'API REST.",
     },
     link: "",
@@ -298,9 +296,8 @@ export const applications: Application[] = [
       en: "Projet web, ou l'objectif est de realiser une application capable de recupere \
       les releves de compts sous format pdf, pour les traiter et mettre en avant les depenses \
       mensuelles de l'utilisateur",
-      fr: "Projet web, ou l'objectif est de realiser une application capable de recupere \
-      les releves de compts sous format pdf, pour les traiter et mettre en avant les depenses \
-      mensuelles de l'utilisateur",
+      fr: "Balancing-Bank lit vos releves de comptes sous format pdf, puis traite et agence \
+      les donnees de maniere comprehensible pour vous permettre de mieux vous y retrouver.",
     },
     link: "",
     git: "",
@@ -353,11 +350,9 @@ export const applications: Application[] = [
       et kubernetes. Mise a jour de la messagerie instantanée, \
       Réaliser un serveur mail en lien avec la messagerie instantanée, \
       Aider au développement de fonctionnalités diverses front (angular) et back (spring)",
-      fr: "Développer de nouvelles fonctionnalités, veiller a la robustesse, a l'extensibilité \
-      et a la reutilisabilité du code. Mettre en place le CI/CD a l'aide de github action, ansible, gcp \
-      et kubernetes. Mise a jour de la messagerie instantanée, \
-      Réaliser un serveur mail en lien avec la messagerie instantanée, \
-      Aider au développement de fonctionnalités diverses front (angular) et back (spring)",
+      fr: "Mies House est une entreprise developpant des logiciels BtoB. J'ai participer a la realisation \
+      du logiciel Fall, qui permet la mise en relation des differents acteurs lors du transport logistique \
+      d'un colis.",
     },
     link: "https://mieshouse.com/",
     git: "",
@@ -386,10 +381,9 @@ export const applications: Application[] = [
       du serveur, creation d'un module strapi pour controler le serveur de scripts, et les lancer si \
       necessaires. Mise a jour des scrappers. Mise a jour des scripts de calcul d'ecoscore, realisation \
       de scripts de congregation de donnees. Creation d'un module strapi d'import et d'export de donnees",
-      fr: "Amelioration du backend, migration de scripts sous gcp afin de repartir la charge \
-      du serveur, creation d'un module strapi pour controler le serveur de scripts, et les lancer si \
-      necessaires. Mise a jour des scrappers. Mise a jour des scripts de calcul d'ecoscore, realisation \
-      de scripts de congregation de donnees. Creation d'un module strapi d'import et d'export de donnees",
+      fr: "Ubebest (Qweeko) est une entreprise qui se veut actrice dans la crise environnementale. La \
+      plateforme qu'ils proposent permet de comparer les prix des electromenager afin de selection celui \
+      avec le moins d'impact lors de sa fabrication, son transport, sa duree et sa fin de vie.",
     },
     link: "https://ubebest.com/",
     git: "",
@@ -412,8 +406,8 @@ export const applications: Application[] = [
     description: {
       en: "Discover 2D programming and the psychedelic universe of fractals in this project, \
       using minilibX.",
-      fr: "Découvrez la programmation 2D et l'univers psychédelique des fractales grâce à ce \
-      projet à réaliser avec la minilibX.",
+      fr: "Fractol est un site representant l'univers psychédelique des fractales. Amusez-vous \
+      en modifiant divers parametres et regarder votre fractale evoluer !",
     },
     link: "",
     git: "",
@@ -431,8 +425,9 @@ export const applications: Application[] = [
     description: {
       en: "Projet web, ou l'objectif est de realiser une radio web utilisant la blockchain \
       et l'api spotify, pour assurer l'auditeur qu'il n'ecouterat jamais la meme musique.",
-      fr: "Projet web, ou l'objectif est de realiser une radio web utilisant la blockchain \
-      et l'api spotify, pour assurer l'auditeur qu'il n'ecouterat jamais la meme musique.",
+      fr: "Toujours a la recherche d'une nouvelle musique ? Marre de vos playlist en boucle ? \
+      Uniqu'air combine la blockchain d'etherium et l'api spotify, pour assurer a l'auditeur \
+      qu'il n'ecouterat jamais la meme musique.",
     },
     link: "",
     git: "",
@@ -491,7 +486,9 @@ export const applications: Application[] = [
     pictures: [],
     description: {
       en: "",
-      fr: "",
+      fr: "Salesramp est une solution BtoB qui permet de mieux gerer vos equipes commerciales. Elle se \
+      connecte directement aux API des plus grands CRM du marche, Zoho, salesforce, sellsy, ... Et recupere \
+      pour vous les donnes de vos sales afin d'automatisez le calcul de vos plans de commission.",
     },
     link: "",
     git: "",
@@ -511,11 +508,9 @@ export const applications: Application[] = [
       fight each other. You will thus get acquainted with VM conception (with instructions it \
       recognizes, registers, etc) and compilation problems of an assembly language in bytecode. \
       In bonus, the pleasure to have your champions fight in the arena.",
-      fr: "Ce projet vous invite à créer une arène virtuelle et à y faire s'affronter des \
-      programmes codés dans un langage simpliste. Vous allez ainsi aborder la conception \
-      d'une VM (avec les instructions qu'elle reconnait, les registres, etc), et les \
-      problématiques de compilation d'un langage assembleur en bytecode. Avec, en bonus, \
-      le plaisir de faire s'affronter vos champions sur votre arène !",
+      fr: "Corewar est une simulation de combat. Entrez dans une arène virtuelle et affronter des \
+      programmes codés dans un langage simpliste (assembleur). Les programmes s'affrontent sur 512 \
+      octet de RAM pour la supprematie absolue du terrain.",
     },
     link: "",
     git: "",
@@ -534,10 +529,9 @@ export const applications: Application[] = [
       en: "This project involves sorting data on a stack, with a limited set of instructions, \
       and the smallest number of moves. To make this happen, you will have to manipulate \
       various sorting algorithms and choose the most appropriate solution(s) for optimized data sorting.",
-      fr: "Ce projet vous demande de trier des données sur une pile, avec un set d'instructions \
-      limité, en moins de coups possibles. Pour le réussir, vous devrez manipuler différents \
-      algorithmes de tri et choisir la (ou les ?) solution la plus appropriée pour un \
-      classement optimisé des données.",
+      fr: "Push Swap aborde la complexite algorithmique: comment obtenir une pile trier avec un set \
+      d'instructions limité, en moins de coups possibles. Plusieurs algorithme sont abordes selon \
+      le nombre d'entree a trier.",
     },
     link: "",
     git: "",
@@ -554,7 +548,9 @@ export const applications: Application[] = [
     pictures: [],
     description: {
       en: "",
-      fr: "",
+      fr: "Meta-coaching est un portail medical en ligne. Il fournit des programmes de Coaching \
+      sante realise par des professionnel afin d'apprendre a ses utilisateurs a gerer leur sommeil, \
+      stree, equilibre alimentaire ou forme.",
     },
     link: "",
     git: "",
