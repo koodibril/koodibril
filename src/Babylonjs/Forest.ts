@@ -6,6 +6,7 @@ import {
   AnimationGroup,
   AssetContainer,
   Engine,
+  MeshBuilder,
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 
@@ -81,6 +82,7 @@ export class ForestActions {
 
     await this.importforest();
     this.seed();
+    this.createGroundLines();
   }
 
   // import all forest.glb and store them for fast loading
@@ -141,6 +143,15 @@ export class ForestActions {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  private createGroundLines(): void {
+    for (let x = -20; x < 20; x++) {
+      let path = [new Vector3(x, 0, -10), new Vector3(x, 0, 40)];
+      MeshBuilder.CreateTube("tube", { path, radius: 0.01 }, this.scene);
+      path = [new Vector3(-20, 0, x + 10), new Vector3(20, 0, x + 10)];
+      MeshBuilder.CreateTube("tube", { path, radius: 0.01 }, this.scene);
+    }
   }
 
   // suffle method for selecting randomly trees, or bushes
