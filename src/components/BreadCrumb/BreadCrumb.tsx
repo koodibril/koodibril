@@ -53,7 +53,13 @@ const BreadCrumb: React.FC<{
               >
                 <img src={app.logo} />
               </div>
-              <span className="tooltiptext">{app.name}</span>
+              <span
+                className={`tooltiptext${
+                  currentApp === app.name ? " selected" : ""
+                }`}
+              >
+                {app.name}
+              </span>
             </div>
             {id < apps.length - 1 ? (
               <div

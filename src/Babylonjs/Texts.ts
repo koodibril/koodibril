@@ -80,6 +80,7 @@ export const applications: Application[] = [
       "/images/portfolio/babylon/1.png",
       "/images/portfolio/babylon/2.png",
       "/images/portfolio/babylon/3.png",
+      "/images/portfolio/babylon/3.png",
     ],
     description: {
       en: "Tutorial of initiation to openGl with the babylonjs library. The objective is to\
@@ -313,6 +314,7 @@ export const applications: Application[] = [
     pdf: "",
     pictures: [
       "/images/portfolio/koodibril/1.png",
+      "/images/portfolio/koodibril/3.png",
       "/images/portfolio/koodibril/3.png",
       "/images/portfolio/koodibril/4.png",
     ],

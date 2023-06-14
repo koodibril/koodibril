@@ -136,7 +136,7 @@ export class AnimationsActions {
     delta: number
   ): Animatable | null {
     if (object.animations.length > 0) {
-      if (object.animations[0].runtimeAnimations[0].currentFrame > 80)
+      if (object.animations[0].runtimeAnimations[0].currentFrame > 140)
         return null;
       object.animations[0].runtimeAnimations[0].reset(false);
       const currentKeys = object.animations[0].getKeys();
@@ -156,7 +156,7 @@ export class AnimationsActions {
         value: from.z,
       },
       {
-        frame: 120,
+        frame: 240,
         value: to.z,
       },
     ];
@@ -172,7 +172,7 @@ export class AnimationsActions {
     easingFunction.setEasingMode(EasingFunction.EASINGMODE_EASEINOUT);
     zSlide.setEasingFunction(easingFunction);
     object.animations.push(zSlide);
-    const animatable = this.scene.beginAnimation(object, 0, 120, false, 3);
+    const animatable = this.scene.beginAnimation(object, 0, 240, false, 3);
     animatable.onAnimationEndObservable.addOnce(() => {
       object.animations.pop();
     });

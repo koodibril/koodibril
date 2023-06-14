@@ -30,12 +30,12 @@
   cursor: pointer;
   animation: zoomIn2 .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 }
+@font-face {
+  font-family: "Montserrat";
+  src: url('../public/assets/fonts/Montserrat.ttf') format("truetype");
+}
 
 @font-face {
-  font-family: 'JungleRoar';
-  src: url('../public/assets/fonts/jungleRoar.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Tommy';
-  src: url('../public/assets/fonts/tommy.otf') format('truetype');
+  font-family: "Montserrat-italic";
+  src: url('../public/assets/fonts/Montserrat-italic.ttf') format("truetype");
 }

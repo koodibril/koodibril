@@ -37,6 +37,15 @@ const Modal: React.FC<{
       props.setShow(false);
     }
   };
+  const openLink = (url: string | undefined) => {
+    if (!url) return;
+    const link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.click();
+    link.parentNode?.removeChild(link);
+  };
   return (
     <div
       style={{ display: props.show ? "block" : "none" }}
@@ -45,60 +54,50 @@ const Modal: React.FC<{
     >
       <XMark className="close-modal" onClick={() => setAnim(" blowIn out")} />
       <div className="title-wrapper">
-        <div className="title row justify-content-center">
-          <img className="logo" src={appInfo?.logo} />
-          {app}
-        </div>
+        <div className="title row justify-content-center">{app}</div>
+        <hr></hr>
         <div className="subtitle row justify-content-center">
           {appInfo?.subtitle[props.language]}
         </div>
       </div>
       <div className="content">
         <div className="pictures">
-          {appInfo && appInfo.pictures ? (
-            appInfo.pictures.length === 0 && appInfo.pdf === "" ? (
-              <div className="nopic">No pictures are available.</div>
-            ) : (
-              <Carousel
-                pictures={appInfo.pictures}
-                pdf={appInfo.pdf}
-              ></Carousel>
-            )
-          ) : null}
+          {window.innerWidth < 600 && appInfo ? (
+            <Carousel pictures={appInfo.pictures} pdf={appInfo.pdf}></Carousel>
+          ) : (
+            appInfo?.pictures.map((pic, id) => {
+              return (
+                <div key={id} className="picture">
+                  <img src={pic} />
+                </div>
+              );
+            })
+          )}
         </div>
         <div className="description">
           {appInfo?.description[props.language]}
         </div>
         <div className="links">
-          {appInfo?.link ? (
-            <div className="link">
-              You can access a live demo{" "}
-              <a href={appInfo?.link} target="_blank" rel="noopener noreferrer">
-                here
-              </a>
-            </div>
-          ) : (
-            <div className="link">No demo is actually available.</div>
-          )}
-          {appInfo?.git ? (
-            <div className="link">
-              This project is open-source, you can find it on{" "}
-              <a href={appInfo.git} target="_blank" rel="noopener noreferrer">
-                Github
-              </a>
-            </div>
-          ) : (
-            <div className="link">
-              This project is private, no repository is available.
-            </div>
-          )}
+          <div
+            className="link"
+            style={{ backgroundColor: "red" }}
+            onClick={() => openLink(appInfo?.link)}
+          >
+            {props.language === "en"
+              ? "Access live Demo >"
+              : "Voir la demo live >"}
+          </div>
+          <div
+            className="link"
+            style={{ backgroundColor: "black" }}
+            onClick={() => openLink(appInfo?.git)}
+          >
+            {props.language === "en" ? "Access Github repo" : "Voir le repo >"}
+          </div>
         </div>
-      </div>
-      <div className="footer">
         <div className="technos">
-          {appInfo?.technos.map((tech, id) => {
-            return <i key={id} className={`${tech} tech`}></i>;
-          })}
+          Technos
+          <div className="hr-separator"></div>
         </div>
       </div>
     </div>

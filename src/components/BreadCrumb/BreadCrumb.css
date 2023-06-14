@@ -24,9 +24,11 @@
     height: 50px;
     cursor: pointer;
     border-radius: 50%;
-    border: 2px solid black;
+    border: 2px solid white;
     overflow: hidden;
-    background-color: rgb(0, 0, 0);
+    background-color: white;
+    /* box-shadow: 0 0 2em #d3d3d3; */
+    box-shadow: 0 0 1em black;
     &.selected {
         width: 80px;
         height: 80px;
@@ -49,7 +51,12 @@
   top: 10px;
   right: 140%;
   position: absolute;
+  white-space: nowrap;
   z-index: 5;
+  &.selected {
+    top: 25px;
+    right: 120%;
+  }
 }
 .breadcrumb:hover .tooltiptext {
   visibility: visible;
@@ -72,7 +79,8 @@
     width: 1px;
     left: calc(50% - 2px);
     height: calc((80vh / 6) - 70px);
-    border-right: 2px solid black;
+    border-right: 2px solid white;
+    box-shadow: 0 0 1em black;
     &.beforeOrAfter {
       animation: zoomOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
     }

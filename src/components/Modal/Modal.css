@@ -3,15 +3,14 @@
     display: flex;
     flex-direction: column;
     z-index: 5;
-    width: 70vw;
-    height: 80vh;
-    top: 8vh;
-    left: 10vw;
-    font-family: 'Tommy';
+    width: 68.5vw;
+    height: 62.5vh;
+    top: 12vh;
+    left: 12.5vw;
+    font-family: 'Montserrat';
     font-size: 20px;
-    padding: 30px 50px 50px 50px;
+    padding: 58px 50px 70px 50px;
     background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 15px;
     &.blowIn {
       animation: blowUpModal .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
       &.out {
@@ -41,54 +40,83 @@
 }
   .close-modal {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    height: 50px;
-    width: 50px;
+    top: 50px;
+    right: 40px;
+    height: 40px;
+    width: 40px;
   }
   .close-modal:hover {
     cursor: pointer;
     transform: scale(1.2);
   }
+  hr {
+    width: 25%;
+    text-align: left;
+    margin-left: 0;
+  }
   .title-wrapper {
-    height: 10%;
+    height: 20%;
+    line-height: 30px;
   }
   .title {
     align-items: center;
     width: 100%;
-    font-size: 50px;
-    font-family: 'jungleRoar';
-  }
-  .logo {
-    height: 50px;
+    font-size: 38px;
+    font-weight: 600;
   }
   .subtitle {
-    margin-top: -20px;
+    font-family: 'Montserrat-italic';
     margin-bottom: 20px;
   }
   .content {
     height: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
   }
   .pictures {
-    height: 300px;
+    height: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .picture {
+    height: 100%;
+    max-width: 23.5%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .picture img {
+    height: 100%;
   }
   .pdf {
     max-width: 3em;
   }
   .description {
-    max-height: 30%;
+    margin-top: 55px;
+    width: 50%;
+    height: 30%;
+    font-size: 15px;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-    overflow-y: scroll;
+    overflow: hidden;
   }
   .description::-webkit-scrollbar {
     display: none;
   }
   .links {
-    max-height: 10%;
+    height: 15%;
+    width: 23.5%;
+  }
+  .link {
+    padding: 10px;
+    border-radius: 50px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 17px;
   }
   .technos {
     display: flex;
