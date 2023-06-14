@@ -7,7 +7,13 @@ export interface Application {
   link: string;
   git: string;
   pdf: string;
-  technos: string[];
+  technos: Technos;
+}
+
+interface Technos {
+  front: string[];
+  back: string[];
+  database: string[];
 }
 
 export interface Text {
@@ -33,7 +39,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "GRAPHIT",
@@ -61,12 +71,11 @@ export const applications: Application[] = [
     },
     link: "http://demo.graph-it.fr",
     git: "",
-    technos: [
-      "devicon-react-original-wordmark colored",
-      "devicon-d3js-plain colored",
-      "devicon-nodejs-plain-wordmark colored",
-      "devicon-neo4j-plain-wordmark colored",
-    ],
+    technos: {
+      front: ["React", "D3js"],
+      back: ["Nodejs"],
+      database: ["Neo4j"],
+    },
   },
   {
     name: "BABYLON",
@@ -92,11 +101,11 @@ export const applications: Application[] = [
     },
     link: "https://babylon.koodibril.com/",
     git: "https://github.com/koodibril/babylon",
-    technos: [
-      "devicon-javascript-plain colored",
-      "devicon-nodejs-plain-wordmark colored",
-      "devicon-opengl-plain-wordmark colored",
-    ],
+    technos: {
+      front: ["Javascript", "HTML5", "openGL"],
+      back: ["Nodejs"],
+      database: ["None"],
+    },
   },
   {
     name: "CAMAGRU",
@@ -121,10 +130,11 @@ export const applications: Application[] = [
     },
     link: "https://camagru.koodibril.com/",
     git: "https://github.com/koodibril/camagru",
-    technos: [
-      "devicon-php-plain colored",
-      "devicon-mysql-plain-wordmark colored",
-    ],
+    technos: {
+      front: ["HTML", "Javascript"],
+      back: ["PHP"],
+      database: ["Mysql"],
+    },
   },
   {
     name: "SWIFTY-PROTEIN",
@@ -145,7 +155,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "WOODART",
@@ -168,10 +182,11 @@ export const applications: Application[] = [
     },
     link: "https://passat-woodart.koodibril.com/",
     git: "",
-    technos: [
-      "devicon-wordpress-plain-wordmark colored",
-      "devicon-mysql-plain colored",
-    ],
+    technos: {
+      front: ["Wordpress"],
+      back: ["PHP"],
+      database: ["Mysql"],
+    },
   },
   {
     name: "MATCHA",
@@ -191,11 +206,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [
-      "devicon-react-original-wordmark colored",
-      "devicon-nodejs-plain-wordmark colored",
-      "devicon-neo4j-plain-wordmark colored",
-    ],
+    technos: {
+      front: ["React"],
+      back: ["Nodejs"],
+      database: ["Neo4j"],
+    },
   },
   {
     name: "CLEAN-APP",
@@ -216,7 +231,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "https://github.com/AlphaBril/clean-app",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "INCEPTION OF THINGS",
@@ -240,7 +259,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "HYPERTUBE",
@@ -261,7 +284,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "MUSICROOM",
@@ -282,7 +309,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "BALANCINGBANK",
@@ -302,7 +333,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "KOODIBRIL",
@@ -329,13 +364,11 @@ export const applications: Application[] = [
     },
     link: "https://koodibril.com",
     git: "https://github.com/koodibril/koodibril",
-    technos: [
-      "devicon-angularjs-plain-wordmark colored",
-      "devicon-devicon-plain-wordmark colored",
-      "devicon-spring-plain-wordmark colored",
-      "devicon-mongodb-plain-wordmark colored",
-      "devicon-opengl-plain-wordmark colored",
-    ],
+    technos: {
+      front: ["React", "Babylonjs"],
+      back: ["None"],
+      database: ["None"],
+    },
   },
   {
     name: "MIES HOUSE",
@@ -358,12 +391,11 @@ export const applications: Application[] = [
     },
     link: "https://mieshouse.com/",
     git: "",
-    technos: [
-      "devicon-angularjs-plain-wordmark colored",
-      "devicon-spring-plain-wordmark colored",
-      "devicon-postgresql-plain-wordmark colored",
-      "devicon-googlecloud-plain-wordmark colored",
-    ],
+    technos: {
+      front: ["Angular6"],
+      back: ["Spring"],
+      database: ["Postgresql"],
+    },
   },
   {
     name: "UBEBEST",
@@ -389,12 +421,11 @@ export const applications: Application[] = [
     },
     link: "https://ubebest.com/",
     git: "",
-    technos: [
-      "devicon-react-original-wordmark colored",
-      "devicon-nodejs-plain-wordmark colored",
-      "devicon-postgresql-plain-wordmark colored",
-      "devicon-googlecloud-plain-wordmark colored",
-    ],
+    technos: {
+      front: ["React"],
+      back: ["Nodejs"],
+      database: ["Postgresql"],
+    },
   },
   {
     name: "FRACTOL",
@@ -413,7 +444,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "UNIQU'AIR",
@@ -433,7 +468,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "RED-TETRIS",
@@ -452,7 +491,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "LEMIN",
@@ -475,7 +518,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: ["devicon-c-plain-wordmark colored"],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "SALESRAMP",
@@ -494,7 +541,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "COREWAR",
@@ -516,7 +567,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: ["devicon-c-plain-wordmark colored"],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "PUSH_SWAP",
@@ -537,7 +592,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: ["devicon-c-plain-wordmark colored"],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "Méta-Coaching",
@@ -556,7 +615,11 @@ export const applications: Application[] = [
     },
     link: "",
     git: "",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
   {
     name: "AlphaBril",
@@ -583,6 +646,10 @@ export const applications: Application[] = [
     },
     link: "https://www.malt.fr/profile/doucetflorianmarie",
     git: "https://github.com/AlphaBril",
-    technos: [],
+    technos: {
+      front: [],
+      back: [],
+      database: [],
+    },
   },
 ];

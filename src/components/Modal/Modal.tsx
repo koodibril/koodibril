@@ -62,8 +62,8 @@ const Modal: React.FC<{
       </div>
       <div className="content">
         <div className="pictures">
-          {window.innerWidth < 600 && appInfo ? (
-            <Carousel pictures={appInfo.pictures} pdf={appInfo.pdf}></Carousel>
+          {window.innerWidth < 1000 && appInfo ? (
+            <Carousel pictures={appInfo.pictures}></Carousel>
           ) : (
             appInfo?.pictures.map((pic, id) => {
               return (
@@ -74,30 +74,78 @@ const Modal: React.FC<{
             })
           )}
         </div>
-        <div className="description">
-          {appInfo?.description[props.language]}
-        </div>
-        <div className="links">
-          <div
-            className="link"
-            style={{ backgroundColor: "red" }}
-            onClick={() => openLink(appInfo?.link)}
-          >
-            {props.language === "en"
-              ? "Access live Demo >"
-              : "Voir la demo live >"}
+        <div className="footer">
+          <div className="footer-left">
+            <div className="description">
+              {appInfo?.description[props.language]}
+            </div>
+            <div className="links">
+              <div
+                className="link"
+                style={{ backgroundColor: "#740e24" }}
+                onClick={() => openLink(appInfo?.link)}
+              >
+                {props.language === "en"
+                  ? "Access live Demo >"
+                  : "Voir la demo live >"}
+              </div>
+              <div
+                className="link"
+                style={{ backgroundColor: "#071c21", marginTop: "10px" }}
+                onClick={() => openLink(appInfo?.git)}
+              >
+                {props.language === "en"
+                  ? "Access Github repo"
+                  : "Voir le repo >"}
+              </div>
+            </div>
           </div>
-          <div
-            className="link"
-            style={{ backgroundColor: "black" }}
-            onClick={() => openLink(appInfo?.git)}
-          >
-            {props.language === "en" ? "Access Github repo" : "Voir le repo >"}
+          <div className="footer-right">
+            <div className="technos">
+              <b>Technos</b>
+              <div className="lr"></div>
+              <div className="tech">
+                <b>Front</b>
+                <ul>
+                  {appInfo?.technos.front.map((tech, id) => {
+                    return <li key={id}>{tech}</li>;
+                  })}
+                </ul>
+                <b>Back</b>
+                <ul>
+                  {appInfo?.technos.back.map((tech, id) => {
+                    return <li key={id}>{tech}</li>;
+                  })}
+                </ul>
+                <b>Database</b>
+                <ul>
+                  {appInfo?.technos.database.map((tech, id) => {
+                    return <li key={id}>{tech}</li>;
+                  })}
+                </ul>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="technos">
-          Technos
-          <div className="hr-separator"></div>
+          <div className="small-links">
+            <div
+              className="link"
+              style={{ backgroundColor: "#740e24" }}
+              onClick={() => openLink(appInfo?.link)}
+            >
+              {props.language === "en"
+                ? "Access live Demo >"
+                : "Voir la demo live >"}
+            </div>
+            <div
+              className="link"
+              style={{ backgroundColor: "#071c21", marginTop: "10px" }}
+              onClick={() => openLink(appInfo?.git)}
+            >
+              {props.language === "en"
+                ? "Access Github repo"
+                : "Voir le repo >"}
+            </div>
+          </div>
         </div>
       </div>
     </div>
