@@ -24,16 +24,18 @@ function App() {
   return (
     <div className="engine-wrapper">
       <div className="international">
-        <img
-          className={language === "fr" ? "selected-language" : ""}
-          onClick={() => setLanguage("fr")}
-          src="/images/fr.png"
-        />
-        <img
-          className={language === "en" ? "selected-language" : ""}
-          onClick={() => setLanguage("en")}
-          src="/images/en.png"
-        />
+        <div className="language">
+          <b>{language.toUpperCase()}</b>
+        </div>
+        {language === "en" ? (
+          <div className="idropdown" onClick={() => setLanguage("fr")}>
+            <b>FR</b>
+          </div>
+        ) : (
+          <div className="idropdown" onClick={() => setLanguage("en")}>
+            <b>EN</b>
+          </div>
+        )}
       </div>
       <canvas id="renderCanvas"></canvas>
       <Modal
