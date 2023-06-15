@@ -12,9 +12,9 @@
     justify-content: space-between;
     align-items: center;
     @media (max-width: 1000px) {
-      right: 4vw;
-      height: 64vh;
-      top: 18vh;
+      right: 5vw;
+      height: 60vh;
+      top: 15vh;
     }
   }
 .breadcrumb-wrapper::-webkit-scrollbar {
@@ -24,7 +24,6 @@
 .breadcrumb-cartridge {
     position: relative;
     z-index: 5;
-    margin: 20px;
     width: 50px;
     height: 50px;
     cursor: pointer;
@@ -32,14 +31,13 @@
     border: 2px solid white;
     overflow: hidden;
     background-color: white;
-    /* box-shadow: 0 0 2em #d3d3d3; */
-    box-shadow: 0 0 1em black;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.15);
     &.selected {
         width: 80px;
         height: 80px;
         @media (max-width: 1000px) {
-          width: 60px;
-          height: 60px;
+          width: 50px;
+          height: 50px;
         }
         animation: zoomIn .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
     }
@@ -47,33 +45,41 @@
       animation: none;
     }
     @media (max-width: 1000px) {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
     }
 }
 .breadcrumb {
   position: relative;
 }
 .breadcrumb .tooltiptext {
+  font-family: 'Montserrat';
   visibility: hidden;
-  background-color: black;
-  color: #fff;
+  background-color: white;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.15);
+  color: black;
   text-align: center;
   padding: 5px;
+  padding-right: 50px;
+  padding-left: 10px;
   border-radius: 6px;
-  top: 10px;
-  right: 140%;
+  top: 13px;
+  font-size: 16px;
   position: absolute;
   white-space: nowrap;
-  z-index: 5;
+  z-index: 2;
   &.selected {
-    top: 25px;
-    right: 120%;
+    top: 28px;
+  }
+  @media (max-width: 1000px) {
+    display: none;
   }
 }
 .breadcrumb:hover .tooltiptext {
-  visibility: visible;
-  animation: zoomIn2 .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  animation: slideRight .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  &.selected {
+    animation: slideRightSelected .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
 }
 
 .breadcrumb-cartridge:hover {
@@ -84,18 +90,19 @@
     height: 100%;
     width: 100%;
 }
-
 .breadcrumb-separator {
     z-index: 3;
     position: absolute;
-    margin-top: -20px;
+    right: 4.9vw;
+    top: 20px;
     width: 1px;
-    left: calc(50% - 2px);
-    height: calc((80vh / 6) - 70px);
+    height: calc(80vh - 70px);
     border-right: 2px solid white;
-    box-shadow: 0 0 1em black;
-    &.beforeOrAfter {
-      animation: zoomOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.15);
+    @media (max-width: 1000px) {
+      right: 5vw;
+      height: calc(60vh - 30px);
+      top: 20px;
     }
 }
 
@@ -123,3 +130,23 @@
         transform: scaleY(1);
       }
     }
+@keyframes slideRight {
+  from {
+    visibility: hidden;
+    right: 0;
+  }
+  to {
+    visibility: visible;
+    right: 100%;
+  }
+}
+@keyframes slideRightSelected {
+  from {
+    visibility: hidden;
+    right: 0;
+  }
+  to {
+    visibility: visible;
+    right: 80%;
+  }
+}

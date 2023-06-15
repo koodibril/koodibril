@@ -58,7 +58,11 @@ export class ForestActions {
   // store the pannel.glb for fast loading
   private pannel!: AssetContainer;
 
-  public constructor(private scene: Scene, private engine: Engine) {}
+  public constructor(
+    private scene: Scene,
+    private engine: Engine,
+    private device: number
+  ) {}
 
   // instantiate the forest object before filling it
   public async instantiateForest(): Promise<void> {
@@ -124,17 +128,39 @@ export class ForestActions {
     for (let row = 0; row < 24; row++) {
       const z = row * 4 - 48;
       const random_tree = this.shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-      const position_tree = this.shuffleArray([-3, -6, 3, 5]);
+      const position_tree = this.shuffleArray([-9, -12, -3, -6, 3, 5, 8, 11]);
+      const position_tree_mobile = this.shuffleArray([-3, -6, 3, 5]);
       const random_bush = this.shuffleArray([1, 2, 3, 4]);
-
-      for (let i = 0; i < 4; i++) {
-        this.addtree(new Vector3(position_tree[i], 0, z), row, random_tree[i]);
+      const position_bush = this.shuffleArray([-9, 0, 9]);
+      if (this.device === 2) {
+        for (let i = 0; i < 4; i++) {
+          this.addtree(
+            new Vector3(position_tree_mobile[i], 0, z),
+            row,
+            random_tree[i]
+          );
+        }
+        this.addbush(
+          new Vector3(0, 0, z),
+          row,
+          random_bush[this.getRandomInt(0, 3)]
+        );
+      } else {
+        for (let i = 0; i < 8; i++) {
+          this.addtree(
+            new Vector3(position_tree[i], 0, z),
+            row,
+            random_tree[i]
+          );
+        }
+        for (let i = 0; i < 3; i++) {
+          this.addbush(
+            new Vector3(position_bush[i], 0, z),
+            row,
+            random_bush[this.getRandomInt(0, 3)]
+          );
+        }
       }
-      this.addbush(
-        new Vector3(0, 0, z),
-        row,
-        random_bush[this.getRandomInt(0, 3)]
-      );
       this.addflower(new Vector3(Math.random() * (2 - -2) + -2, 1.5, z), row);
     }
   }

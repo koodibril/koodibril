@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { KoodibrilEngine, pannelInfo } from "./Babylonjs/Engine";
 import Modal from "./components/Modal/Modal";
 import BreadCrumb from "./components/BreadCrumb/BreadCrumb";
+import Menu from "./components/Menu/Menu";
 
 function App() {
   const [appName, setAppName] = useState<pannelInfo>({
@@ -23,17 +24,20 @@ function App() {
 
   return (
     <div className="engine-wrapper">
+      <Menu />
       <div className="international">
-        <img
-          className={language === "fr" ? "selected-language" : ""}
-          onClick={() => setLanguage("fr")}
-          src="/images/fr.png"
-        />
-        <img
-          className={language === "en" ? "selected-language" : ""}
-          onClick={() => setLanguage("en")}
-          src="/images/en.png"
-        />
+        <div className="language">
+          <b>{language.toUpperCase()}</b>
+        </div>
+        {language === "en" ? (
+          <div className="idropdown" onClick={() => setLanguage("fr")}>
+            <b>FR</b>
+          </div>
+        ) : (
+          <div className="idropdown" onClick={() => setLanguage("en")}>
+            <b>EN</b>
+          </div>
+        )}
       </div>
       <canvas id="renderCanvas"></canvas>
       <Modal

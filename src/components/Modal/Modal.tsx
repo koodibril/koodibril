@@ -61,17 +61,31 @@ const Modal: React.FC<{
         </div>
       </div>
       <div className="content">
-        <div className="pictures">
+        <div
+          className="pictures"
+          style={
+            appInfo?.pictures.length === 0
+              ? { justifyContent: "space-around" }
+              : { justifyContent: "space-between" }
+          }
+        >
           {window.innerWidth < 1000 && appInfo ? (
             <Carousel pictures={appInfo.pictures}></Carousel>
           ) : (
-            appInfo?.pictures.map((pic, id) => {
-              return (
-                <div key={id} className="picture">
-                  <img src={pic} />
+            <>
+              {appInfo?.pictures.map((pic, id) => {
+                return (
+                  <div key={id} className="picture">
+                    <img src={pic} />
+                  </div>
+                );
+              })}
+              {appInfo?.pictures.length === 0 ? (
+                <div className="picture">
+                  <img src={"/images/damn.png"} />
                 </div>
-              );
-            })
+              ) : null}
+            </>
           )}
         </div>
         <div className="footer">
