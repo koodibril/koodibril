@@ -27,16 +27,6 @@ const BreadCrumb: React.FC<{
       ];
   };
 
-  const isBeforeOrAfter = (id: number) => {
-    const apps = getApps();
-    if (apps) {
-      const appId = apps.findIndex((app) => app.name === currentApp);
-      if (appId === -1) return false;
-      if (appId - 1 === id || appId === id) return true;
-    }
-    return false;
-  };
-
   const generateApps = () => {
     const apps = getApps();
     if (engine && apps && apps.length > 0) {
@@ -61,17 +51,6 @@ const BreadCrumb: React.FC<{
                 {app.name}
               </span>
             </div>
-            {id < apps.length - 1 ? (
-              <div
-                key={app.name + "sep"}
-                className={
-                  "breadcrumb-separator" +
-                  (isBeforeOrAfter(id) ? " beforeOrAfter" : "")
-                }
-              >
-                {" "}
-              </div>
-            ) : null}
           </div>
         );
       });
@@ -85,6 +64,7 @@ const BreadCrumb: React.FC<{
   return (
     <div onWheel={(e) => handleWheel(e)} className="breadcrumb-wrapper">
       {generateApps()}
+      <div className="breadcrumb-separator"></div>
     </div>
   );
 };
