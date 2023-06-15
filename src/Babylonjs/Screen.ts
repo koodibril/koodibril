@@ -13,7 +13,7 @@ import { ILoadingScreen, Nullable } from "@babylonjs/core";
  */
 export class CustomLoadingScreen implements ILoadingScreen {
   /** Gets or sets the logo url to use for the default loading screen */
-  public static DefaultLogoUrl = "";
+  public static DefaultLogoUrl = "/images/portfolio/koodibril/logo.png";
 
   /** Gets or sets the spinner url to use for the default loading screen */
   public static DefaultSpinnerUrl = "";
