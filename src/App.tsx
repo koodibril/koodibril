@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { KoodibrilEngine, pannelInfo } from "./Babylonjs/Engine";
 import Modal from "./components/Modal/Modal";
 import BreadCrumb from "./components/BreadCrumb/BreadCrumb";
+import Menu from "./components/Menu/Menu";
 
 function App() {
   const [appName, setAppName] = useState<pannelInfo>({
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <div className="engine-wrapper">
+      <Menu />
       <div className="international">
         <div className="language">
           <b>{language.toUpperCase()}</b>

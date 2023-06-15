@@ -1,0 +1,124 @@
+.menu {
+    position: absolute;
+    font-family: "Montserrat";
+    top: 5px;
+    right: 100px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2;
+  }
+  .menu svg {
+    height: 40px;
+    width: 40px;
+  }
+  .menu img {
+    height: 40px;
+    width: 40px;
+  }
+  .menu-logo svg {
+    height: 20px;
+    width: 20px;
+  }
+  .menu:hover {
+    cursor: pointer;
+  }
+  .menu-logo {
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    display: flex;
+    position: absolute;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 4;
+  }
+  .menu-dropdown {
+    display: block;
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    position: absolute;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2;
+  }
+  
+  .menu:hover #one{
+    animation: slideLeftIn1 .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  .menu #one{
+    animation: slideLeftOut1 .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  
+  .menu:hover #two{
+    animation: slideLeftIn2 .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  .menu #two{
+    animation: slideLeftOut2 .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  
+  .menu:hover #three{
+    animation: slideLeftIn3 .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  .menu #three{
+    animation: slideLeftOut3 .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  @keyframes slideLeftIn1 {
+    from {
+      right: 0;
+    }
+    to {
+      right: 40px
+    }
+  }
+  @keyframes slideLeftOut1 {
+    from {
+      right: 40px;
+    }
+    to {
+      right: 0;
+    }
+  }
+  @keyframes slideLeftIn2 {
+    from {
+      right: 0;
+    }
+    to {
+      right: 80px
+    }
+  }
+  @keyframes slideLeftOut2 {
+    from {
+      right: 80px;
+    }
+    to {
+      right: 0;
+    }
+  }
+  @keyframes slideLeftIn3 {
+    from {
+      right: 0;
+    }
+    to {
+      right: 120px
+    }
+  }
+  @keyframes slideLeftOut3 {
+    from {
+      right: 120px;
+    }
+    to {
+      right: 0;
+    }
+  }

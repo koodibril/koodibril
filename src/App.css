@@ -63,21 +63,21 @@
 @keyframes slideTopIn {
   from {
     display: none;
-    right: 0;
+    top: 0;
   }
   to {
     display: flex;
-    right: 40px
+    top: 40px
   }
 }
 @keyframes slideTopOut {
   from {
     display: flex;
-    right: 40px;
+    top: 40px;
   }
   to {
     display: none;
-    right: 0;
+    top: 0;
   }
 }
 @font-face {

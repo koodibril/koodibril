@@ -124,17 +124,20 @@ export class ForestActions {
     for (let row = 0; row < 24; row++) {
       const z = row * 4 - 48;
       const random_tree = this.shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-      const position_tree = this.shuffleArray([-3, -6, 3, 5]);
+      const position_tree = this.shuffleArray([-9, -12, -3, -6, 3, 5, 8, 11]);
       const random_bush = this.shuffleArray([1, 2, 3, 4]);
+      const position_bush = this.shuffleArray([-9, 0, 9]);
 
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 8; i++) {
         this.addtree(new Vector3(position_tree[i], 0, z), row, random_tree[i]);
       }
-      this.addbush(
-        new Vector3(0, 0, z),
-        row,
-        random_bush[this.getRandomInt(0, 3)]
-      );
+      for (let i = 0; i < 3; i++) {
+        this.addbush(
+          new Vector3(position_bush[i], 0, z),
+          row,
+          random_bush[this.getRandomInt(0, 3)]
+        );
+      }
       this.addflower(new Vector3(Math.random() * (2 - -2) + -2, 1.5, z), row);
     }
   }
