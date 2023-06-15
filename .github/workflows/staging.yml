@@ -1,0 +1,24 @@
+name: staging
+
+on:
+  push:
+    branches: [ staging ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Build
+        run: |
+          cd ~/build/koodibril
+          git checkout staging
+          git pull
+          docker build . -t koodibril
+          docker image tag koodibril koodibril:staging
+      - name: Deploy
+        run: |
+          cd ~/websites/staging
+          docker-compose up -d

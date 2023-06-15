@@ -1,0 +1,24 @@
+name: master
+
+on:
+  push:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Build
+        run: |
+          cd ~/build/koodibril
+          git checkout master
+          git pull
+          docker build . -t koodibril
+          docker image tag koodibril koodibril:master
+      - name: Deploy
+        run: |
+          cd ~/websites/koodibril
+          docker-compose up -d
