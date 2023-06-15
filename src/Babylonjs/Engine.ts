@@ -172,6 +172,24 @@ export class KoodibrilEngine {
             }
           }
           break;
+        case PointerEventTypes.POINTERDOUBLETAP:
+          if (!this.move && !this.loading && this.device === 2) {
+            if (!this.open) {
+              this.opener();
+            }
+          }
+          break;
+      }
+    });
+
+    // observable for scroll in phone
+    this.canvas.addEventListener("touchstart", (event) => {
+      this.touchY = event.touches[0].clientY;
+    });
+    this.canvas.addEventListener("touchend", (event) => {
+      const currentY = event.changedTouches[0].clientY;
+      if (currentY - this.touchY > 50 || currentY - this.touchY < -50) {
+        this.wheel((currentY - this.touchY) * 4);
       }
     });
 
