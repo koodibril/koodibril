@@ -105,7 +105,7 @@
     justify-content: space-between;
     align-items: center;
     @media (max-width: 1000px) {
-      height: auto;
+      height: 30%;
       display: block;
     }
   }
