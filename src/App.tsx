@@ -11,15 +11,20 @@ function App() {
     app: "KOODIBRIL",
     side: false,
   });
+  const [error, setError] = useState("");
   const [engine, setEngine] = useState<KoodibrilEngine>();
   const [show, setShow] = useState(false);
   const [language, setLanguage] = useState<"fr" | "en">("fr");
   useEffect(() => {
     const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
     const engine = new KoodibrilEngine(setShow, setAppName);
-    engine.createScene(canvas);
-    engine.animate();
-    setEngine(engine);
+    if (engine.support()) {
+      engine.createScene(canvas);
+      engine.animate();
+      setEngine(engine);
+    } else {
+      setError("WebGL is not supported on your device");
+    }
   }, []);
 
   return (
@@ -39,7 +44,7 @@ function App() {
           </div>
         )}
       </div>
-      <canvas id="renderCanvas"></canvas>
+      {error ? error : <canvas id="renderCanvas"></canvas>}
       <Modal
         appName={appName}
         show={show}

@@ -79,7 +79,6 @@ export class KoodibrilEngine {
     } else {
       this.device = 1;
     }
-
     this.engine = new Engine(this.canvas, true);
     const loadingScreen = new CustomLoadingScreen(this.canvas);
     this.engine.loadingScreen = loadingScreen;
@@ -142,6 +141,10 @@ export class KoodibrilEngine {
     this.wheely = 0;
     this.engine.loadingUIText = "";
     this.engine.loadingUIBackgroundColor = "rgb(1, 1, 1, 0.7)";
+  }
+
+  public support(): boolean {
+    return Engine.isSupported();
   }
 
   // class that is called outside of the rendering for listeners
