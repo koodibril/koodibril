@@ -13,9 +13,6 @@ jobs:
     steps:
       - name: Build
         run: |
-          cd ~/build/koodibril
-          git checkout master
-          git pull
           docker build . -t koodibril
           docker image tag koodibril koodibril:master
       - name: Deploy
