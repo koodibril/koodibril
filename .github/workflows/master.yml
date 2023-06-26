@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: Build
         run: |
+          whoami
           docker build . -t koodibril
           docker image tag koodibril koodibril:master
       - name: Deploy
